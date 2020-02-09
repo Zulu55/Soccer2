@@ -81,13 +81,13 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            TeamEntity teamEntity = await _context.Teams.FindAsync(id);
+            var teamEntity = await _context.Teams.FindAsync(id);
             if (teamEntity == null)
             {
                 return NotFound();
             }
 
-            TeamViewModel model = _converterHelper.ToTeamViewModel(teamEntity);
+            var model = _converterHelper.ToTeamViewModel(teamEntity);
             return View(model);
         }
 
@@ -106,7 +106,7 @@ namespace Soccer.Web.Controllers
                         path = await _imageHelper.UploadImageAsync(model.LogoFile, "Teams");
                     }
 
-                    TeamEntity team = _converterHelper.ToTeamEntity(model, path, false);
+                    var team = _converterHelper.ToTeamEntity(model, path, false);
                     _context.Update(team);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));

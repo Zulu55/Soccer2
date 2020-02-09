@@ -59,5 +59,66 @@ namespace Soccer.Web.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tournamentEntity = await _context.Tournaments.FindAsync(id);
+            if (tournamentEntity == null)
+            {
+                return NotFound();
+            }
+
+            var model = _converterHelper.ToTournamentViewModel(tournamentEntity);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(TournamentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ModelState.IsValid)
+                {
+                    var path = model.LogoPath;
+
+                    if (model.LogoFile != null)
+                    {
+                        path = await _imageHelper.UploadImageAsync(model.LogoFile, "Tournaments");
+                    }
+
+                    var tournamentEntity = _converterHelper.ToTournamentEntity(model, path, false);
+                    _context.Update(tournamentEntity);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tournamentEntity = await _context.Tournaments
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tournamentEntity == null)
+            {
+                return NotFound();
+            }
+
+            _context.Tournaments.Remove(tournamentEntity);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
