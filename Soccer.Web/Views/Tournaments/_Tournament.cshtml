@@ -1,0 +1,33 @@
+﻿@model Soccer.Web.Models.TournamentViewModel
+
+<div class="form-group">
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="LogoFile" class="control-label"></label>
+    <input asp-for="LogoFile" class="form-control" type="file" />
+    <span asp-validation-for="LogoFile" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="StartDate" class="control-label"></label>
+    <input asp-for="StartDate" class="form-control" />
+    <span asp-validation-for="StartDate" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="EndDate" class="control-label"></label>
+    <input asp-for="EndDate" class="form-control" />
+    <span asp-validation-for="EndDate" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+        </label>
+    </div>
+</div>

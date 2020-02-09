@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Soccer.Web.Models
 {
-    public class TeamViewModel : TeamEntity
+    public class TournamentViewModel : TournamentEntity
     {
         [Display(Name = "Logo")]
         public IFormFile LogoFile { get; set; }
