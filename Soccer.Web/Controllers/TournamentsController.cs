@@ -120,5 +120,30 @@ namespace Soccer.Web.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tournamentEntity = await _context.Tournaments
+                .Include(t => t.Groups)
+                .ThenInclude(t => t.Matches)
+                .ThenInclude(t => t.Local)
+                .Include(t => t.Groups)
+                .ThenInclude(t => t.Matches)
+                .ThenInclude(t => t.Visitor)
+                .Include(t => t.Groups)
+                .ThenInclude(t => t.GroupDetails)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tournamentEntity == null)
+            {
+                return NotFound();
+            }
+
+            return View(tournamentEntity);
+        }
     }
 }
