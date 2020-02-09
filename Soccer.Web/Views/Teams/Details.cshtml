@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>TeamEntity</h4>
+    <h4>Team</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -20,11 +20,14 @@
             @Html.DisplayNameFor(model => model.LogoPath)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LogoPath)
+            @if (!string.IsNullOrEmpty(Model.LogoPath))
+            {
+                <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>
