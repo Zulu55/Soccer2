@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Soccer.Web.Data.Entities
@@ -30,5 +31,6 @@ namespace Soccer.Web.Data.Entities
 
         public GroupEntity Group { get; set; }
 
+        public ICollection<PredictionEntity> Predictions { get; set; }
     }
 }
