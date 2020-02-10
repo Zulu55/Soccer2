@@ -1,10 +1,45 @@
-﻿using Soccer.Web.Data.Entities;
+﻿using Soccer.Web.Data;
+using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Soccer.Web.Helpers
 {
     public class ConverterHelper : IConverterHelper
     {
+        private readonly DataContext _context;
+
+        public ConverterHelper(DataContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<GroupEntity> ToGroupEntityAsync(GroupViewModel model, bool isNew)
+        {
+            return new GroupEntity
+            {
+                GroupDetails = isNew ? new List<GroupDetailEntity>() : model.GroupDetails,
+                Id = isNew ? 0 : model.Id,
+                Matches = isNew ? new List<MatchEntity>() : model.Matches,
+                Name = model.Name,
+                Tournament = await _context.Tournaments.FindAsync(model.TournamentId)
+            };
+        }
+
+        public GroupViewModel ToGroupViewModel(GroupEntity groupEntity)
+        {
+            return new GroupViewModel
+            {
+                GroupDetails = groupEntity.GroupDetails,
+                Id = groupEntity.Id,
+                Matches = groupEntity.Matches,
+                Name = groupEntity.Name,
+                Tournament = groupEntity.Tournament,
+                TournamentId = groupEntity.Tournament.Id
+            };
+        }
+
         public TeamEntity ToTeamEntity(TeamViewModel model, string path, bool isNew)
         {
             return new TeamEntity
@@ -29,13 +64,13 @@ namespace Soccer.Web.Helpers
         {
             return new TournamentEntity
             {
-                    EndDate = model.EndDate,
-                    Groups = model.Groups,
-                    Id = isNew ? 0 : model.Id,
-                    IsActive = model.IsActive,
-                    LogoPath = path,
-                    Name = model.Name,
-                    StartDate = model.StartDate
+                EndDate = model.EndDate,
+                Groups = model.Groups,
+                Id = isNew ? 0 : model.Id,
+                IsActive = model.IsActive,
+                LogoPath = path,
+                Name = model.Name,
+                StartDate = model.StartDate
             };
         }
 
@@ -43,13 +78,13 @@ namespace Soccer.Web.Helpers
         {
             return new TournamentViewModel
             {
-                    EndDate = tournamentEntity.EndDate,
-                    Groups = tournamentEntity.Groups,
-                    Id = tournamentEntity.Id,
-                    IsActive = tournamentEntity.IsActive,
-                    LogoPath = tournamentEntity.LogoPath,
-                    Name = tournamentEntity.Name,
-                    StartDate = tournamentEntity.StartDate
+                EndDate = tournamentEntity.EndDate,
+                Groups = tournamentEntity.Groups,
+                Id = tournamentEntity.Id,
+                IsActive = tournamentEntity.IsActive,
+                LogoPath = tournamentEntity.LogoPath,
+                Name = tournamentEntity.Name,
+                StartDate = tournamentEntity.StartDate
             };
         }
     }

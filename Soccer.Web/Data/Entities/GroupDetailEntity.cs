@@ -28,6 +28,7 @@ namespace Soccer.Web.Data.Entities
         [Display(Name = "Goals Against")]
         public int GoalsAgainst { get; set; }
 
+        [Display(Name = "Goal Difference")]
         public int GoalDifference => GoalsFor - GoalsAgainst;
 
         public GroupEntity Group { get; set; }

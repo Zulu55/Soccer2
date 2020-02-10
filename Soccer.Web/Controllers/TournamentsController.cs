@@ -13,6 +13,7 @@ namespace Soccer.Web.Controllers
         private readonly DataContext _context;
         private readonly IImageHelper _imageHelper;
         private readonly IConverterHelper _converterHelper;
+        private object t;
 
         public TournamentsController(
             DataContext context,
@@ -144,6 +145,120 @@ namespace Soccer.Web.Controllers
             }
 
             return View(tournamentEntity);
+        }
+
+        public async Task<IActionResult> AddGroup(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tournamentEntity = await _context.Tournaments.FindAsync(id);
+            if (tournamentEntity == null)
+            {
+                return NotFound();
+            }
+
+            var model = new GroupViewModel 
+            { 
+                Tournament = tournamentEntity,
+                TournamentId = tournamentEntity.Id 
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddGroup(GroupViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var groupEntity = await _converterHelper.ToGroupEntityAsync(model, true);
+                _context.Add(groupEntity);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(Details)}/{model.TournamentId}");
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditGroup(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var groupEntity = await _context.Groups
+                .Include(g => g.Tournament)
+                .FirstOrDefaultAsync(g => g.Id == id);
+            if (groupEntity == null)
+            {
+                return NotFound();
+            }
+
+            var model = _converterHelper.ToGroupViewModel(groupEntity);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditGroup(GroupViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var groupEntity = await _converterHelper.ToGroupEntityAsync(model, false);
+                _context.Update(groupEntity);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(Details)}/{model.TournamentId}");
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> DeleteGroup(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var groupEntity = await _context.Groups
+                .Include(g => g.Tournament)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (groupEntity == null)
+            {
+                return NotFound();
+            }
+
+            _context.Groups.Remove(groupEntity);
+            await _context.SaveChangesAsync();
+            return RedirectToAction($"{nameof(Details)}/{groupEntity.Tournament.Id}");
+        }
+
+        public async Task<IActionResult> DetailsGroup(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var groupEntity = await _context.Groups
+                .Include(g => g.Matches)
+                .ThenInclude(g => g.Local)
+                .Include(g => g.Matches)
+                .ThenInclude(g => g.Visitor)
+                .Include(g => g.Tournament)
+                .Include(g => g.GroupDetails)
+                .FirstOrDefaultAsync(g =>g.Id == id);
+            if (groupEntity == null)
+            {
+                return NotFound();
+            }
+
+            return View(groupEntity);
         }
     }
 }

@@ -23,6 +23,10 @@ namespace Soccer.Web.Data.Entities
         [Display(Name = "Goals Visitor")]
         public int GoalsVisitor { get; set; }
 
+        [Display(Name = "Is Closed?")]
+        public bool IsClosed { get; set; }
+
         public GroupEntity Group { get; set; }
+
     }
 }
