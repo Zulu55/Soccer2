@@ -349,5 +349,40 @@ namespace Soccer.Web.Controllers
             model.Teams = _combosHelper.GetComboTeams(model.GroupId);
             return View(model);
         }
+
+        public async Task<IActionResult> EditGroupDetail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var groupDetailEntity = await _context.GroupDetails
+                .Include(gd => gd.Group)
+                .Include(gd => gd.Team)
+                .FirstOrDefaultAsync(gd => gd.Id == id);
+            if (groupDetailEntity == null)
+            {
+                return NotFound();
+            }
+
+            var model = _converterHelper.ToGroupDetailViewModel(groupDetailEntity);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditGroupDetail(GroupDetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var groupDetailEntity = await _converterHelper.ToGroupDetailEntityAsync(model, false);
+                _context.Update(groupDetailEntity);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(DetailsGroup)}/{model.GroupId}");
+            }
+
+            return View(model);
+        }
     }
 }
