@@ -9,10 +9,49 @@ namespace Soccer.Web.Helpers
     public class ConverterHelper : IConverterHelper
     {
         private readonly DataContext _context;
+        private readonly ICombosHelper _combosHelper;
 
-        public ConverterHelper(DataContext context)
+        public ConverterHelper(
+            DataContext context,
+            ICombosHelper combosHelper)
         {
             _context = context;
+            _combosHelper = combosHelper;
+        }
+
+        public async Task<GroupDetailEntity> ToGroupDetailEntityAsync(GroupDetailViewModel model, bool isNew)
+        {
+            return new GroupDetailEntity
+            {
+                GoalsAgainst = model.GoalsAgainst,
+                GoalsFor = model.GoalsFor,
+                Group = await _context.Groups.FindAsync(model.GroupId),
+                Id = isNew ? 0 : model.Id,
+                MatchesLost = model.MatchesLost,
+                MatchesPlayed = model.MatchesPlayed,
+                MatchesTied = model.MatchesTied,
+                MatchesWon = model.MatchesWon,
+                Team = await _context.Teams.FindAsync(model.TeamId)
+            };
+        }
+
+        public GroupDetailViewModel ToGroupDetailViewModel(GroupDetailEntity groupDetailEntity)
+        {
+            return new GroupDetailViewModel
+            {
+                GoalsAgainst = groupDetailEntity.GoalsAgainst,
+                GoalsFor = groupDetailEntity.GoalsFor,
+                Group = groupDetailEntity.Group,
+                GroupId = groupDetailEntity.Group.Id,
+                Id = groupDetailEntity.Id,
+                MatchesLost = groupDetailEntity.MatchesLost,
+                MatchesPlayed = groupDetailEntity.MatchesPlayed,
+                MatchesTied = groupDetailEntity.MatchesTied,
+                MatchesWon = groupDetailEntity.MatchesWon,
+                Team = groupDetailEntity.Team,
+                TeamId = groupDetailEntity.Team.Id,
+                Teams = _combosHelper.GetComboTeams()
+            };
         }
 
         public async Task<GroupEntity> ToGroupEntityAsync(GroupViewModel model, bool isNew)

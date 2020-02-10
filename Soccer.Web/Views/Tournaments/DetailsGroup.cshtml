@@ -103,9 +103,9 @@
                         </thead>
                         <tbody>
                             @foreach (var item in Model.GroupDetails
-                           .OrderByDescending(g => g.Points)
-                           .ThenByDescending(g => g.GoalDifference)
-                           .ThenByDescending(g => g.GoalsFor))
+                                .OrderByDescending(g => g.Points)
+                                .ThenByDescending(g => g.GoalDifference)
+                                .ThenByDescending(g => g.GoalsFor))
                             {
                                 <tr>
                                     <td>
@@ -157,7 +157,7 @@
 }
 
 <br />
-@if (Model.GroupDetails.Count != 0)
+@if (Model.GroupDetails.Count != 0 && Model.GroupDetails.FirstOrDefault().Group.Matches.Count != 0)
 {
     <div class="row">
         <div class="col-md-12">
