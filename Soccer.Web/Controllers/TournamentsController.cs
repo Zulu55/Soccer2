@@ -384,5 +384,41 @@ namespace Soccer.Web.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> EditMatch(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var matchEntity = await _context.Matches
+                .Include(m => m.Group)
+                .Include(m => m.Local)
+                .Include(m => m.Visitor)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (matchEntity == null)
+            {
+                return NotFound();
+            }
+
+            var model = _converterHelper.ToMatchViewModel(matchEntity);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditMatch(MatchViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var matchEntity = await _converterHelper.ToMatchEntityAsync(model, false);
+                _context.Update(matchEntity);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(DetailsGroup)}/{model.GroupId}");
+            }
+
+            return View(model);
+        }
     }
 }
