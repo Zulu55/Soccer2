@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Soccer.Web.Data;
 using Soccer.Web.Helpers;
 using Soccer.Web.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -300,6 +301,52 @@ namespace Soccer.Web.Controllers
             }
 
             model.Teams = _combosHelper.GetComboTeams();
+            return View(model);
+        }
+
+        public async Task<IActionResult> AddMatch(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var groupEntity = await _context.Groups.FindAsync(id);
+            if (groupEntity == null)
+            {
+                return NotFound();
+            }
+
+            var model = new MatchViewModel
+            {
+                Date = DateTime.Now,
+                Group = groupEntity,
+                GroupId = groupEntity.Id,
+                Teams = _combosHelper.GetComboTeams(groupEntity.Id)
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddMatch(MatchViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.LocalId != model.VisitorId)
+                {
+                    var matchEntity = await _converterHelper.ToMatchEntityAsync(model, true);
+                    _context.Add(matchEntity);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction($"{nameof(DetailsGroup)}/{model.GroupId}");
+                }
+
+                ModelState.AddModelError(string.Empty, "The local and vistitor must be differents teams.");
+            }
+
+            model.Group = await _context.Groups.FindAsync(model.GroupId);
+            model.Teams = _combosHelper.GetComboTeams(model.GroupId);
             return View(model);
         }
     }

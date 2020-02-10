@@ -98,7 +98,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.GroupDetails.FirstOrDefault().GoalDifference)
                                 </th>
-                                <th width="150px"></th>
+                                <th width="100px"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,7 +143,6 @@
                                     </td>
                                     <td>
                                         <a asp-action="EditGroupDetail" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                                        <a asp-action="DetailsGroupDetail" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon glyphicon-align-justify"></i></a>
                                         <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
                                     </td>
                                 </tr>
