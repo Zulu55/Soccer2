@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Soccer.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TeamsController : Controller
     {
         private readonly DataContext _context;
@@ -37,7 +39,7 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            var teamEntity = await _context.Teams
+            TeamEntity teamEntity = await _context.Teams
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teamEntity == null)
             {
@@ -58,14 +60,14 @@ namespace Soccer.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var path = string.Empty;
+                string path = string.Empty;
 
                 if (model.LogoFile != null)
                 {
                     path = await _imageHelper.UploadImageAsync(model.LogoFile, "Teams");
                 }
 
-                var team = _converterHelper.ToTeamEntity(model, path, true);
+                TeamEntity team = _converterHelper.ToTeamEntity(model, path, true);
                 _context.Add(team);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -81,13 +83,13 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            var teamEntity = await _context.Teams.FindAsync(id);
+            TeamEntity teamEntity = await _context.Teams.FindAsync(id);
             if (teamEntity == null)
             {
                 return NotFound();
             }
 
-            var model = _converterHelper.ToTeamViewModel(teamEntity);
+            TeamViewModel model = _converterHelper.ToTeamViewModel(teamEntity);
             return View(model);
         }
 
@@ -99,14 +101,14 @@ namespace Soccer.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var path = model.LogoPath;
+                    string path = model.LogoPath;
 
                     if (model.LogoFile != null)
                     {
                         path = await _imageHelper.UploadImageAsync(model.LogoFile, "Teams");
                     }
 
-                    var team = _converterHelper.ToTeamEntity(model, path, false);
+                    TeamEntity team = _converterHelper.ToTeamEntity(model, path, false);
                     _context.Update(team);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -123,7 +125,7 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            var teamEntity = await _context.Teams
+            TeamEntity teamEntity = await _context.Teams
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teamEntity == null)
             {

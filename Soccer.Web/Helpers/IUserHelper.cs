@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Soccer.Web.Data.Entities;
+using Soccer.Web.Models;
 using System.Threading.Tasks;
 
 namespace Soccer.Web.Helpers
@@ -15,5 +16,9 @@ namespace Soccer.Web.Helpers
         Task AddUserToRoleAsync(UserEntity user, string roleName);
 
         Task<bool> IsUserInRoleAsync(UserEntity user, string roleName);
+
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+
+        Task LogoutAsync();
     }
 }

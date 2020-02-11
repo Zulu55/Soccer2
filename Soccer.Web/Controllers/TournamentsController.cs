@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Soccer.Web.Data;
 using Soccer.Web.Helpers;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Soccer.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TournamentsController : Controller
     {
         private readonly DataContext _context;
