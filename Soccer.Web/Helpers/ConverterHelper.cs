@@ -1,7 +1,9 @@
-﻿using Soccer.Web.Data;
+﻿using Soccer.Common.Models;
+using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Soccer.Web.Helpers
@@ -158,6 +160,101 @@ namespace Soccer.Web.Helpers
                 LogoPath = tournamentEntity.LogoPath,
                 Name = tournamentEntity.Name,
                 StartDate = tournamentEntity.StartDate
+            };
+        }
+
+        public TournamentResponse ToTournamentResponse(TournamentEntity tournamentEntity)
+        {
+            return new TournamentResponse
+            {
+                EndDate = tournamentEntity.EndDate,
+                Id = tournamentEntity.Id,
+                IsActive = tournamentEntity.IsActive,
+                LogoPath = tournamentEntity.LogoPath,
+                Name = tournamentEntity.Name,
+                StartDate = tournamentEntity.StartDate,
+                Groups = tournamentEntity.Groups.Select(g => new GroupResponse
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    GroupDetails = g.GroupDetails.Select(gd => new GroupDetailResponse
+                    {
+                        GoalsAgainst = gd.GoalsAgainst,
+                        GoalsFor = gd.GoalsFor,
+                        Id = gd.Id,
+                        MatchesLost = gd.MatchesLost,
+                        MatchesPlayed = gd.MatchesPlayed,
+                        MatchesTied = gd.MatchesTied,
+                        MatchesWon = gd.MatchesWon,
+                        Team = ToTeamResponse(gd.Team)
+                    }).ToList(),
+                    Matches = g.Matches.Select(m => new MatchResponse
+                    {
+                        Date = m.Date,
+                        GoalsLocal = m.GoalsLocal,
+                        GoalsVisitor = m.GoalsVisitor,
+                        Id = m.Id,
+                        IsClosed = m.IsClosed,
+                        Local = ToTeamResponse(m.Local),
+                        Visitor = ToTeamResponse(m.Visitor),
+                        Predictions = m.Predictions.Select(p => new PredictionResponse
+                        {
+                            GoalsLocal = p.GoalsLocal,
+                            GoalsVisitor = p.GoalsVisitor,
+                            Id = p.Id,
+                            Points = p.Points,
+                            User = ToUserResponse(p.User)
+                        }).ToList()
+                    }).ToList()
+                }).ToList()
+            };
+        }
+
+        public List<TournamentResponse> ToTournamentResponse(List<TournamentEntity> tournamentEntities)
+        {
+            List<TournamentResponse> list = new List<TournamentResponse>();
+            foreach (TournamentEntity tournamentEntity in tournamentEntities)
+            {
+                list.Add(ToTournamentResponse(tournamentEntity));
+            }
+
+            return list;
+        }
+
+        private UserResponse ToUserResponse(UserEntity user)
+        {
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserResponse
+            {
+                Address = user.Address,
+                Document = user.Document,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Id = user.Id,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PicturePath = user.PicturePath,
+                Team = ToTeamResponse(user?.Team),
+                UserType = user.UserType
+            };
+        }
+
+        private TeamResponse ToTeamResponse(TeamEntity team)
+        {
+            if (team == null)
+            {
+                return null;
+            }
+
+            return new TeamResponse
+            {
+                Id = team.Id,
+                LogoPath = team.LogoPath,
+                Name = team.Name
             };
         }
     }
