@@ -5,6 +5,7 @@ using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Helpers;
 using Soccer.Web.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -69,8 +70,23 @@ namespace Soccer.Web.Controllers
 
                 TeamEntity team = _converterHelper.ToTeamEntity(model, path, true);
                 _context.Add(team);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Already there is a record with the same name.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                    }
+                }
             }
 
             return View(model);
@@ -110,8 +126,23 @@ namespace Soccer.Web.Controllers
 
                     TeamEntity team = _converterHelper.ToTeamEntity(model, path, false);
                     _context.Update(team);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.InnerException.Message.Contains("duplicate"))
+                        {
+                            ModelState.AddModelError(string.Empty, "Already there is a record with the same name.");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, ex.InnerException.Message);
+                        }
+                    }
                 }
             }
 
