@@ -43,25 +43,37 @@ namespace Soccer.Web.Controllers
             return View(teamEntity);
         }
 
-        // GET: Teams/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Teams/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LogoPath")] TeamEntity teamEntity)
+        public async Task<IActionResult> Create(TeamEntity teamEntity)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(teamEntity);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    if (ex.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Already exists a team with the same name.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }            
             }
+
             return View(teamEntity);
         }
 
@@ -81,12 +93,9 @@ namespace Soccer.Web.Controllers
             return View(teamEntity);
         }
 
-        // POST: Teams/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LogoPath")] TeamEntity teamEntity)
+        public async Task<IActionResult> Edit(int id, TeamEntity teamEntity)
         {
             if (id != teamEntity.Id)
             {
@@ -95,24 +104,26 @@ namespace Soccer.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                _context.Update(teamEntity);
+
                 try
                 {
-                    _context.Update(teamEntity);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!TeamEntityExists(teamEntity.Id))
+                    if (ex.InnerException.Message.Contains("duplicate"))
                     {
-                        return NotFound();
+                        ModelState.AddModelError(string.Empty, "Already exists a team with the same name.");
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, ex.Message);
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
             return View(teamEntity);
         }
 
