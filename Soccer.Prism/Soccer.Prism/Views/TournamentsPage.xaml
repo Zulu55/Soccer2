@@ -7,7 +7,7 @@
              x:Class="Soccer.Prism.Views.TournamentsPage"
              Title="{Binding Title}">
 
-    <StackLayout Padding="10">
+    <StackLayout Padding="5">
         <CollectionView ItemsSource="{Binding Tournaments}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"/>
@@ -18,6 +18,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <ffimageloading:CachedImage Grid.Column="0"
                                                     Aspect="AspectFill"
@@ -42,6 +43,8 @@
                                    FontAttributes="Italic" 
                                    VerticalOptions="End" />
                         </StackLayout>
+                        <Image Grid.Column="2" 
+                               Source="ic_more_vert"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

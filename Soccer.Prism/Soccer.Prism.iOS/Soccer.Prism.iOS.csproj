@@ -50,6 +50,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -200,6 +201,12 @@
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>Soccer.Prism</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_more_vert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\drawable\ic_more_vert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
