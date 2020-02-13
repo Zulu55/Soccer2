@@ -1,28 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
+using Soccer.Web.Helpers;
+using Soccer.Web.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Soccer.Web.Controllers
 {
     public class TeamsController : Controller
     {
         private readonly DataContext _context;
+        private readonly IImageHelper _imageHelper;
+        private readonly IConverterHelper _converterHelper;
 
-        public TeamsController(DataContext context)
+        public TeamsController(
+            DataContext context,
+            IImageHelper imageHelper,
+            IConverterHelper converterHelper)
         {
             _context = context;
+            _imageHelper = imageHelper;
+            _converterHelper = converterHelper;
         }
 
-        // GET: Teams
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Teams.ToListAsync());
+            return View(await _context.Teams
+                .OrderBy(t => t.Name)
+                .ToListAsync());
         }
 
         // GET: Teams/Details/5
@@ -33,7 +41,7 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            var teamEntity = await _context.Teams
+            TeamEntity teamEntity = await _context.Teams
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teamEntity == null)
             {
@@ -43,6 +51,7 @@ namespace Soccer.Web.Controllers
             return View(teamEntity);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -50,12 +59,20 @@ namespace Soccer.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TeamEntity teamEntity)
+        public async Task<IActionResult> Create(TeamViewModel teamViewModel)
         {
             if (ModelState.IsValid)
             {
+                string path = string.Empty;
+
+                if (teamViewModel.LogoFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(teamViewModel.LogoFile, "Teams");
+                }
+
+                TeamEntity teamEntity = _converterHelper.ToTeamEntity(teamViewModel, path, true);
                 _context.Add(teamEntity);
-                
+
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -71,13 +88,12 @@ namespace Soccer.Web.Controllers
                     {
                         ModelState.AddModelError(string.Empty, ex.Message);
                     }
-                }            
+                }
             }
 
-            return View(teamEntity);
+            return View(teamViewModel);
         }
 
-        // GET: Teams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,25 +101,36 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            var teamEntity = await _context.Teams.FindAsync(id);
+            TeamEntity teamEntity = await _context.Teams.FindAsync(id);
+
             if (teamEntity == null)
             {
                 return NotFound();
             }
-            return View(teamEntity);
+
+            TeamViewModel teamViewModel = _converterHelper.ToTeamViewModel(teamEntity);
+            return View(teamViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, TeamEntity teamEntity)
+        public async Task<IActionResult> Edit(int id, TeamViewModel teamViewModel)
         {
-            if (id != teamEntity.Id)
+            if (id != teamViewModel.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                string path = teamViewModel.LogoPath;
+
+                if (teamViewModel.LogoFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(teamViewModel.LogoFile, "Teams");
+                }
+
+                TeamEntity teamEntity = _converterHelper.ToTeamEntity(teamViewModel, path, false);
                 _context.Update(teamEntity);
 
                 try
@@ -124,7 +151,7 @@ namespace Soccer.Web.Controllers
                 }
             }
 
-            return View(teamEntity);
+            return View(teamViewModel);
         }
 
         // GET: Teams/Delete/5
@@ -135,7 +162,7 @@ namespace Soccer.Web.Controllers
                 return NotFound();
             }
 
-            var teamEntity = await _context.Teams
+            TeamEntity teamEntity = await _context.Teams
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teamEntity == null)
             {
@@ -150,7 +177,7 @@ namespace Soccer.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var teamEntity = await _context.Teams.FindAsync(id);
+            TeamEntity teamEntity = await _context.Teams.FindAsync(id);
             _context.Teams.Remove(teamEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
