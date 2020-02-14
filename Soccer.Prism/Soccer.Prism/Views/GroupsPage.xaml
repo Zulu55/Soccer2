@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Soccer.Prism.Views.GroupsPage"
+             Title="{Binding Title}">
+
+    <StackLayout Padding="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                   FontAttributes="Bold"
+                   Text="Logo"/>
+            <Label Grid.Column="1"
+                   FontAttributes="Bold"
+                   Text="Name"/>
+            <Label Grid.Column="2"
+                   HorizontalTextAlignment="End"
+                   FontAttributes="Bold"
+                   Text="MP"/>
+            <Label Grid.Column="3"
+                   HorizontalTextAlignment="End"
+                   FontAttributes="Bold"
+                   Text="MW"/>
+            <Label Grid.Column="4"
+                   HorizontalTextAlignment="End"
+                   FontAttributes="Bold"
+                   Text="MT"/>
+            <Label Grid.Column="5"
+                   HorizontalTextAlignment="End"
+                   FontAttributes="Bold"
+                   Text="ML"/>
+            <Label Grid.Column="6"
+                   HorizontalTextAlignment="End"
+                   FontAttributes="Bold"
+                   Text="PO"/>
+            <Label Grid.Column="7"
+                   HorizontalTextAlignment="End"
+                   FontAttributes="Bold"
+                   Text="GD"/>
+        </Grid>
+        <ListView ItemsSource="{Binding Groups}"
+                  IsGroupingEnabled="true">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label FontAttributes="Bold" 
+                               FontSize="Large"
+                               Text="{Binding Name}"/>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ffimageloading:CachedImage Grid.Column="0"
+                                                        Aspect="AspectFit"
+                                                        CacheDuration= "50"
+                                                        Margin="5"
+                                                        RetryCount= "3"
+                                                        RetryDelay= "600"
+                                                        Source="{Binding Team.LogoFullPath}" 
+                                                        WidthRequest="40"/>
+                            <Label Grid.Column="1"
+                                   FontAttributes="Bold"
+                                   Text="{Binding Team.Name}" 
+                                   VerticalOptions="Center"/>
+                            <Label Grid.Column="2"
+                                   HorizontalTextAlignment="End"
+                                   Text="{Binding MatchesPlayed}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="3"
+                                   HorizontalTextAlignment="End"
+                                   Text="{Binding MatchesWon}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="4"
+                                   HorizontalTextAlignment="End"
+                                   Text="{Binding MatchesTied}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="5"
+                                   HorizontalTextAlignment="End"
+                                   Text="{Binding MatchesLost}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="6"
+                                   HorizontalTextAlignment="End"
+                                   Text="{Binding Points}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="7"
+                                   HorizontalTextAlignment="End"
+                                   Text="{Binding GoalDifference}"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
