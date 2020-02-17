@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using Soccer.Common.Models;
+using Soccer.Prism.Views;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -23,7 +24,7 @@ namespace Soccer.Prism.ViewModels
                 { "tournament", this }
             };
 
-            await _navigationService.NavigateAsync("GroupsPage", parameters);
+            await _navigationService.NavigateAsync(nameof(MatchesPage), parameters);
         }
     }
 }
