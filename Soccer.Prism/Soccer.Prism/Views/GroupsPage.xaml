@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Soccer.Prism.Views.GroupsPage"
+             IconImageSource="ic_action_vpn_key"
              Title="{Binding Title}">
 
     <StackLayout Padding="5">

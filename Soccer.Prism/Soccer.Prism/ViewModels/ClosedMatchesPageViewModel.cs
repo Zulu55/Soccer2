@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Soccer.Prism.ViewModels
 {
-    public class MatchesPageViewModel : ViewModelBase
+    public class ClosedMatchesPageViewModel : ViewModelBase
     {
         private TournamentResponse _tournament;
         private List<MatchResponse> _matches;
 
-        public MatchesPageViewModel(INavigationService navigationService) : base(navigationService)
+        public ClosedMatchesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Pending";
+            Title = "Closed";
         }
 
         public List<MatchResponse> Matches
@@ -34,7 +34,7 @@ namespace Soccer.Prism.ViewModels
                     matches.AddRange(group.Matches);
                 }
 
-                Matches = matches.OrderBy(m => m.Date).ToList();
+                Matches = matches.Where(m => m.IsClosed).OrderBy(m => m.Date).ToList();
             }
         }
     }
