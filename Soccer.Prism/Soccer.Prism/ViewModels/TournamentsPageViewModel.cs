@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using Soccer.Common.Models;
 using Soccer.Common.Services;
+using Soccer.Prism.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,7 +20,7 @@ namespace Soccer.Prism.ViewModels
         {
             _navigationService = navigationService;
             _apiService = apiService;
-            Title = "Tournaments";
+            Title = "Soccer";
             LoadTournamentsAsync();
         }
 
@@ -43,22 +44,16 @@ namespace Soccer.Prism.ViewModels
             if (!connection)
             {
                 IsRunning = false;
-                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
 
-            Response response = await _apiService.GetListAsync<TournamentResponse>(
-                url,
-                "/api",
-                "/Tournaments");
+            Response response = await _apiService.GetListAsync<TournamentResponse>(url, "/api", "/Tournaments");
             IsRunning = false;
 
             if (!response.IsSuccess)
             {
-                await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    response.Message,
-                    "Accept");
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 

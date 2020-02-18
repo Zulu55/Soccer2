@@ -1,6 +1,7 @@
 ﻿using Prism.Navigation;
 using Soccer.Common.Helpers;
 using Soccer.Common.Models;
+using Soccer.Prism.Helpers;
 using System.Collections.Generic;
 
 namespace Soccer.Prism.ViewModels
@@ -16,7 +17,7 @@ namespace Soccer.Prism.ViewModels
             ITransformHelper transformHelper) : base(navigationService)
         {
             _transformHelper = transformHelper;
-            Title = "Groups";
+            Title = Languages.Groups;
         }
 
         public List<Group> Groups

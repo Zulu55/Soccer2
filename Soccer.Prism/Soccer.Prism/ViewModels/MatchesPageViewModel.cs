@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using Soccer.Common.Helpers;
 using Soccer.Common.Models;
+using Soccer.Prism.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Soccer.Prism.ViewModels
 
         public MatchesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Pending";
+            Title = Languages.Pending;
             LoadMatches();
         }
 

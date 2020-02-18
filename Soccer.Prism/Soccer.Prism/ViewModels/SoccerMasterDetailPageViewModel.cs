@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Soccer.Common.Models;
+using Soccer.Prism.Helpers;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -26,31 +27,31 @@ namespace Soccer.Prism.ViewModels
                 {
                     Icon = "tournament",
                     PageName = "TournamentsPage",
-                    Title = "Tournaments"
+                    Title = Languages.Tournaments
                 },
                 new Menu
                 {
                     Icon = "prediction",
                     PageName = "MyPredictionsPage",
-                    Title = "My Predictions"
+                    Title = Languages.MyPredictions
                 },
                 new Menu
                 {
                     Icon = "medal",
                     PageName = "MyPositionsPage",
-                    Title = "My Positions"
+                    Title = Languages.MyPositions
                 },
                 new Menu
                 {
                     Icon = "user",
                     PageName = "ModifyUserPage",
-                    Title = "Modify User"
+                    Title = Languages.ModifyUser
                 },
                 new Menu
                 {
                     Icon = "login",
                     PageName = "LoginPage",
-                    Title = "Log in"
+                    Title = Languages.Login
                 }
             };
 
