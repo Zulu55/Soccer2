@@ -193,5 +193,23 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_action_vpn_key.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\soccer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\medal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\prediction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\tournament.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\user.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
