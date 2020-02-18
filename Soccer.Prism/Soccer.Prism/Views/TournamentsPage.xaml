@@ -16,45 +16,49 @@
                      Padding="5">
             <CollectionView ItemsSource="{Binding Tournaments}">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"/>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SelectTournamentCommand}"/>
-                            </Grid.GestureRecognizers>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ffimageloading:CachedImage Grid.Column="0"
-                                                        Aspect="AspectFill"
-                                                        Source="{Binding LogoFullPath}" 
-                                                        CacheDuration= "50"
-                                                        Margin="5"
-                                                        RetryCount= "3"
-                                                        RetryDelay= "600"
-                                                        WidthRequest="100"/>
-                            <StackLayout Grid.Column="1"
-                                         VerticalOptions="Center">
-                                <Label Text="{Binding Name}" 
-                                       FontAttributes="Bold"
-                                       FontSize="Medium"
-                                       LineBreakMode="TailTruncation" />
-                                <Label Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
-                                       LineBreakMode="TailTruncation"
-                                       FontAttributes="Italic" 
-                                       VerticalOptions="End" />
-                                <Label Text="{Binding EndDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
-                                       LineBreakMode="TailTruncation"
-                                       FontAttributes="Italic" 
-                                       VerticalOptions="End" />
-                            </StackLayout>
-                            <Image Grid.Column="2" 
-                                   Source="ic_more_vert"/>
-                        </Grid>
+                        <Frame BackgroundColor="{StaticResource ColorDanger}"
+                               CornerRadius="10">
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectTournamentCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ffimageloading:CachedImage Grid.Column="0"
+                                                            Aspect="AspectFill"
+                                                            Source="{Binding LogoFullPath}" 
+                                                            CacheDuration= "50"
+                                                            Margin="5"
+                                                            RetryCount= "3"
+                                                            RetryDelay= "600"
+                                                            WidthRequest="100"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="Center">
+                                    <Label Text="{Binding Name}" 
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label Text="{Binding StartDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
+                                           LineBreakMode="TailTruncation"
+                                           FontAttributes="Italic" 
+                                           VerticalOptions="End" />
+                                    <Label Text="{Binding EndDateLocal, StringFormat='{0:yyyy/MM/dd}'}"
+                                           LineBreakMode="TailTruncation"
+                                           FontAttributes="Italic" 
+                                           VerticalOptions="End" />
+                                </StackLayout>
+                                <Image Grid.Column="2" 
+                                       Source="ic_more_vert"/>
+                            </Grid>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
