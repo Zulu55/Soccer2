@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Soccer.Prism.Views.MatchesPage"
              IconImageSource="ic_action_grade"
@@ -10,59 +9,12 @@
              Title="{Binding Title}">
 
     <StackLayout Padding="5">
-        <CollectionView ItemsSource="{Binding Matches}">
+        <CollectionView ItemsSource="{Binding Matches}"
+                        ItemTemplate="{StaticResource MatchTemplate}">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" 
                                  VerticalItemSpacing="5"/>
             </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <ffimageloading:CachedImage Grid.Column="0"
-                                                        Aspect="AspectFit"
-                                                        CacheDuration= "50"
-                                                        HeightRequest="90"
-                                                        RetryCount= "3"
-                                                        RetryDelay= "600"
-                                                        Source="{Binding Local.LogoFullPath}" 
-                                                        WidthRequest="90"/>
-                            <StackLayout Grid.Column="1"
-                                            VerticalOptions="Center">
-                                <StackLayout HorizontalOptions="Center" 
-                                                Orientation="Horizontal">
-                                    <Label FontAttributes="Bold"
-                                            FontSize="48"
-                                            Text="{Binding GoalsLocal}"/>
-                                    <Label Text="Vs."
-                                            VerticalOptions="Center"/>
-                                    <Label FontAttributes="Bold"
-                                            FontSize="48"
-                                            Text="{Binding GoalsVisitor}"/>
-                                </StackLayout>
-                                <StackLayout Orientation="Horizontal"
-                                             HorizontalOptions="Center">
-                                    <Label Text="{Binding DateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
-                                           VerticalOptions="Center" />
-                                </StackLayout>
-                            </StackLayout>
-                            <ffimageloading:CachedImage Grid.Column="2"
-                                                        Aspect="AspectFit"
-                                                        CacheDuration= "50"
-                                                        HeightRequest="90"
-                                                        RetryCount= "3"
-                                                        RetryDelay= "600"
-                                                        Source="{Binding Visitor.LogoFullPath}" 
-                                                        WidthRequest="90"/>
-                        </Grid>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
         </CollectionView>
     </StackLayout>
 

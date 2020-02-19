@@ -25,6 +25,12 @@
 </div>
 
 <div class="form-group">
+    <label asp-for="MatchesLost" class="control-label"></label>
+    <input asp-for="MatchesLost" class="form-control" />
+    <span asp-validation-for="MatchesLost" class="text-danger"></span>
+</div>
+
+<div class="form-group">
     <label asp-for="GoalsFor" class="control-label"></label>
     <input asp-for="GoalsFor" class="form-control" />
     <span asp-validation-for="GoalsFor" class="text-danger"></span>

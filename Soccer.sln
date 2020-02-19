@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29721.120
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer.Common", "Soccer.Common\Soccer.Common.csproj", "{966E268A-58CE-4199-A5E5-6722DA7E3F75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soccer.Common", "Soccer.Common\Soccer.Common.csproj", "{966E268A-58CE-4199-A5E5-6722DA7E3F75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer.Web", "Soccer.Web\Soccer.Web.csproj", "{1B117364-CB79-4269-AB77-8C49095C1511}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soccer.Web", "Soccer.Web\Soccer.Web.csproj", "{1B117364-CB79-4269-AB77-8C49095C1511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer.Prism", "Soccer.Prism\Soccer.Prism\Soccer.Prism.csproj", "{84383AEF-045E-4251-BB34-EF6F6973DEB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soccer.Prism", "Soccer.Prism\Soccer.Prism\Soccer.Prism.csproj", "{84383AEF-045E-4251-BB34-EF6F6973DEB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer.Prism.Android", "Soccer.Prism\Soccer.Prism.Android\Soccer.Prism.Android.csproj", "{D0F5FEC8-4D17-40D7-957E-5DCA02DC2000}"
 EndProject
@@ -152,6 +152,7 @@ Global
 		{77D9241C-09F8-4C18-A24E-268376973380}.AppStore|iPhoneSimulator.ActiveCfg = AppStore|iPhoneSimulator
 		{77D9241C-09F8-4C18-A24E-268376973380}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{77D9241C-09F8-4C18-A24E-268376973380}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{77D9241C-09F8-4C18-A24E-268376973380}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{77D9241C-09F8-4C18-A24E-268376973380}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{77D9241C-09F8-4C18-A24E-268376973380}.Debug|iPhone.Build.0 = Debug|iPhone
 		{77D9241C-09F8-4C18-A24E-268376973380}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
@@ -210,6 +211,7 @@ Global
 		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.AppStore|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.AppStore|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.Debug|iPhone.Build.0 = Debug|iPhone
 		{AEFAF003-48FF-4E4D-A881-C7653569ED7C}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator

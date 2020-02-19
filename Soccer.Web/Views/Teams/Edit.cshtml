@@ -23,6 +23,12 @@
             </div>
         </form>
     </div>
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Model.LogoPath))
+        {
+            <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+        }
+    </div>
 </div>
 
 @section Scripts {
