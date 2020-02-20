@@ -1,0 +1,43 @@
+﻿@model Soccer.Web.Models.GroupDetailViewModel
+
+<div class="form-group">
+    <label asp-for="TeamId" class="control-label"></label>
+    <select asp-for="TeamId" asp-items="Model.Teams" class="form-control"></select>
+    <span asp-validation-for="TeamId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="MatchesPlayed" class="control-label"></label>
+    <input asp-for="MatchesPlayed" class="form-control" />
+    <span asp-validation-for="MatchesPlayed" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="MatchesWon" class="control-label"></label>
+    <input asp-for="MatchesWon" class="form-control" />
+    <span asp-validation-for="MatchesWon" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="MatchesTied" class="control-label"></label>
+    <input asp-for="MatchesTied" class="form-control" />
+    <span asp-validation-for="MatchesTied" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="MatchesLost" class="control-label"></label>
+    <input asp-for="MatchesLost" class="form-control" />
+    <span asp-validation-for="MatchesLost" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GoalsFor" class="control-label"></label>
+    <input asp-for="GoalsFor" class="form-control" />
+    <span asp-validation-for="GoalsFor" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GoalsAgainst" class="control-label"></label>
+    <input asp-for="GoalsAgainst" class="form-control" />
+    <span asp-validation-for="GoalsAgainst" class="text-danger"></span>
+</div>

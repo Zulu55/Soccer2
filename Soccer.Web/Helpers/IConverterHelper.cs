@@ -1,5 +1,6 @@
 ﻿using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
+using System.Threading.Tasks;
 
 namespace Soccer.Web.Helpers
 {
@@ -12,5 +13,17 @@ namespace Soccer.Web.Helpers
         TournamentEntity ToTournamentEntity(TournamentViewModel model, string path, bool isNew);
 
         TournamentViewModel ToTournamentViewModel(TournamentEntity tournamentEntity);
+
+        Task<GroupEntity> ToGroupEntityAsync(GroupViewModel model, bool isNew);
+
+        GroupViewModel ToGroupViewModel(GroupEntity groupEntity);
+
+        Task<GroupDetailEntity> ToGroupDetailEntityAsync(GroupDetailViewModel model, bool isNew);
+
+        GroupDetailViewModel ToGroupDetailViewModel(GroupDetailEntity groupDetailEntity);
+
+        Task<MatchEntity> ToMatchEntityAsync(MatchViewModel model, bool isNew);
+
+        MatchViewModel ToMatchViewModel(MatchEntity matchEntity);
     }
 }
