@@ -118,9 +118,7 @@ namespace Soccer.Web.Controllers
 
         public async Task<IActionResult> ChangeUser()
         {
-            UserEntity user = await _context.Users
-                .Include(u => u.Team)
-                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+            UserEntity user = await _userHelper.GetUserAsync(User.Identity.Name);
             if (user == null)
             {
                 return NotFound();
@@ -154,7 +152,7 @@ namespace Soccer.Web.Controllers
                     path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
                 }
 
-                UserEntity user = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
+                UserEntity user = await _userHelper.GetUserAsync(User.Identity.Name);
 
                 user.Document = model.Document;
                 user.FirstName = model.FirstName;
@@ -182,7 +180,7 @@ namespace Soccer.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
+                var user = await _userHelper.GetUserAsync(User.Identity.Name);
                 if (user != null)
                 {
                     var result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);

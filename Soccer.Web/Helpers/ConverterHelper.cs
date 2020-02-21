@@ -257,5 +257,31 @@ namespace Soccer.Web.Helpers
                 Name = team.Name
             };
         }
+
+        public PredictionResponse ToPredictionResponse(PredictionEntity predictionEntity)
+        {
+            return new PredictionResponse
+            {
+                GoalsLocal = predictionEntity.GoalsLocal,
+                GoalsVisitor = predictionEntity.GoalsVisitor,
+                Id = predictionEntity.Id,
+                Match = ToMatchResponse(predictionEntity.Match),
+                Points = predictionEntity.Points
+            };
+        }
+
+        public MatchResponse ToMatchResponse(MatchEntity matchEntity)
+        {
+            return new MatchResponse
+            {
+                Date = matchEntity.Date,
+                GoalsLocal = matchEntity.GoalsLocal,
+                GoalsVisitor = matchEntity.GoalsVisitor,
+                Id = matchEntity.Id,
+                IsClosed = matchEntity.IsClosed,
+                Local = ToTeamResponse(matchEntity.Local),
+                Visitor = ToTeamResponse(matchEntity.Visitor)
+            };
+        }
     }
 }

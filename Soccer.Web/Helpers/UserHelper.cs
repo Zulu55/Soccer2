@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Soccer.Common.Enums;
 using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Soccer.Web.Helpers
@@ -48,11 +51,6 @@ namespace Soccer.Web.Helpers
             }
         }
 
-        public async Task<UserEntity> GetUserByEmailAsync(string email)
-        {
-            return await _userManager.FindByEmailAsync(email);
-        }
-
         public async Task<bool> IsUserInRoleAsync(UserEntity user, string roleName)
         {
             return await _userManager.IsInRoleAsync(user, roleName);
@@ -94,7 +92,7 @@ namespace Soccer.Web.Helpers
                 return null;
             }
 
-            UserEntity newUser = await GetUserByEmailAsync(model.Username);
+            UserEntity newUser = await GetUserAsync(model.Username);
             await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
             return newUser;
         }
@@ -107,6 +105,20 @@ namespace Soccer.Web.Helpers
         public async Task<IdentityResult> UpdateUserAsync(UserEntity user)
         {
             return await _userManager.UpdateAsync(user);
+        }
+
+        public async Task<UserEntity> GetUserAsync(Guid userId)
+        {
+            return await _context.Users
+                .Include(u => u.Team)
+                .FirstOrDefaultAsync(u => u.Id == userId.ToString());
+        }
+
+        public async Task<UserEntity> GetUserAsync(string email)
+        {
+            return await _context.Users
+                .Include(u => u.Team)
+                .FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }
