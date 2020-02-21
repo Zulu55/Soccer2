@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Soccer.Common.Models;
 using Soccer.Web.Data;
@@ -10,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace Soccer.Web.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
+    [Route("api/[controller]")]
     public class PredictionsController : ControllerBase
     {
         private readonly DataContext _context;
@@ -67,12 +70,12 @@ namespace Soccer.Web.Controllers.API
             }
 
             // Add precitions undone
-            var matches = await _context.Matches
+            List<MatchEntity> matches = await _context.Matches
                 .Where(m => m.Group.Tournament.Id == predictionRequest.TournamentId)
                 .ToListAsync();
-            foreach (var matchEntity in matches)
+            foreach (MatchEntity matchEntity in matches)
             {
-                var predictionResponse = predictionResponses.FirstOrDefault(pr => pr.Match.Id == matchEntity.Id);
+                PredictionResponse predictionResponse = predictionResponses.FirstOrDefault(pr => pr.Match.Id == matchEntity.Id);
                 if (predictionResponse == null)
                 {
                     predictionResponses.Add(new PredictionResponse
