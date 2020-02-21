@@ -15,9 +15,9 @@ namespace Soccer.Common.Models
 
         public TeamResponse Visitor { get; set; }
 
-        public int GoalsLocal { get; set; }
+        public int? GoalsLocal { get; set; }
 
-        public int GoalsVisitor { get; set; }
+        public int? GoalsVisitor { get; set; }
 
         public bool IsClosed { get; set; }
 

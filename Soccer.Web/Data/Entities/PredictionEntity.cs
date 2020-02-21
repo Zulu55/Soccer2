@@ -11,10 +11,10 @@ namespace Soccer.Web.Data.Entities
         public UserEntity User { get; set; }
 
         [Display(Name = "Goals Local")]
-        public int GoalsLocal { get; set; }
+        public int? GoalsLocal { get; set; }
 
         [Display(Name = "Goals Visitor")]
-        public int GoalsVisitor { get; set; }
+        public int? GoalsVisitor { get; set; }
 
         public int Points { get; set; }
     }

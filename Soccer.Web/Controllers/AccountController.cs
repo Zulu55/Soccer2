@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Soccer.Common.Enums;
+using Soccer.Web.Data;
+using Soccer.Web.Data.Entities;
 using Soccer.Web.Helpers;
 using Soccer.Web.Models;
 using System.Linq;
@@ -9,12 +12,14 @@ namespace Soccer.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
         private readonly IImageHelper _imageHelper;
         private readonly ICombosHelper _combosHelper;
 
-        public AccountController(IUserHelper userHelper, IImageHelper imageHelper, ICombosHelper combosHelper)
+        public AccountController(DataContext context, IUserHelper userHelper, IImageHelper imageHelper, ICombosHelper combosHelper)
         {
+            _context = context;
             _userHelper = userHelper;
             _imageHelper = imageHelper;
             _combosHelper = combosHelper;
@@ -35,7 +40,7 @@ namespace Soccer.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _userHelper.LoginAsync(model);
+                Microsoft.AspNetCore.Identity.SignInResult result = await _userHelper.LoginAsync(model);
                 if (result.Succeeded)
                 {
                     if (Request.Query.Keys.Contains("ReturnUrl"))
@@ -64,7 +69,7 @@ namespace Soccer.Web.Controllers
 
         public IActionResult Register()
         {
-            var model = new AddUserViewModel
+            AddUserViewModel model = new AddUserViewModel
             {
                 Teams = _combosHelper.GetComboTeams()
             };
@@ -85,25 +90,114 @@ namespace Soccer.Web.Controllers
                     path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
                 }
 
-                var user = await _userHelper.AddUserAsync(model, path, UserType.User);
+                UserEntity user = await _userHelper.AddUserAsync(model, path, UserType.User);
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "This email is already used.");
                     return View(model);
                 }
 
-                var loginViewModel = new LoginViewModel
+                LoginViewModel loginViewModel = new LoginViewModel
                 {
                     Password = model.Password,
                     RememberMe = false,
                     Username = model.Username
                 };
 
-                var result2 = await _userHelper.LoginAsync(loginViewModel);
+                Microsoft.AspNetCore.Identity.SignInResult result2 = await _userHelper.LoginAsync(loginViewModel);
 
                 if (result2.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
+                }
+            }
+
+            model.Teams = _combosHelper.GetComboTeams();
+            return View(model);
+        }
+
+        public async Task<IActionResult> ChangeUser()
+        {
+            UserEntity user = await _context.Users
+                .Include(u => u.Team)
+                .FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            EditUserViewModel model = new EditUserViewModel
+            {
+                Address = user.Address,
+                Document = user.Document,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PicturePath = user.PicturePath,
+                Teams = _combosHelper.GetComboTeams(),
+                TeamId = user.Team.Id
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUser(EditUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string path = model.PicturePath;
+
+                if (model.PictureFile != null)
+                {
+                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                }
+
+                UserEntity user = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
+
+                user.Document = model.Document;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
+                user.PicturePath = path;
+                user.Team = await _context.Teams.FindAsync(model.TeamId);
+
+                await _userHelper.UpdateUserAsync(user);
+                return RedirectToAction("Index", "Home");
+            }
+
+            model.Teams = _combosHelper.GetComboTeams();
+            return View(model);
+        }
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userHelper.GetUserByEmailAsync(User.Identity.Name);
+                if (user != null)
+                {
+                    var result = await _userHelper.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ChangeUser");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User no found.");
                 }
             }
 

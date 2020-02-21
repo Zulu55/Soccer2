@@ -23,5 +23,9 @@ namespace Soccer.Web.Helpers
         Task LogoutAsync();
 
         Task<UserEntity> AddUserAsync(AddUserViewModel model, string path, UserType userType);
+
+        Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
+
+        Task<IdentityResult> UpdateUserAsync(UserEntity user);
     }
 }
