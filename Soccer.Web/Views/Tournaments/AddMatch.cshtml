@@ -1,0 +1,29 @@
+﻿@model Soccer.Web.Models.MatchViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Add</h2>
+
+<h4>Match to group: @Model.Group.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddMatch" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="GroupId" />
+
+            <partial name="_Match" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="DetailsGroup" asp-route-id="@Model.GroupId" class="btn btn-success">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,39 @@
+﻿@model Soccer.Web.Models.MatchViewModel
+
+<div class="form-group">
+    <label asp-for="Date" class="control-label"></label>
+    <input asp-for="Date" class="form-control" />
+    <span asp-validation-for="Date" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="LocalId" class="control-label"></label>
+    <select asp-for="LocalId" asp-items="Model.Teams" class="form-control"></select>
+    <span asp-validation-for="LocalId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="VisitorId" class="control-label"></label>
+    <select asp-for="VisitorId" asp-items="Model.Teams" class="form-control"></select>
+    <span asp-validation-for="VisitorId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GoalsLocal" class="control-label"></label>
+    <input asp-for="GoalsLocal" class="form-control" />
+    <span asp-validation-for="GoalsLocal" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GoalsVisitor" class="control-label"></label>
+    <input asp-for="GoalsVisitor" class="form-control" />
+    <span asp-validation-for="GoalsVisitor" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input asp-for="IsClosed" /> @Html.DisplayNameFor(model => model.IsClosed)
+        </label>
+    </div>
+</div>
