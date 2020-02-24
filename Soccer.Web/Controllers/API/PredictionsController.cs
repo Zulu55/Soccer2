@@ -6,6 +6,7 @@ using Soccer.Common.Models;
 using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,23 +20,84 @@ namespace Soccer.Web.Controllers.API
     {
         private readonly DataContext _context;
         private readonly IConverterHelper _converterHelper;
+        private readonly IUserHelper _userHelper;
 
-        public PredictionsController(DataContext context, IConverterHelper converterHelper)
+        public PredictionsController(
+            DataContext context,
+            IConverterHelper converterHelper,
+            IUserHelper userHelper)
         {
             _context = context;
             _converterHelper = converterHelper;
+            _userHelper = userHelper;
         }
 
         [HttpPost]
-        [Route("GetPredictionsForUser")]
-        public async Task<IActionResult> GetPredictionsForUser([FromBody] PredictionRequest predictionRequest)
+        public async Task<IActionResult> PostPrediction([FromBody] PredictionRequest predictionRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            TournamentEntity tournament = await _context.Tournaments.FindAsync(predictionRequest.TournamentId);
+            MatchEntity matchEntity = await _context.Matches.FindAsync(predictionRequest.MatchId);
+            if (matchEntity == null)
+            {
+                return BadRequest("Error003");
+            }
+
+            if (matchEntity.IsClosed)
+            {
+                return BadRequest("Error004");
+            }
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(predictionRequest.UserId);
+            if (userEntity == null)
+            {
+                return BadRequest("Error002");
+            }
+
+            if (matchEntity.Date <= DateTime.UtcNow)
+            {
+                return BadRequest("Error005");
+            }
+
+            PredictionEntity predictionEntity = await _context.Predictions
+                .FirstOrDefaultAsync(p => p.User.Id == predictionRequest.UserId.ToString() && p.Match.Id == predictionRequest.MatchId);
+
+            if (predictionEntity == null)
+            {
+                predictionEntity = new PredictionEntity
+                {
+                    GoalsLocal = predictionRequest.GoalsLocal,
+                    GoalsVisitor = predictionRequest.GoalsVisitor,
+                    Match = matchEntity,
+                    User = userEntity
+                };
+
+                _context.Predictions.Add(predictionEntity);
+            }
+            else
+            {
+                predictionEntity.GoalsLocal = predictionRequest.GoalsLocal;
+                predictionEntity.GoalsVisitor = predictionRequest.GoalsVisitor;
+                _context.Predictions.Update(predictionEntity);
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(_converterHelper.ToPredictionResponse(predictionEntity));
+        }
+
+        [HttpPost]
+        [Route("GetPredictionsForUser")]
+        public async Task<IActionResult> GetPredictionsForUser([FromBody] PredictionsForUserRequest predictionsForUserRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TournamentEntity tournament = await _context.Tournaments.FindAsync(predictionsForUserRequest.TournamentId);
             if (tournament == null)
             {
                 return BadRequest("Error001");
@@ -53,7 +115,7 @@ namespace Soccer.Web.Controllers.API
                 .ThenInclude(p => p.Match)
                 .ThenInclude(p => p.Group)
                 .ThenInclude(p => p.Tournament)
-                .FirstOrDefaultAsync(u => u.Id == predictionRequest.UserId.ToString());
+                .FirstOrDefaultAsync(u => u.Id == predictionsForUserRequest.UserId.ToString());
             if (userEntity == null)
             {
                 return BadRequest("Error002");
@@ -63,7 +125,7 @@ namespace Soccer.Web.Controllers.API
             List<PredictionResponse> predictionResponses = new List<PredictionResponse>();
             foreach (PredictionEntity predictionEntity in userEntity.Predictions)
             {
-                if (predictionEntity.Match.Group.Tournament.Id == predictionRequest.TournamentId)
+                if (predictionEntity.Match.Group.Tournament.Id == predictionsForUserRequest.TournamentId)
                 {
                     predictionResponses.Add(_converterHelper.ToPredictionResponse(predictionEntity));
                 }
@@ -71,7 +133,9 @@ namespace Soccer.Web.Controllers.API
 
             // Add precitions undone
             List<MatchEntity> matches = await _context.Matches
-                .Where(m => m.Group.Tournament.Id == predictionRequest.TournamentId)
+                .Include(m => m.Local)
+                .Include(m => m.Visitor)
+                .Where(m => m.Group.Tournament.Id == predictionsForUserRequest.TournamentId)
                 .ToListAsync();
             foreach (MatchEntity matchEntity in matches)
             {
