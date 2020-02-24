@@ -2,6 +2,8 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:prism="http://prismlibrary.com"
+                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                   prism:ViewModelLocator.AutowireViewModel="True"
                   x:Class="Soccer.Prism.Views.SoccerMasterDetailPage">
 
@@ -9,12 +11,40 @@
         <ContentPage Title="Menu"
                      BackgroundColor="{StaticResource ColorDanger}">
             <StackLayout Padding="20">
-                <Image HeightRequest="150"
-                        Source="soccer"/>
-                <Label FontAttributes="Bold"
-                        FontSize="Large"
-                        Text="{Binding User.FullName}"
-                        TextColor="Black"/>
+                <RelativeLayout>
+                    <Image x:Name="Logo" HorizontalOptions="Center"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,Property=X,Factor=1,Constant=60}"
+                           HeightRequest="150"
+                           Source="soccer"/>
+                    <ffimageloading:CachedImage x:Name="Picture" 
+                                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Logo,Property=Y,Factor=1,Constant=60}"
+                                                Aspect="AspectFit"
+                                                Source="{Binding User.PictureFullPath}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="100"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <ffimageloading:CachedImage x:Name="Team" 
+                                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=50}"
+                                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=X,Factor=1,Constant=60}"
+                                                Aspect="AspectFit"
+                                                Source="{Binding User.Team.LogoFullPath}" 
+                                                CacheDuration= "50"
+                                                HeightRequest="50"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600"/>
+                    <Label RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=110}"
+                           FontAttributes="Bold"
+                           FontSize="Large"
+                           Text="{Binding User.FullName}"
+                           TextColor="Black"/>
+                </RelativeLayout>
                 <ListView BackgroundColor="Transparent"
                             ItemsSource="{Binding Menus}"
                 	      HasUnevenRows="True"
