@@ -88,6 +88,28 @@ namespace Soccer.Web.Controllers.API
             return Ok(_converterHelper.ToPredictionResponse(predictionEntity));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetPositions()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            List<UserEntity> users = await _context.Users
+                .Include(u => u.Team)
+                .Include(u => u.Predictions)
+                .ToListAsync();
+            List<PositionResponse> positionResponses = users.Select(u => new PositionResponse
+            {
+                Points = u.Points,
+                UserResponse = _converterHelper.ToUserResponse(u)
+
+            }).ToList();
+
+            return Ok(positionResponses.OrderByDescending(pr => pr.Points));
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPositionsByTournament([FromRoute] int id)
         {
@@ -120,8 +142,8 @@ namespace Soccer.Web.Controllers.API
                         {
                             positionResponses.Add(new PositionResponse
                             {
-                                    Points = predictionEntity.Points,
-                                    UserResponse = _converterHelper.ToUserResponse(predictionEntity.User),
+                                Points = predictionEntity.Points,
+                                UserResponse = _converterHelper.ToUserResponse(predictionEntity.User),
                             });
                         }
                         else
