@@ -68,5 +68,49 @@ namespace Soccer.Prism.Helpers
         public static string LoginError => Resource.LoginError;
 
         public static string Logout => Resource.Logout;
+
+        public static string Document => Resource.Document;
+
+        public static string DocumentError => Resource.DocumentError;
+
+        public static string DocumentPlaceHolder => Resource.DocumentPlaceHolder;
+
+        public static string FirstName => Resource.FirstName;
+
+        public static string FirstNameError => Resource.FirstNameError;
+
+        public static string FirstNamePlaceHolder => Resource.FirstNamePlaceHolder;
+
+        public static string LastName => Resource.LastName;
+
+        public static string LastNameError => Resource.LastNameError;
+
+        public static string LastNamePlaceHolder => Resource.LastNamePlaceHolder;
+
+        public static string Address => Resource.Address;
+
+        public static string AddressError => Resource.AddressError;
+
+        public static string AddressPlaceHolder => Resource.AddressPlaceHolder;
+
+        public static string Phone => Resource.Phone;
+
+        public static string PhoneError => Resource.PhoneError;
+
+        public static string PhonePlaceHolder => Resource.PhonePlaceHolder;
+
+        public static string FavoriteTeam => Resource.FavoriteTeam;
+
+        public static string FavoriteTeamError => Resource.FavoriteTeamError;
+
+        public static string FavoriteTeamPlaceHolder => Resource.FavoriteTeamPlaceHolder;
+
+        public static string PasswordConfirm => Resource.PasswordConfirm;
+
+        public static string PasswordConfirmError1 => Resource.PasswordConfirmError1;
+
+        public static string PasswordConfirmError2 => Resource.PasswordConfirmError2;
+
+        public static string PasswordConfirmPlaceHolder => Resource.PasswordConfirmPlaceHolder;
     }
 }
