@@ -1,4 +1,5 @@
 ﻿using Soccer.Common.Models;
+using Soccer.Common.Models.Soccer.Common.Models;
 using System.Threading.Tasks;
 
 namespace Soccer.Common.Services
@@ -8,5 +9,9 @@ namespace Soccer.Common.Services
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller);
 
         Task<bool> CheckConnectionAsync(string url);
+
+        Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
+
+        Task<Response> GetUserByEmail(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken, string email);
     }
 }

@@ -24,7 +24,7 @@ namespace Soccer.Web.Controllers.API
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTeams()
+        public async Task<IActionResult> GetTournaments()
         {
             List<TournamentEntity> tournaments = await _context.Tournaments
                 .Include(t => t.Groups)
@@ -32,8 +32,6 @@ namespace Soccer.Web.Controllers.API
                 .ThenInclude(gd => gd.Team)
                 .Include(t => t.Groups)
                 .ThenInclude(g => g.Matches)
-                .ThenInclude(m => m.Predictions)
-                .ThenInclude(p => p.User)
                 .Include(t => t.Groups)
                 .ThenInclude(g => g.Matches)
                 .ThenInclude(m => m.Local)

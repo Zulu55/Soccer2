@@ -10,9 +10,13 @@
                      BackgroundColor="{StaticResource ColorDanger}">
             <StackLayout Padding="20">
                 <Image HeightRequest="150"
-                       Source="soccer"/>
+                        Source="soccer"/>
+                <Label FontAttributes="Bold"
+                        FontSize="Large"
+                        Text="{Binding User.FullName}"
+                        TextColor="Black"/>
                 <ListView BackgroundColor="Transparent"
-                	      ItemsSource="{Binding Menus}"
+                            ItemsSource="{Binding Menus}"
                 	      HasUnevenRows="True"
                 	      SeparatorVisibility="None">
                     <ListView.ItemTemplate>

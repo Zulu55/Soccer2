@@ -173,11 +173,11 @@ namespace Soccer.Web.Helpers
                 LogoPath = tournamentEntity.LogoPath,
                 Name = tournamentEntity.Name,
                 StartDate = tournamentEntity.StartDate,
-                Groups = tournamentEntity.Groups.Select(g => new GroupResponse
+                Groups = tournamentEntity.Groups?.Select(g => new GroupResponse
                 {
                     Id = g.Id,
                     Name = g.Name,
-                    GroupDetails = g.GroupDetails.Select(gd => new GroupDetailResponse
+                    GroupDetails = g.GroupDetails?.Select(gd => new GroupDetailResponse
                     {
                         GoalsAgainst = gd.GoalsAgainst,
                         GoalsFor = gd.GoalsFor,
@@ -188,7 +188,7 @@ namespace Soccer.Web.Helpers
                         MatchesWon = gd.MatchesWon,
                         Team = ToTeamResponse(gd.Team)
                     }).ToList(),
-                    Matches = g.Matches.Select(m => new MatchResponse
+                    Matches = g.Matches?.Select(m => new MatchResponse
                     {
                         Date = m.Date,
                         GoalsLocal = m.GoalsLocal,
@@ -197,7 +197,7 @@ namespace Soccer.Web.Helpers
                         IsClosed = m.IsClosed,
                         Local = ToTeamResponse(m.Local),
                         Visitor = ToTeamResponse(m.Visitor),
-                        Predictions = m.Predictions.Select(p => new PredictionResponse
+                        Predictions = m.Predictions?.Select(p => new PredictionResponse
                         {
                             GoalsLocal = p.GoalsLocal,
                             GoalsVisitor = p.GoalsVisitor,

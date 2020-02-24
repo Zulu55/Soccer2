@@ -25,6 +25,7 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="TextColor" Value="{StaticResource ColorFontInverse}" />
+                <Setter Property="CornerRadius" Value="10" />
             </Style>
 
             <Style TargetType="Label">
@@ -37,6 +38,7 @@
 
             <Style x:Key="DangerButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorDanger}" />
+                <Setter Property="TextColor" Value="{StaticResource ColorFont}" />
             </Style>
 
             <!-- Data Templates -->
