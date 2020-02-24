@@ -88,6 +88,53 @@ namespace Soccer.Web.Controllers.API
             return Ok(_converterHelper.ToPredictionResponse(predictionEntity));
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPositionsByTournament([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TournamentEntity tournament = await _context.Tournaments
+                .Include(t => t.Groups)
+                .ThenInclude(g => g.Matches)
+                .ThenInclude(m => m.Predictions)
+                .ThenInclude(p => p.User)
+                .ThenInclude(u => u.Team)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (tournament == null)
+            {
+                return BadRequest("Error001");
+            }
+
+            List<PositionResponse> positionResponses = new List<PositionResponse>();
+            foreach (GroupEntity groupEntity in tournament.Groups)
+            {
+                foreach (MatchEntity matchEntity in groupEntity.Matches)
+                {
+                    foreach (PredictionEntity predictionEntity in matchEntity.Predictions)
+                    {
+                        PositionResponse positionResponse = positionResponses.FirstOrDefault(pr => pr.UserResponse.Id == predictionEntity.User.Id);
+                        if (positionResponse == null)
+                        {
+                            positionResponses.Add(new PositionResponse
+                            {
+                                    Points = predictionEntity.Points,
+                                    UserResponse = _converterHelper.ToUserResponse(predictionEntity.User),
+                            });
+                        }
+                        else
+                        {
+                            positionResponse.Points += predictionEntity.Points;
+                        }
+                    }
+                }
+            }
+
+            return Ok(positionResponses.OrderByDescending(pr => pr.Points));
+        }
+
         [HttpPost]
         [Route("GetPredictionsForUser")]
         public async Task<IActionResult> GetPredictionsForUser([FromBody] PredictionsForUserRequest predictionsForUserRequest)

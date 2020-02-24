@@ -35,5 +35,7 @@ namespace Soccer.Web.Helpers
         PredictionResponse ToPredictionResponse(PredictionEntity predictionEntity);
         
         MatchResponse ToMatchResponse(MatchEntity matchEntity);
+        
+        UserResponse ToUserResponse(UserEntity user);
     }
 }
