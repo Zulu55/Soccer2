@@ -276,4 +276,16 @@
   <data name="Message001" xml:space="preserve">
     <value>Se envió un correo electrónico de confirmación. ¡Confirme su cuenta e inicie sesión en la aplicación!</value>
   </data>
+  <data name="PictureSource" xml:space="preserve">
+    <value>¿Dónde quieres tomar la foto?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="FromCamera" xml:space="preserve">
+    <value>De la cámara</value>
+  </data>
+  <data name="FromGallery" xml:space="preserve">
+    <value>De la galería</value>
+  </data>
 </root>

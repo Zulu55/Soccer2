@@ -118,5 +118,13 @@ namespace Soccer.Prism.Helpers
         public static string Error007 => Resource.Error007;
 
         public static string Message001 => Resource.Message001;
+
+        public static string PictureSource => Resource.PictureSource;
+
+        public static string Cancel => Resource.Cancel;
+
+        public static string FromCamera => Resource.FromCamera;
+
+        public static string FromGallery => Resource.FromGallery;
     }
 }
