@@ -247,4 +247,13 @@
   <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
     <value>Enter the password confirm...</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="Error007" xml:space="preserve">
+    <value>This email is already registered.</value>
+  </data>
+  <data name="Message001" xml:space="preserve">
+    <value>A Confirmation email was sent. Please confirm your account and log into the App.</value>
+  </data>
 </root>

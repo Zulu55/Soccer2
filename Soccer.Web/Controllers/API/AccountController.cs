@@ -53,7 +53,7 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "This email is already registered."
+                    Message = "Error007"
                 });
             }
 
@@ -100,7 +100,7 @@ namespace Soccer.Web.Controllers.API
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "A Confirmation email was sent. Please confirm your account and log into the App."
+                Message = "Message001"
             });
         }
 

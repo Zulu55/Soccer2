@@ -110,6 +110,7 @@ namespace Soccer.Web.Controllers
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "This email is already used.");
+                    model.Teams = _combosHelper.GetComboTeams();
                     return View(model);
                 }
 
@@ -120,11 +121,16 @@ namespace Soccer.Web.Controllers
                     token = myToken
                 }, protocol: HttpContext.Request.Scheme);
 
-                _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                var response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
                     $"To allow the user, " +
                     $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
-                ViewBag.Message = "The instructions to allow your user has been sent to email.";
-                return View(model);
+                if (response.IsSuccess)
+                {
+                    ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                    return View(model);
+                }
+
+                ModelState.AddModelError(string.Empty, response.Message);
             }
 
             model.Teams = _combosHelper.GetComboTeams();

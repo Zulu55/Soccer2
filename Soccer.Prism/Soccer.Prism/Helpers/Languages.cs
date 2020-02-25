@@ -112,5 +112,11 @@ namespace Soccer.Prism.Helpers
         public static string PasswordConfirmError2 => Resource.PasswordConfirmError2;
 
         public static string PasswordConfirmPlaceHolder => Resource.PasswordConfirmPlaceHolder;
+
+        public static string Ok => Resource.Ok;
+
+        public static string Error007 => Resource.Error007;
+
+        public static string Message001 => Resource.Message001;
     }
 }

@@ -178,6 +178,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This email is already registered..
+        /// </summary>
+        internal static string Error007 {
+            get {
+                return ResourceManager.GetString("Error007", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorite team.
         /// </summary>
         internal static string FavoriteTeam {
@@ -313,6 +322,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A Confirmation email was sent. Please confirm your account and log into the App..
+        /// </summary>
+        internal static string Message001 {
+            get {
+                return ResourceManager.GetString("Message001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ML.
         /// </summary>
         internal static string ML {
@@ -381,6 +399,15 @@ namespace Soccer.Prism.Resources {
         internal static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         

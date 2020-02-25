@@ -1,7 +1,9 @@
-﻿namespace Soccer.Web.Helpers
+﻿using Soccer.Common.Models;
+
+namespace Soccer.Web.Helpers
 {
 	public interface IMailHelper
 	{
-		void SendMail(string to, string subject, string body);
+		Response SendMail(string to, string subject, string body);
 	}
 }
