@@ -288,4 +288,10 @@
   <data name="FromGallery" xml:space="preserve">
     <value>De la galería</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Recuperar contraseña</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>¿Olvidó la contraseña?</value>
+  </data>
 </root>
