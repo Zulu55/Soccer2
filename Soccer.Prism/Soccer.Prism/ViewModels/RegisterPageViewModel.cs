@@ -6,7 +6,6 @@ using Soccer.Common.Helpers;
 using Soccer.Common.Models;
 using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -40,7 +39,7 @@ namespace Soccer.Prism.ViewModels
             _navigationService = navigationService;
             _regexHelper = regexHelper;
             _apiService = apiService;
-            this._filesHelper = filesHelper;
+            _filesHelper = filesHelper;
             Title = Languages.Register;
             Image = App.Current.Resources["UrlNoImage"].ToString();
             IsEnabled = true;
@@ -235,7 +234,7 @@ namespace Soccer.Prism.ViewModels
         {
             await CrossMedia.Current.Initialize();
 
-            var source = await Application.Current.MainPage.DisplayActionSheet(
+            string source = await Application.Current.MainPage.DisplayActionSheet(
                 Languages.PictureSource,
                 Languages.Cancel,
                 null,
@@ -268,7 +267,7 @@ namespace Soccer.Prism.ViewModels
             {
                 Image = ImageSource.FromStream(() =>
                 {
-                    var stream = _file.GetStream();
+                    System.IO.Stream stream = _file.GetStream();
                     return stream;
                 });
             }
