@@ -558,6 +558,117 @@ namespace Soccer.Web.Data
                     }
                 });
 
+                startDate = DateTime.Today.AddMonths(1).ToUniversalTime();
+                endDate = DateTime.Today.AddMonths(2).ToUniversalTime();
+
+                _context.Tournaments.Add(new TournamentEntity
+                {
+                    StartDate = startDate,
+                    EndDate = endDate,
+                    IsActive = true,
+                    LogoPath = $"~/images/Tournaments/Champions 2020.png",
+                    Name = "Champions 2020",
+                    Groups = new List<GroupEntity>
+                    {
+                        new GroupEntity
+                        {
+                             Name = "A",
+                             GroupDetails = new List<GroupDetailEntity>
+                             {
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Ajax") },
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Barcelona") }
+                             },
+                             Matches = new List<MatchEntity>
+                             {
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddHours(14),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Ajax"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Barcelona")
+                                 },
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddHours(17),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Barcelona"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Ajax")
+                                 }
+                             }
+                        },
+                        new GroupEntity
+                        {
+                             Name = "B",
+                             GroupDetails = new List<GroupDetailEntity>
+                             {
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Bayer Leverkusen") },
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Chelsea") }
+                             },
+                             Matches = new List<MatchEntity>
+                             {
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddDays(1).AddHours(14),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Bayer Leverkusen"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Chelsea")
+                                 },
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddDays(1).AddHours(17),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Chelsea"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Bayer Leverkusen")
+                                 }
+                             }
+                        },
+                        new GroupEntity
+                        {
+                             Name = "C",
+                             GroupDetails = new List<GroupDetailEntity>
+                             {
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Borussia Dortmund") },
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Inter Milan") }
+                             },
+                             Matches = new List<MatchEntity>
+                             {
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddDays(1).AddHours(14),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Borussia Dortmund"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Inter Milan")
+                                 },
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddDays(1).AddHours(17),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Inter Milan"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Borussia Dortmund")
+                                 }
+                             }
+                        },
+                        new GroupEntity
+                        {
+                             Name = "D",
+                             GroupDetails = new List<GroupDetailEntity>
+                             {
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "PSG") },
+                                 new GroupDetailEntity { Team = _context.Teams.FirstOrDefault(t => t.Name == "Real Madrid") }
+                             },
+                             Matches = new List<MatchEntity>
+                             {
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddDays(1).AddHours(14),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "PSG"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "Real Madrid")
+                                 },
+                                 new MatchEntity
+                                 {
+                                     Date = startDate.AddDays(1).AddHours(17),
+                                     Local = _context.Teams.FirstOrDefault(t => t.Name == "Real Madrid"),
+                                     Visitor = _context.Teams.FirstOrDefault(t => t.Name == "PSG")
+                                 }
+                             }
+                        }
+                    }
+                });
+
                 await _context.SaveChangesAsync();
             }
         }
