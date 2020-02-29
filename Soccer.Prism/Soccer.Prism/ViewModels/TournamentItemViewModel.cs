@@ -25,7 +25,7 @@ namespace Soccer.Prism.ViewModels
                 { "tournament", this }
             };
 
-            await _navigationService.NavigateAsync(nameof(GroupsPage), parameters);
+            await _navigationService.NavigateAsync(nameof(TournamentTabbedPage), parameters);
         }
-    }
+    }   
 }
