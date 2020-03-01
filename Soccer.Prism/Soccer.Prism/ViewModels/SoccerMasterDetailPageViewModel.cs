@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Prism.Navigation;
-using Soccer.Common.Helpers;
+﻿using Prism.Navigation;
 using Soccer.Common.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
