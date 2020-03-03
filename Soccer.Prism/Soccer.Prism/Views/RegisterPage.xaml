@@ -137,8 +137,7 @@
                                 ItemDisplayBinding="{Binding Name}"
                                 ItemsSource="{Binding Teams}"
                                 SelectedItem="{Binding Team}"
-                                Title="{i18n:Translate FavoriteTeamPlaceHolder}">
-                        </Picker>
+                                Title="{i18n:Translate FavoriteTeamPlaceHolder}"/>
                     </Grid>
                 </StackLayout>
             </ScrollView>

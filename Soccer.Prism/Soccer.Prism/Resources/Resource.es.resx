@@ -184,13 +184,13 @@
     <value>Debes ingresar un correo electrónico...</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Contraseña</value>
+    <value>Clave</value>
   </data>
   <data name="PasswordPlaceHolder" xml:space="preserve">
-    <value>Entra tu contraseña...</value>
+    <value>Entra tu clave...</value>
   </data>
   <data name="LoginError" xml:space="preserve">
-    <value>Email o contraseña incorrectos</value>
+    <value>Email o clave incorrectos</value>
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Cerrar sesión</value>
@@ -253,19 +253,19 @@
     <value>Selecciona tu equipo favorito...</value>
   </data>
   <data name="PasswordConfirm" xml:space="preserve">
-    <value>Confirmar contraseña</value>
+    <value>Confirmar clave</value>
   </data>
   <data name="PasswordConfirmError1" xml:space="preserve">
-    <value>Debes ingresar una contraseña</value>
+    <value>Debes ingresar una clave</value>
   </data>
   <data name="PasswordConfirmError2" xml:space="preserve">
-    <value>La nueva contraseña y la confirmación de contraseña no son iguales.</value>
+    <value>La nueva clave y la confirmación de clave no son iguales.</value>
   </data>
   <data name="PasswordConfirmPlaceHolder" xml:space="preserve">
-    <value>Ingrese la confirmación de contraseña...</value>
+    <value>Ingrese la confirmación de clave...</value>
   </data>
   <data name="PasswordError" xml:space="preserve">
-    <value>Debe ingresar una contraseña de al menos seis caracteres.</value>
+    <value>Debe ingresar una clave de al menos seis caracteres.</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
@@ -289,9 +289,15 @@
     <value>De la galería</value>
   </data>
   <data name="PasswordRecover" xml:space="preserve">
-    <value>Recuperar contraseña</value>
+    <value>Recuperar clave</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
-    <value>¿Olvidó la contraseña?</value>
+    <value>¿Olvidó la clave?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar clave</value>
   </data>
 </root>

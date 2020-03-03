@@ -13,6 +13,10 @@ namespace Soccer.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string Save => Resource.Save;
+
+        public static string ChangePassword => Resource.ChangePassword;
+
         public static string Accept => Resource.Accept;
 
         public static string ConnectionError => Resource.ConnectionError;
