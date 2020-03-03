@@ -608,5 +608,14 @@ namespace Soccer.Prism.Resources {
                 return ResourceManager.GetString("Tournaments", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User updated.
+        /// </summary>
+        internal static string UserUpdated {
+            get {
+                return ResourceManager.GetString("UserUpdated", resourceCulture);
+            }
+        }
     }
 }

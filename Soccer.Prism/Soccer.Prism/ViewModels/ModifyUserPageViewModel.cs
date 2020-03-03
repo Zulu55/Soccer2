@@ -3,21 +3,23 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Navigation;
-using System.Threading.Tasks;
 using Soccer.Common.Helpers;
 using Soccer.Common.Models;
-using Soccer.Prism.Helpers;
-using Xamarin.Forms;
-using System.Collections.ObjectModel;
 using Soccer.Common.Services;
+using Soccer.Prism.Helpers;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Soccer.Prism.ViewModels
 {
     public class ModifyUserPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
+        private readonly IFilesHelper _filesHelper;
         private bool _isRunning;
         private bool _isEnabled;
         private ImageSource _image;
@@ -28,10 +30,12 @@ namespace Soccer.Prism.ViewModels
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
 
-        public ModifyUserPageViewModel(INavigationService navigationService, IApiService apiService)
+        public ModifyUserPageViewModel(INavigationService navigationService, IApiService apiService, IFilesHelper filesHelper)
             : base(navigationService)
         {
+            _navigationService = navigationService;
             _apiService = apiService;
+            _filesHelper = filesHelper;
             Title = Languages.ModifyUser;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
@@ -81,11 +85,52 @@ namespace Soccer.Prism.ViewModels
 
         private async void SaveAsync()
         {
-            var isValid = await ValidateDataAsync();
+            bool isValid = await ValidateDataAsync();
             if (!isValid)
             {
                 return;
             }
+
+            IsRunning = true;
+            IsEnabled = false;
+
+            byte[] imageArray = null;
+            if (_file != null)
+            {
+                imageArray = _filesHelper.ReadFully(_file.GetStream());
+            }
+
+            UserRequest userRequest = new UserRequest
+            {
+                Address = User.Address,
+                Document = User.Document,
+                Email = User.Email,
+                FirstName = User.FirstName,
+                LastName = User.LastName,
+                Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
+                Phone = User.PhoneNumber,
+                PictureArray = imageArray,
+                TeamId = Team.Id
+            };
+
+            TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            Response response = await _apiService.PutAsync(url, "/api", "/Account", userRequest, "bearer", token.Token);
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            if (!response.IsSuccess)
+            {
+                await App.Current.MainPage.DisplayAlert(
+                    "Error",
+                    response.Message,
+                    "Accept");
+                return;
+            }
+
+            Settings.User = JsonConvert.SerializeObject(User);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
         private async Task<bool> ValidateDataAsync()

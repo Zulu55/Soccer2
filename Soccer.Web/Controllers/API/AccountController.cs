@@ -154,12 +154,19 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest("User not found.");
             }
 
+            string picturePath = userEntity.PicturePath;
+            if (request.PictureArray != null && request.PictureArray.Length > 0)
+            {
+                picturePath = _imageHelper.UploadImage(request.PictureArray, "Users");
+            }
+
             userEntity.FirstName = request.FirstName;
             userEntity.LastName = request.LastName;
             userEntity.Address = request.Address;
             userEntity.PhoneNumber = request.Phone;
             userEntity.Document = request.Phone;
             userEntity.Team = await _dataContext.Teams.FindAsync(request.TeamId);
+            userEntity.PicturePath = picturePath;
 
             IdentityResult respose = await _userHelper.UpdateUserAsync(userEntity);
             if (!respose.Succeeded)
@@ -167,8 +174,7 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(respose.Errors.FirstOrDefault().Description);
             }
 
-            UserEntity updatedUser = await _userHelper.GetUserAsync(request.Email);
-            return Ok(updatedUser);
+            return NoContent();
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

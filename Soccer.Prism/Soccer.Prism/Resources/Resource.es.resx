@@ -300,4 +300,7 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>Cambiar clave</value>
   </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>Usuario actualizado</value>
+  </data>
 </root>
