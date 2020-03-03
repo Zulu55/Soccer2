@@ -90,6 +90,8 @@
                                                         Source="{Binding Team.LogoFullPath}" 
                                                         WidthRequest="40"/>
                             <Label Grid.Column="1"
+                                   LineBreakMode="TailTruncation"
+                                   MaxLines="1"
                                    FontAttributes="Bold"
                                    Text="{Binding Team.Name}" 
                                    VerticalOptions="Center"/>

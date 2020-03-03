@@ -110,7 +110,7 @@
       <Name>Soccer.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Soccer.Prism\Soccer.Prism.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{84383AEF-045E-4251-BB34-EF6F6973DEB7}</Project>
       <Name>Soccer.Prism</Name>
     </ProjectReference>
   </ItemGroup>

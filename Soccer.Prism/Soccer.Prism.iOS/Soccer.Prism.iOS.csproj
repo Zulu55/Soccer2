@@ -72,8 +72,8 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>Soccer</CodesignProvision>
+    <CodesignKey>Apple Development: David  Rubio (Y4UBG6TVN5)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
@@ -95,51 +95,12 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <ITunesArtwork Include="iTunesArtwork@1x.png" />
-    <ITunesArtwork Include="iTunesArtwork@2x.png" />
-    <ITunesArtwork Include="iTunesArtwork@3x.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@1x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60@3x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5@2x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ItunesArtwork@2x.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ic_more_vert.imageset\Contents.json">
@@ -154,6 +115,62 @@
     <ImageAsset Include="Assets.xcassets\ic_more_vert.imageset\ic_more_vert2.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%401x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20%402x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%401x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-29x29%402x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%401x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-40x40%402x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%401x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-76x76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-83.5x83.5%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\ItunesArtwork%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%402x-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x-1.png" />
+    <ImageAsset Include="Assets.xcassets\soccer.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\soccer.imageset\soccer.png" />
+    <ImageAsset Include="Assets.xcassets\soccer.imageset\soccer-1.png" />
+    <ImageAsset Include="Assets.xcassets\soccer.imageset\soccer-2.png" />
+    <ImageAsset Include="Assets.xcassets\tournament.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\prediction.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\medal.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\user.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\login.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\tournament.imageset\tournament.png" />
+    <ImageAsset Include="Assets.xcassets\tournament.imageset\tournament-1.png" />
+    <ImageAsset Include="Assets.xcassets\tournament.imageset\tournament-2.png" />
+    <ImageAsset Include="Assets.xcassets\prediction.imageset\prediction.png" />
+    <ImageAsset Include="Assets.xcassets\prediction.imageset\prediction-1.png" />
+    <ImageAsset Include="Assets.xcassets\prediction.imageset\prediction-2.png" />
+    <ImageAsset Include="Assets.xcassets\medal.imageset\medal.png" />
+    <ImageAsset Include="Assets.xcassets\medal.imageset\medal-1.png" />
+    <ImageAsset Include="Assets.xcassets\medal.imageset\medal-2.png" />
+    <ImageAsset Include="Assets.xcassets\user.imageset\user.png" />
+    <ImageAsset Include="Assets.xcassets\user.imageset\user-1.png" />
+    <ImageAsset Include="Assets.xcassets\user.imageset\user-2.png" />
+    <ImageAsset Include="Assets.xcassets\login.imageset\login.png" />
+    <ImageAsset Include="Assets.xcassets\login.imageset\login-1.png" />
+    <ImageAsset Include="Assets.xcassets\login.imageset\login-2.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_grade.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\ic_action_tag_faces.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\ic_action_vpn_key.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\ic_action_grade.imageset\ic_action_grade.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_grade.imageset\ic_action_grade-1.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_grade.imageset\ic_action_grade-2.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_tag_faces.imageset\ic_action_tag_faces.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_tag_faces.imageset\ic_action_tag_faces-1.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_tag_faces.imageset\ic_action_tag_faces-2.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_vpn_key.imageset\ic_action_vpn_key.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_vpn_key.imageset\ic_action_vpn_key-1.png" />
+    <ImageAsset Include="Assets.xcassets\ic_action_vpn_key.imageset\ic_action_vpn_key-2.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h@2x.png" />
@@ -191,7 +208,7 @@
       <Name>Soccer.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Soccer.Prism\Soccer.Prism.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{84383AEF-045E-4251-BB34-EF6F6973DEB7}</Project>
       <Name>Soccer.Prism</Name>
     </ProjectReference>
   </ItemGroup>
@@ -254,6 +271,21 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\soccer.imageset\" />
+    <Folder Include="Assets.xcassets\tournament.imageset\" />
+    <Folder Include="Assets.xcassets\prediction.imageset\" />
+    <Folder Include="Assets.xcassets\medal.imageset\" />
+    <Folder Include="Assets.xcassets\user.imageset\" />
+    <Folder Include="Assets.xcassets\login.imageset\" />
+    <Folder Include="Assets.xcassets\ic_action_grade.imageset\" />
+    <Folder Include="Assets.xcassets\ic_action_tag_faces.imageset\" />
+    <Folder Include="Assets.xcassets\ic_action_vpn_key.imageset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
