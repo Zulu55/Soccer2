@@ -57,14 +57,19 @@
                    FontAttributes="Bold"
                    Text="{i18n:Translate GD}"/>
         </Grid>
-        <ListView ItemsSource="{Binding Groups}"
+        <ListView BackgroundColor="{StaticResource ColorBackgroud}"
+                  ItemsSource="{Binding Groups}"
                   IsGroupingEnabled="true">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label FontAttributes="Bold" 
-                               FontSize="Large"
-                               Text="{Binding Name}"/>
+                        <StackLayout BackgroundColor="{StaticResource ColorDanger}"
+                                     VerticalOptions="Center">
+                            <Label FontAttributes="Bold" 
+                                   FontSize="Large"
+                                   Margin="10,0"
+                                   Text="{Binding Name}"/>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>

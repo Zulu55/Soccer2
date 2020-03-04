@@ -204,17 +204,18 @@ namespace Soccer.Web.Controllers.API
             IdentityResult result = await _userHelper.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
             if (!result.Succeeded)
             {
+                var message = result.Errors.FirstOrDefault().Description;
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = result.Errors.FirstOrDefault().Description
+                    Message = message.Contains("password") ? "Error001" : message
                 });
             }
 
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "The password was changed successfully!"
+                Message = "Message002"
             });
         }
 

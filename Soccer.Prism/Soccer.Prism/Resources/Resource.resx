@@ -283,4 +283,40 @@
   <data name="UserUpdated" xml:space="preserve">
     <value>User updated</value>
   </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>You must to enter the password confirmation.</value>
+  </data>
+  <data name="ConfirmNewPasswordError2" xml:space="preserve">
+    <value>The password and the confirm does not match.</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter the password confirm...</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>You must enter your current password.</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter your current password...</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>You must enter a new password at least six characters.</value>
+  </data>
+  <data name="Message002" xml:space="preserve">
+    <value>The password was changed successfully!</value>
+  </data>
+  <data name="Error001" xml:space="preserve">
+    <value>Incorrect current password.</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Enter the new password...</value>
+  </data>
 </root>

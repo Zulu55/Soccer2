@@ -7,6 +7,7 @@ using Soccer.Common.Helpers;
 using Soccer.Common.Models;
 using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
+using Soccer.Prism.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace Soccer.Prism.ViewModels
         private ObservableCollection<TeamResponse> _teams;
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
+        private DelegateCommand _changePasswordCommand;
 
         public ModifyUserPageViewModel(INavigationService navigationService, IApiService apiService, IFilesHelper filesHelper)
             : base(navigationService)
@@ -42,6 +44,8 @@ namespace Soccer.Prism.ViewModels
             Image = User.PictureFullPath;
             LoadTeamsAsync();
         }
+
+        public DelegateCommand ChangePasswordCommand => _changePasswordCommand ?? (_changePasswordCommand = new DelegateCommand(ChangePasswordAsync));
 
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
@@ -238,6 +242,11 @@ namespace Soccer.Prism.ViewModels
             List<TeamResponse> list = (List<TeamResponse>)response.Result;
             Teams = new ObservableCollection<TeamResponse>(list.OrderBy(t => t.Name));
             Team = Teams.FirstOrDefault(t => t.Id == User.Team.Id);
+        }
+
+        private async void ChangePasswordAsync()
+        {
+            await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
     }
 }
