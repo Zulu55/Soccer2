@@ -342,4 +342,7 @@
   <data name="SelectTournament" xml:space="preserve">
     <value>Veuillez sélectionner un tourno</value>
   </data>
+  <data name="PredictionsFor" xml:space="preserve">
+    <value>Prédictions pour</value>
+  </data>
 </root>

@@ -15,6 +15,8 @@ namespace Soccer.Prism.Helpers
 
         public static string SelectTournament => Resource.SelectTournament;
 
+        public static string PredictionsFor => Resource.PredictionsFor;
+
         public static string Message002 => Resource.Message002;
 
         public static string Error001 => Resource.Error001;

@@ -691,6 +691,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predictions for.
+        /// </summary>
+        internal static string PredictionsFor {
+            get {
+                return ResourceManager.GetString("PredictionsFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register New User.
         /// </summary>
         internal static string Register {
