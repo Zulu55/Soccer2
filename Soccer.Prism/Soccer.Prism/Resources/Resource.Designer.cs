@@ -709,6 +709,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a tournament.
+        /// </summary>
+        internal static string SelectTournament {
+            get {
+                return ResourceManager.GetString("SelectTournament", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tournaments.
         /// </summary>
         internal static string Tournaments {

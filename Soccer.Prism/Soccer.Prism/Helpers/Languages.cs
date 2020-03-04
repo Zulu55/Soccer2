@@ -13,6 +13,8 @@ namespace Soccer.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string SelectTournament => Resource.SelectTournament;
+
         public static string Message002 => Resource.Message002;
 
         public static string Error001 => Resource.Error001;

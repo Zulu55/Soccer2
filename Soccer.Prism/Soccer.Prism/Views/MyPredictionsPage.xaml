@@ -3,10 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+         	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
+           	 xmlns:i18n="clr-namespace:Soccer.Prism.Helpers"
              x:Class="Soccer.Prism.Views.MyPredictionsPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
-  
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All" 
+                     Padding="5">
+            <CollectionView ItemsSource="{Binding Tournaments}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectTournament2Command}"/>
+                            </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ffimageloading:CachedImage Grid.Column="0"
+                                                        Aspect="AspectFill"
+                                                        Source="{Binding LogoFullPath}" 
+                                                        CacheDuration= "50"
+                                                        Margin="5"
+                                                        RetryCount= "3"
+                                                        RetryDelay= "600"
+                                                        WidthRequest="50"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding Name}" 
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   VerticalOptions="Center"/>
+                            <Image Grid.Column="2" 
+                                   Source="ic_more_vert"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator AnimationType="Gear" 
+                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                    AbsoluteLayout.LayoutFlags="All"
+                	                    BackgroundColor="{StaticResource ColorAccent}"
+                	                    HorizontalOptions="Center"
+                	                    TextColor="{StaticResource ColorFontInverse}"
+                	                    IsVisible="{Binding IsRunning}"
+                	                    Title="{i18n:Translate Loading}"
+                	                    VerticalOptions="Center"
+                	                    ViewBoxWidth="80"
+                	                    ViewBoxHeight="80" />
+    </AbsoluteLayout>
+
 </ContentPage>

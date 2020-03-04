@@ -339,4 +339,7 @@
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Entrer le nouveau mot de passe</value>
   </data>
+  <data name="SelectTournament" xml:space="preserve">
+    <value>Veuillez sélectionner un tourno</value>
+  </data>
 </root>

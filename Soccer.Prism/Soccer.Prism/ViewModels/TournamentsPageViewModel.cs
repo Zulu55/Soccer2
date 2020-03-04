@@ -14,9 +14,8 @@ namespace Soccer.Prism.ViewModels
         private List<TournamentItemViewModel> _tournaments;
         private bool _isRunning;
 
-        public TournamentsPageViewModel(
-            INavigationService navigationService,
-            IApiService apiService) : base(navigationService)
+        public TournamentsPageViewModel(INavigationService navigationService, IApiService apiService) 
+            : base(navigationService)
         {
             _navigationService = navigationService;
             _apiService = apiService;

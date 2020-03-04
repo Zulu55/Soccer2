@@ -339,4 +339,7 @@
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Escribe la nueva clave...</value>
   </data>
+  <data name="SelectTournament" xml:space="preserve">
+    <value>Selecciona un torneo</value>
+  </data>
 </root>
