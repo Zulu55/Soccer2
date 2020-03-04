@@ -24,11 +24,16 @@ namespace Soccer.Prism.ViewModels
                 Settings.IsLogin = false;
                 Settings.User = null;
                 Settings.Token = null;
-                await _navigationService.NavigateAsync("/SoccerMasterDetailPage/NavigationPage/TournamentsPage");
-                return;
             }
 
-            await _navigationService.NavigateAsync($"/SoccerMasterDetailPage/NavigationPage/{PageName}");
+            if (IsLoginRequired && !Settings.IsLogin)
+            {
+                await _navigationService.NavigateAsync($"/SoccerMasterDetailPage/NavigationPage/LoginPage");
+            }
+            else
+            {
+                await _navigationService.NavigateAsync($"/SoccerMasterDetailPage/NavigationPage/{PageName}");
+            }
         }
     }
 }

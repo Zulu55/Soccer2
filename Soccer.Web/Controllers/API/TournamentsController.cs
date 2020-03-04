@@ -4,6 +4,7 @@ using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Soccer.Web.Controllers.API
@@ -38,8 +39,19 @@ namespace Soccer.Web.Controllers.API
                 .Include(t => t.Groups)
                 .ThenInclude(g => g.Matches)
                 .ThenInclude(m => m.Visitor)
+                .Where(t => t.IsActive)
                 .ToListAsync();
             return Ok(_converterHelper.ToTournamentResponse(tournaments));
+        }
+
+        [HttpGet]
+        [Route("GetTournaments2")]
+        public async Task<IActionResult> GetTournaments2()
+        {
+            List<TournamentEntity> tournaments = await _context.Tournaments
+                .Where(t => t.IsActive)
+                .ToListAsync();
+            return Ok(tournaments);
         }
     }
 }
