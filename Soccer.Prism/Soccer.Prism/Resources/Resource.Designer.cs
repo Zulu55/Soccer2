@@ -376,6 +376,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Updated?.
+        /// </summary>
+        internal static string IsUpdated {
+            get {
+                return ResourceManager.GetString("IsUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         internal static string LastName {
@@ -408,6 +417,15 @@ namespace Soccer.Prism.Resources {
         internal static string Loading {
             get {
                 return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter the local goals..
+        /// </summary>
+        internal static string LocalGoalsError {
+            get {
+                return ResourceManager.GetString("LocalGoalsError", resourceCulture);
             }
         }
         
@@ -736,11 +754,29 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        internal static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User updated.
         /// </summary>
         internal static string UserUpdated {
             get {
                 return ResourceManager.GetString("UserUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter the visitor goals..
+        /// </summary>
+        internal static string VisitorGoalsError {
+            get {
+                return ResourceManager.GetString("VisitorGoalsError", resourceCulture);
             }
         }
     }

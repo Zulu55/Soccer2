@@ -68,7 +68,14 @@
                                                      HorizontalOptions="Center">
                                             <Label Text="{Binding Match.DateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
                                                    VerticalOptions="Center" />
-                                            <Button Text="Update"/>
+                                            <Button Command="{Binding UpdatePredictionCommand}" 
+                                                    Text="{i18n:Translate Update}"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label Text="{i18n:Translate IsUpdated}" 
+                                                       VerticalOptions="Center"/>
+                                                <CheckBox IsChecked="{Binding IsUpdated}" 
+                                                          IsEnabled="False"/>
+                                            </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
                                     <StackLayout Grid.Column="2">

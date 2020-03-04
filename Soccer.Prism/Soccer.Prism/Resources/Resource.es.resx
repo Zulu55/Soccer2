@@ -345,4 +345,16 @@
   <data name="PredictionsFor" xml:space="preserve">
     <value>Pronósticos para</value>
   </data>
+  <data name="IsUpdated" xml:space="preserve">
+    <value>Listo?</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="LocalGoalsError" xml:space="preserve">
+    <value>Debe ingresar los goles del local.</value>
+  </data>
+  <data name="VisitorGoalsError" xml:space="preserve">
+    <value>Debe ingresar los goles del visitante.</value>
+  </data>
 </root>

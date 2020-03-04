@@ -325,4 +325,16 @@
   <data name="PredictionsFor" xml:space="preserve">
     <value>Predictions for</value>
   </data>
+  <data name="IsUpdated" xml:space="preserve">
+    <value>Is Updated?</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="LocalGoalsError" xml:space="preserve">
+    <value>You must enter the local goals.</value>
+  </data>
+  <data name="VisitorGoalsError" xml:space="preserve">
+    <value>You must enter the visitor goals.</value>
+  </data>
 </root>
