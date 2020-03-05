@@ -364,7 +364,7 @@
     <value>No puedes grabar la predicción porque el partido ya ha comenzado.</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Abierta</value>
+    <value>Abiertos</value>
   </data>
   <data name="Real" xml:space="preserve">
     <value>Real</value>

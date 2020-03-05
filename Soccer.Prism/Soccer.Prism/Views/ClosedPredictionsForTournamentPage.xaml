@@ -10,6 +10,7 @@
              ios:Page.UseSafeArea="true"
              x:Class="Soccer.Prism.Views.ClosedPredictionsForTournamentPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
+             IconImageSource="ic_action_tag_faces"
              Title="{Binding Title}">
 
     <AbsoluteLayout>

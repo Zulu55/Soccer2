@@ -6,8 +6,8 @@
              ios:Page.UseSafeArea="true"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Soccer.Prism.Views.MatchesPage"
-             IconImageSource="ic_action_grade"
              BackgroundColor="{StaticResource ColorBackgroud}"
+             IconImageSource="ic_action_grade"
              Title="{Binding Title}">
 
     <StackLayout Padding="5">

@@ -6,14 +6,13 @@
         	xmlns:local="clr-namespace:Soccer.Prism.Views"
             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
             ios:Page.UseSafeArea="true"
-            x:Class="Soccer.Prism.Views.TournamentTabbedPage"
+            x:Class="Soccer.Prism.Views.PredictionsTabbedPage"
             BackgroundColor="{StaticResource ColorBackgroud}"
         	Title="{Binding Title}">
 
     <TabbedPage.Children>
-        <local:GroupsPage />
-        <local:MatchesPage />
-        <local:ClosedMatchesPage />
+        <local:PredictionsForTournamentPage />
+        <local:ClosedPredictionsForTournamentPage />
     </TabbedPage.Children>
 
 </TabbedPage>

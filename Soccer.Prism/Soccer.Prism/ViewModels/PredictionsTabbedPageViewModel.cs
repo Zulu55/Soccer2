@@ -1,15 +1,16 @@
 ﻿using Prism.Navigation;
 using Soccer.Common.Models;
+using Soccer.Prism.Helpers;
 
 namespace Soccer.Prism.ViewModels
 {
-    public class TournamentTabbedPageViewModel : ViewModelBase
+    public class PredictionsTabbedPageViewModel : ViewModelBase
     {
         private TournamentResponse _tournament;
 
-        public TournamentTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
+        public PredictionsTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            Title = "Soccer";
+            Title = Languages.PredictionsFor;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -19,7 +20,7 @@ namespace Soccer.Prism.ViewModels
             if (parameters.ContainsKey("tournament"))
             {
                 _tournament = parameters.GetValue<TournamentResponse>("tournament");
-                Title = _tournament.Name;
+                Title = $"{Languages.PredictionsFor}: {_tournament.Name}";
             }
         }
     }
