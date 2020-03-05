@@ -23,6 +23,7 @@ namespace Soccer.Prism.ViewModels
         {
             _apiService = apiService;
             Title = Languages.Closed;
+            LoadTournamentAsync();
         }
 
         public bool IsRunning
@@ -37,10 +38,9 @@ namespace Soccer.Prism.ViewModels
             set => SetProperty(ref _predictions, value);
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        private async void LoadTournamentAsync()
         {
-            base.OnNavigatedTo(parameters);
-            _tournament = parameters.GetValue<TournamentResponse>("tournament");
+            _tournament = JsonConvert.DeserializeObject<TournamentResponse>(Settings.Tournament);
             LoadPredictionsAsync();
         }
 

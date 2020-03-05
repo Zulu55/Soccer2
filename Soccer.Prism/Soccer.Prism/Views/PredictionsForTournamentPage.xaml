@@ -57,7 +57,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Keyboard="Numeric"
                                                    Text="{Binding GoalsLocal}"
-                                                   WidthRequest="40"/>
+                                                   WidthRequest="45"/>
                                             <Label Text="Vs."
                                                    VerticalOptions="Center"/>
                                             <Entry FontAttributes="Bold"
@@ -65,7 +65,7 @@
                                                    HorizontalTextAlignment="Center"
                                                    Keyboard="Numeric"
                                                    Text="{Binding GoalsVisitor}"
-                                                   WidthRequest="40"/>
+                                                   WidthRequest="45"/>
                                         </StackLayout>
                                         <StackLayout Orientation="Vertical"
                                                      HorizontalOptions="Center">
