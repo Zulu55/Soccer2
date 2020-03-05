@@ -363,4 +363,16 @@
   <data name="Error003" xml:space="preserve">
     <value>No puedes grabar la predicción porque el partido ya ha comenzado.</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>Abierta</value>
+  </data>
+  <data name="Real" xml:space="preserve">
+    <value>Real</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Puntos</value>
+  </data>
+  <data name="Prediction" xml:space="preserve">
+    <value>Predicción</value>
+  </data>
 </root>

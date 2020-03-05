@@ -11,18 +11,18 @@ using System.Linq;
 
 namespace Soccer.Prism.ViewModels
 {
-    public class PredictionsForTournamentPageViewModel : ViewModelBase
+    public class ClosedPredictionsForTournamentPageViewModel : ViewModelBase
     {
         private readonly IApiService _apiService;
         private TournamentResponse _tournament;
         private bool _isRunning;
         private ObservableCollection<PredictionItemViewModel> _predictions;
 
-        public PredictionsForTournamentPageViewModel(INavigationService navigationService, IApiService apiService)
+        public ClosedPredictionsForTournamentPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
             _apiService = apiService;
-            Title = Languages.Open;
+            Title = Languages.Closed;
         }
 
         public bool IsRunning
@@ -77,15 +77,15 @@ namespace Soccer.Prism.ViewModels
             List<PredictionResponse> list = (List<PredictionResponse>)response.Result;
             Predictions = new ObservableCollection<PredictionItemViewModel>(list
                 .Select(p => new PredictionItemViewModel(_apiService)
-            {
-                GoalsLocal = p.GoalsLocal,
-                GoalsVisitor = p.GoalsVisitor,
-                Id = p.Id,
-                Match = p.Match,
-                Points = p.Points,
-                User = p.User
-            })
-                .Where(p => !p.Match.IsClosed && p.Match.DateLocal > DateTime.Now)
+                {
+                    GoalsLocal = p.GoalsLocal,
+                    GoalsVisitor = p.GoalsVisitor,
+                    Id = p.Id,
+                    Match = p.Match,
+                    Points = p.Points,
+                    User = p.User
+                })
+                .Where(p => p.Match.IsClosed || p.Match.DateLocal <= DateTime.Now)
                 .OrderBy(p => p.Match.Date)
                 .ToList());
         }

@@ -363,4 +363,16 @@
   <data name="Error003" xml:space="preserve">
     <value>Vous ne pouvez pas enregistrer la prédiction, car le match a déjà commencé.!</value>
   </data>
+  <data name="Open" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Real" xml:space="preserve">
+    <value>Réel</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="Prediction" xml:space="preserve">
+    <value>prédiction</value>
+  </data>
 </root>

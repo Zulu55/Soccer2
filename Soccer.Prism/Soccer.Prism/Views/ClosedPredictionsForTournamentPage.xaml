@@ -8,7 +8,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
            	 xmlns:i18n="clr-namespace:Soccer.Prism.Helpers"
              ios:Page.UseSafeArea="true"
-             x:Class="Soccer.Prism.Views.PredictionsForTournamentPage"
+             x:Class="Soccer.Prism.Views.ClosedPredictionsForTournamentPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
@@ -46,32 +46,44 @@
                                                MaxLines="2"
                                                Text="{Binding Match.Local.Name}"
                                                WidthRequest="90"/>
-                                    </StackLayout>
-                                    <StackLayout Grid.Column="1"
-                                                 VerticalOptions="Center">
+                                        <Label HorizontalOptions="Center" 
+                                               FontAttributes="Bold"
+                                               FontSize="Large"
+                                               Text="{i18n:Translate Real}"
+                                               TextColor="{StaticResource ColorAccent}"/>
                                         <StackLayout HorizontalOptions="Center" 
                                                      Orientation="Horizontal">
-                                            <Entry FontAttributes="Bold"
+                                            <Label FontAttributes="Bold"
                                                    FontSize="48"
                                                    HorizontalTextAlignment="Center"
-                                                   Keyboard="Numeric"
-                                                   Text="{Binding GoalsLocal}"
+                                                   Text="{Binding Match.GoalsLocal}"
                                                    WidthRequest="40"/>
                                             <Label Text="Vs."
                                                    VerticalOptions="Center"/>
-                                            <Entry FontAttributes="Bold"
+                                            <Label FontAttributes="Bold"
                                                    FontSize="48"
                                                    HorizontalTextAlignment="Center"
-                                                   Keyboard="Numeric"
-                                                   Text="{Binding GoalsVisitor}"
+                                                   Text="{Binding Match.GoalsVisitor}"
                                                    WidthRequest="40"/>
                                         </StackLayout>
-                                        <StackLayout Orientation="Vertical"
-                                                     HorizontalOptions="Center">
-                                            <Label Text="{Binding Match.DateLocal, StringFormat='{0:yyyy/MM/dd HH:mm}'}"
-                                                   VerticalOptions="Center" />
-                                            <Button Command="{Binding UpdatePredictionCommand}" 
-                                                    Text="{i18n:Translate Update}"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center">
+                                        <StackLayout BackgroundColor="{StaticResource ColorAccent}" 
+                                                     HorizontalOptions="Center"
+                                                     Padding="5"
+                                                     Orientation="Vertical">
+                                            <Label FontAttributes="Bold"  
+                                                   FontSize="Medium"
+                                                   HorizontalTextAlignment="Center"
+                                                   Text="{i18n:Translate Points}"
+                                                   TextColor="{StaticResource ColorFontInverse}"/>
+                                            <Label FontAttributes="Bold"  
+                                                   FontSize="48" 
+                                                   HorizontalTextAlignment="Center" 
+                                                   Text="{Binding Points}"
+                                                   TextColor="{StaticResource ColorFontInverse}"/>
                                         </StackLayout>
                                     </StackLayout>
                                     <StackLayout Grid.Column="2">
@@ -89,6 +101,26 @@
                                                MaxLines="2"
                                                Text="{Binding Match.Visitor.Name}"
                                                WidthRequest="90"/>
+                                        <Label HorizontalOptions="Center" 
+                                               FontAttributes="Bold"
+                                               FontSize="Large"
+                                               Text="{i18n:Translate Prediction}"
+                                               TextColor="{StaticResource ColorAccent}"/>
+                                        <StackLayout HorizontalOptions="Center" 
+                                                     Orientation="Horizontal">
+                                            <Label FontAttributes="Bold"
+                                                   FontSize="48"
+                                                   HorizontalTextAlignment="Center"
+                                                   Text="{Binding GoalsLocal}"
+                                                   WidthRequest="40"/>
+                                            <Label Text="Vs."
+                                                   VerticalOptions="Center"/>
+                                            <Label FontAttributes="Bold"
+                                                   FontSize="48"
+                                                   HorizontalTextAlignment="Center"
+                                                   Text="{Binding GoalsVisitor}"
+                                                   WidthRequest="40"/>
+                                        </StackLayout>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>
@@ -109,5 +141,6 @@
                 	                    ViewBoxWidth="80"
                 	                    ViewBoxHeight="80" />
     </AbsoluteLayout>
+
 
 </ContentPage>
