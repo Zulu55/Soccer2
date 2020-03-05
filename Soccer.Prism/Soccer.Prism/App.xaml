@@ -11,6 +11,34 @@
             <!-- Parameters -->
             <x:String x:Key="UrlAPI">https://SoccerWeb0.azurewebsites.net/</x:String>
 
+            <!-- Colors -->
+            <Color x:Key="ColorBackgroud">#54E85D</Color>
+            <Color x:Key="ColorPrimary">#191919</Color>
+            <Color x:Key="ColorSecondary">#90FF69</Color>
+            <Color x:Key="ColorDanger">#FFFFFF</Color>
+            <Color x:Key="ColorAccent">#38006A</Color>
+            <Color x:Key="ColorFont">#191919</Color>
+            <Color x:Key="ColorFontInverse">#FFFFFF</Color>
+
+            <!-- Styles -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorAccent}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="TextColor" Value="{StaticResource ColorFontInverse}" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ColorFont}" />
+            </Style>
+
+            <Style x:Key="SecondaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorSecondary}" />
+            </Style>
+
+            <Style x:Key="DangerButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ColorDanger}" />
+            </Style>
+
             <!-- Data Templates -->
             <DataTemplate x:Key="MatchTemplate">
                 <StackLayout>

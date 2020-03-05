@@ -6,6 +6,7 @@
          	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Soccer.Prism.Views.TournamentsPage"
+             BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
 
     <AbsoluteLayout>
@@ -58,15 +59,15 @@
             </CollectionView>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="Gear" 
-                                       AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
-                	                   AbsoluteLayout.LayoutFlags="All"
-                	                   BackgroundColor="Silver"
-                	                   HorizontalOptions="Center"
-                	                   TextColor="White"
-                	                   IsVisible="{Binding IsRunning}"
-                	                   Title="Loading..."
-                	                   VerticalOptions="Center"
-                	                   ViewBoxWidth="80"
-                	                   ViewBoxHeight="80" />
+                                        AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                	                    AbsoluteLayout.LayoutFlags="All"
+                	                    BackgroundColor="{StaticResource ColorAccent}"
+                	                    HorizontalOptions="Center"
+                	                    TextColor="{StaticResource ColorFontInverse}"
+                	                    IsVisible="{Binding IsRunning}"
+                	                    Title="Loading..."
+                	                    VerticalOptions="Center"
+                	                    ViewBoxWidth="80"
+                	                    ViewBoxHeight="80" />
     </AbsoluteLayout>
 </ContentPage>
