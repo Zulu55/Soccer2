@@ -13,6 +13,7 @@
     <TabbedPage.Children>
         <local:PredictionsForTournamentPage />
         <local:ClosedPredictionsForTournamentPage />
+        <local:PositionsInTournamentPage />
     </TabbedPage.Children>
 
 </TabbedPage>

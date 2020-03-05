@@ -103,6 +103,15 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_action_equalizer.imageset\ic_action_equalizer.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_action_equalizer.imageset\ic_action_equalizer1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_action_equalizer.imageset\ic_action_equalizer2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\ic_more_vert.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -173,6 +182,9 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-60x60%403x-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ic_action_equalizer.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\soccer.imageset\Contents.json">
@@ -385,19 +397,22 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets.xcassets\soccer.imageset\" />
-    <Folder Include="Assets.xcassets\tournament.imageset\" />
-    <Folder Include="Assets.xcassets\prediction.imageset\" />
-    <Folder Include="Assets.xcassets\medal.imageset\" />
-    <Folder Include="Assets.xcassets\user.imageset\" />
-    <Folder Include="Assets.xcassets\login.imageset\" />
     <Folder Include="Assets.xcassets\ic_action_grade.imageset\" />
     <Folder Include="Assets.xcassets\ic_action_tag_faces.imageset\" />
     <Folder Include="Assets.xcassets\ic_action_vpn_key.imageset\" />
+    <Folder Include="Assets.xcassets\login.imageset\" />
+    <Folder Include="Assets.xcassets\medal.imageset\" />
+    <Folder Include="Assets.xcassets\prediction.imageset\" />
+    <Folder Include="Assets.xcassets\soccer.imageset\" />
+    <Folder Include="Assets.xcassets\tournament.imageset\" />
+    <Folder Include="Assets.xcassets\user.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_equalizer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

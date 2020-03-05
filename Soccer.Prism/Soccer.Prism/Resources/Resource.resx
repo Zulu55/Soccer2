@@ -355,4 +355,10 @@
   <data name="Prediction" xml:space="preserve">
     <value>Prediction</value>
   </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Positions</value>
+  </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Picture</value>
+  </data>
 </root>

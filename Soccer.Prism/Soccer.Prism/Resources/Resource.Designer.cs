@@ -718,6 +718,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Picture.
+        /// </summary>
+        internal static string Picture {
+            get {
+                return ResourceManager.GetString("Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Where do you want to take the picture?.
         /// </summary>
         internal static string PictureSource {
@@ -741,6 +750,15 @@ namespace Soccer.Prism.Resources {
         internal static string Points {
             get {
                 return ResourceManager.GetString("Points", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Positions.
+        /// </summary>
+        internal static string Positions {
+            get {
+                return ResourceManager.GetString("Positions", resourceCulture);
             }
         }
         
