@@ -357,4 +357,10 @@
   <data name="VisitorGoalsError" xml:space="preserve">
     <value>Vous devez saisir les objectifs du visiteur.!</value>
   </data>
+  <data name="Error002" xml:space="preserve">
+    <value>Le match est déjà terminé.!</value>
+  </data>
+  <data name="Error003" xml:space="preserve">
+    <value>Vous ne pouvez pas enregistrer la prédiction, car le match a déjà commencé.!</value>
+  </data>
 </root>

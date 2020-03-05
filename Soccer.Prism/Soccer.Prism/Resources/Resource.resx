@@ -337,4 +337,10 @@
   <data name="VisitorGoalsError" xml:space="preserve">
     <value>You must enter the visitor goals.</value>
   </data>
+  <data name="Error002" xml:space="preserve">
+    <value>Match is already closed.</value>
+  </data>
+  <data name="Error003" xml:space="preserve">
+    <value>You cannot record the prediction, because the match has already started.</value>
+  </data>
 </root>

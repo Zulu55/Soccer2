@@ -6,6 +6,7 @@ using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Soccer.Prism.ViewModels
@@ -15,7 +16,7 @@ namespace Soccer.Prism.ViewModels
         private readonly IApiService _apiService;
         private TournamentResponse _tournament;
         private bool _isRunning;
-        private List<PredictionItemViewModel> _predictions;
+        private ObservableCollection<PredictionItemViewModel> _predictions;
 
         public PredictionsForTournamentPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -30,7 +31,7 @@ namespace Soccer.Prism.ViewModels
             set => SetProperty(ref _isRunning, value);
         }
 
-        public List<PredictionItemViewModel> Predictions
+        public ObservableCollection<PredictionItemViewModel> Predictions
         {
             get => _predictions;
             set => SetProperty(ref _predictions, value);
@@ -75,7 +76,8 @@ namespace Soccer.Prism.ViewModels
             }
 
             List<PredictionResponse> list = (List<PredictionResponse>)response.Result;
-            Predictions = list.Select(p => new PredictionItemViewModel
+            Predictions = new ObservableCollection<PredictionItemViewModel>(list
+                .Select(p => new PredictionItemViewModel(_apiService)
             {
                 GoalsLocal = p.GoalsLocal,
                 GoalsVisitor = p.GoalsVisitor,
@@ -86,7 +88,7 @@ namespace Soccer.Prism.ViewModels
             })
                 .Where(p => !p.Match.IsClosed && p.Match.DateLocal > DateTime.Now)
                 .OrderBy(p => p.Match.Date)
-                .ToList();
+                .ToList());
         }
     }
 }

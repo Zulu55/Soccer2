@@ -40,10 +40,12 @@
                                                                     Source="{Binding Match.Local.LogoFullPath}" 
                                                                     WidthRequest="90"/>
                                         <Label HorizontalOptions="Center" 
+                                               HorizontalTextAlignment="Center"
                                                FontAttributes="Bold"
                                                LineBreakMode="TailTruncation"
-                                               MaxLines="1"
-                                               Text="{Binding Match.Local.Name}"/>
+                                               MaxLines="2"
+                                               Text="{Binding Match.Local.Name}"
+                                               WidthRequest="90"/>
                                     </StackLayout>
                                     <StackLayout Grid.Column="1"
                                                  VerticalOptions="Center">
@@ -70,12 +72,6 @@
                                                    VerticalOptions="Center" />
                                             <Button Command="{Binding UpdatePredictionCommand}" 
                                                     Text="{i18n:Translate Update}"/>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="{i18n:Translate IsUpdated}" 
-                                                       VerticalOptions="Center"/>
-                                                <CheckBox IsChecked="{Binding IsUpdated}" 
-                                                          IsEnabled="False"/>
-                                            </StackLayout>
                                         </StackLayout>
                                     </StackLayout>
                                     <StackLayout Grid.Column="2">
@@ -87,10 +83,12 @@
                                                                     Source="{Binding Match.Visitor.LogoFullPath}" 
                                                                     WidthRequest="90"/>
                                         <Label HorizontalOptions="Center" 
+                                               HorizontalTextAlignment="Center"
                                                FontAttributes="Bold"
                                                LineBreakMode="TailTruncation"
-                                               MaxLines="1"
-                                               Text="{Binding Match.Visitor.Name}"/>
+                                               MaxLines="2"
+                                               Text="{Binding Match.Local.Name}"
+                                               WidthRequest="90"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>

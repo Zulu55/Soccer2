@@ -13,6 +13,10 @@ namespace Soccer.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string Error002 => Resource.Error002;
+
+        public static string Error003 => Resource.Error003;
+
         public static string LocalGoalsError => Resource.LocalGoalsError;
 
         public static string VisitorGoalsError => Resource.VisitorGoalsError;

@@ -43,23 +43,23 @@ namespace Soccer.Web.Controllers.API
             MatchEntity matchEntity = await _context.Matches.FindAsync(predictionRequest.MatchId);
             if (matchEntity == null)
             {
-                return BadRequest("Error003");
+                return BadRequest("Match doesn't exists.");
             }
 
             if (matchEntity.IsClosed)
             {
-                return BadRequest("Error004");
+                return BadRequest("Error002");
             }
 
             UserEntity userEntity = await _userHelper.GetUserAsync(predictionRequest.UserId);
             if (userEntity == null)
             {
-                return BadRequest("Error002");
+                return BadRequest("User doesn't exists.");
             }
 
             if (matchEntity.Date <= DateTime.UtcNow)
             {
-                return BadRequest("Error005");
+                return BadRequest("Error003");
             }
 
             PredictionEntity predictionEntity = await _context.Predictions
@@ -85,7 +85,7 @@ namespace Soccer.Web.Controllers.API
             }
 
             await _context.SaveChangesAsync();
-            return Ok(_converterHelper.ToPredictionResponse(predictionEntity));
+            return NoContent();
         }
 
         [HttpGet]

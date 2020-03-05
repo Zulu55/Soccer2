@@ -357,4 +357,10 @@
   <data name="VisitorGoalsError" xml:space="preserve">
     <value>Debe ingresar los goles del visitante.</value>
   </data>
+  <data name="Error002" xml:space="preserve">
+    <value>¡El partido ya está cerrado!</value>
+  </data>
+  <data name="Error003" xml:space="preserve">
+    <value>No puedes grabar la predicción porque el partido ya ha comenzado.</value>
+  </data>
 </root>
