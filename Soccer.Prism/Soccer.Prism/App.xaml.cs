@@ -20,7 +20,7 @@ namespace Soccer.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/TournamentsPage");
+            await NavigationService.NavigateAsync("/SoccerMasterDetailPage/NavigationPage/TournamentsPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -33,6 +33,11 @@ namespace Soccer.Prism
             containerRegistry.RegisterForNavigation<MatchesPage, MatchesPageViewModel>();
             containerRegistry.RegisterForNavigation<ClosedMatchesPage, ClosedMatchesPageViewModel>();
             containerRegistry.RegisterForNavigation<TournamentTabbedPage, TournamentTabbedPageViewModel>();
+            containerRegistry.RegisterForNavigation<SoccerMasterDetailPage, SoccerMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<MyPredictionsPage, MyPredictionsPageViewModel>();
+            containerRegistry.RegisterForNavigation<MyPositionsPage, MyPositionsPageViewModel>();
+            containerRegistry.RegisterForNavigation<ModifyUserPage, ModifyUserPageViewModel>();
+            containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
         }
     }
 }

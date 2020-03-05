@@ -9,7 +9,7 @@
         <ResourceDictionary>
 
             <!-- Parameters -->
-            <x:String x:Key="UrlAPI">https://SoccerWeb1.azurewebsites.net/</x:String>
+            <x:String x:Key="UrlAPI">https://SoccerWeb0.azurewebsites.net/</x:String>
 
             <!-- Data Templates -->
             <DataTemplate x:Key="MatchTemplate">

@@ -2,6 +2,8 @@
 using Prism.Navigation;
 using Soccer.Common.Models;
 using Soccer.Prism.Views;
+using Soccer.Common.Helpers;
+using Newtonsoft.Json;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -25,6 +27,7 @@ namespace Soccer.Prism.ViewModels
                 { "tournament", this }
             };
 
+            Settings.Tournament = JsonConvert.SerializeObject(this);
             await _navigationService.NavigateAsync(nameof(TournamentTabbedPage), parameters);
         }
     }   
