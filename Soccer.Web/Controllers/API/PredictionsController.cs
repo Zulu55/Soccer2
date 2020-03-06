@@ -107,7 +107,15 @@ namespace Soccer.Web.Controllers.API
 
             }).ToList();
 
-            return Ok(positionResponses.OrderByDescending(pr => pr.Points));
+            List<PositionResponse> list = positionResponses.OrderByDescending(pr => pr.Points).ToList();
+            int i = 1;
+            foreach (var item in list)
+            {
+                item.Ranking = i;
+                i++;
+            }
+
+            return Ok(list);
         }
 
         [HttpGet("{id}")]
@@ -154,7 +162,15 @@ namespace Soccer.Web.Controllers.API
                 }
             }
 
-            return Ok(positionResponses.OrderByDescending(pr => pr.Points));
+            List<PositionResponse> list = positionResponses.OrderByDescending(pr => pr.Points).ToList();
+            int i = 1;
+            foreach (var item in list)
+            {
+                item.Ranking = i;
+                i++;
+            }
+
+            return Ok(list);
         }
 
         [HttpPost]
@@ -220,6 +236,5 @@ namespace Soccer.Web.Controllers.API
 
             return Ok(predictionResponses.OrderBy(pr => pr.Id).ThenBy(pr => pr.Match.Date));
         }
-
     }
 }

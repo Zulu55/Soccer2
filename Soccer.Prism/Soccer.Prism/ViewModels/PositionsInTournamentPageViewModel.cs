@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Navigation;
 using Soccer.Common.Helpers;
 using Soccer.Common.Models;
@@ -6,6 +7,7 @@ using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -15,6 +17,9 @@ namespace Soccer.Prism.ViewModels
         private TournamentResponse _tournament;
         private bool _isRunning;
         private ObservableCollection<PositionResponse> _positions;
+        private List<PositionResponse> _myPositions;
+        private string _search;
+        private DelegateCommand _searchCommand;
 
         public PositionsInTournamentPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -24,10 +29,22 @@ namespace Soccer.Prism.ViewModels
             LoadPositionsAsync();
         }
 
+        public DelegateCommand SearchCommand => _searchCommand ?? (_searchCommand = new DelegateCommand(ShowPositions));
+
         public bool IsRunning
         {
             get => _isRunning;
             set => SetProperty(ref _isRunning, value);
+        }
+
+        public string Search
+        {
+            get => _search;
+            set
+            {
+                SetProperty(ref _search, value);
+                ShowPositions();
+            }
         }
 
         public ObservableCollection<PositionResponse> Positions
@@ -59,8 +76,22 @@ namespace Soccer.Prism.ViewModels
                 return;
             }
 
-            List<PositionResponse> list = (List<PositionResponse>)response.Result;
-            Positions = new ObservableCollection<PositionResponse>(list);
+            _myPositions = (List<PositionResponse>)response.Result;
+            ShowPositions();
+        }
+
+        private void ShowPositions()
+        {
+            if (string.IsNullOrEmpty(Search))
+            {
+                Positions = new ObservableCollection<PositionResponse>(_myPositions);
+            }
+            else
+            {
+                Positions = new ObservableCollection<PositionResponse>(
+                    _myPositions.Where(p => p.UserResponse.FirstName.ToUpper().Contains(Search.ToUpper()) ||
+                                            p.UserResponse.LastName.ToUpper().Contains(Search.ToUpper())));
+            }
         }
     }
 }

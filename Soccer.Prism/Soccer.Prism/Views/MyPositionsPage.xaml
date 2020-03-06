@@ -22,6 +22,7 @@
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="70" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0"
                         FontAttributes="Bold"
@@ -39,7 +40,17 @@
                         HorizontalTextAlignment="End"
                         Text="{i18n:Translate Points}" 
                         VerticalOptions="Center"/>
+                <Label Grid.Column="3"
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="End"
+                        Text="{i18n:Translate Ranking}" 
+                        VerticalOptions="Center"/>
             </Grid>
+            <SearchBar Margin="10,0"
+                       Placeholder="{i18n:Translate SearchUserPlaceHolder}"
+                       SearchCommand="{Binding SearchCommand}"
+                       Text="{Binding Search}"/>
             <CollectionView ItemsSource="{Binding Positions}"
                             ItemTemplate="{StaticResource PositionTemplate}">
                 <CollectionView.ItemsLayout>

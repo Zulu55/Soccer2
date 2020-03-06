@@ -781,6 +781,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ranking.
+        /// </summary>
+        internal static string Ranking {
+            get {
+                return ResourceManager.GetString("Ranking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Real.
         /// </summary>
         internal static string Real {
@@ -804,6 +813,15 @@ namespace Soccer.Prism.Resources {
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search a user name....
+        /// </summary>
+        internal static string SearchUserPlaceHolder {
+            get {
+                return ResourceManager.GetString("SearchUserPlaceHolder", resourceCulture);
             }
         }
         

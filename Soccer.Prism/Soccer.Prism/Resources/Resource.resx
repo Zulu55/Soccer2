@@ -361,4 +361,10 @@
   <data name="Picture" xml:space="preserve">
     <value>Picture</value>
   </data>
+  <data name="Ranking" xml:space="preserve">
+    <value>Ranking</value>
+  </data>
+  <data name="SearchUserPlaceHolder" xml:space="preserve">
+    <value>Search a user name...</value>
+  </data>
 </root>

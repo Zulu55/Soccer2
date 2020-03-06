@@ -13,6 +13,10 @@ namespace Soccer.Prism.Helpers
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string SearchUserPlaceHolder => Resource.SearchUserPlaceHolder;
+
+        public static string Ranking => Resource.Ranking;
+
         public static string Positions => Resource.Positions;
 
         public static string Picture => Resource.Picture;
