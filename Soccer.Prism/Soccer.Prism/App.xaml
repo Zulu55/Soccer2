@@ -2,6 +2,7 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              x:Class="Soccer.Prism.App">
 	<Application.Resources>
@@ -96,6 +97,53 @@
                                         WidthRequest="90"/>
                     </Grid>
                 </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="PositionTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+                    <RelativeLayout Grid.Column="0">
+                        <ffimageloading:CachedImage x:Name="Picture"
+                                                Aspect="AspectFill"
+                                                Source="{Binding UserResponse.PictureFullPath}" 
+                                                CacheDuration= "50"
+                                                Margin="5"
+                                                RetryCount= "3"
+                                                RetryDelay= "600"
+                                                WidthRequest="50">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                        <ffimageloading:CachedImage x:Name="Team" 
+                                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=20}"
+                                    RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=X,Factor=1,Constant=30}"
+                                    Aspect="AspectFit"
+                                    Source="{Binding UserResponse.Team.LogoFullPath}" 
+                                    CacheDuration= "50"
+                                    HeightRequest="30"
+                                    Margin="5"
+                                    RetryCount= "3"
+                                    RetryDelay= "600">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation />
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                    </RelativeLayout>
+                    <Label Grid.Column="1"
+                        FontSize="Medium"
+                        Text="{Binding UserResponse.FullName}" 
+                        VerticalOptions="Center"/>
+                    <Label Grid.Column="2"
+                        FontSize="Medium"
+                        HorizontalTextAlignment="End"
+                        Text="{Binding Points}" 
+                        VerticalOptions="Center"/>
+                </Grid>
             </DataTemplate>
 
         </ResourceDictionary>
