@@ -1,10 +1,6 @@
-﻿using DryIoc;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using Soccer.Common.Models;
 using Soccer.Common.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,13 +22,13 @@ namespace Soccer.Prism.ViewModels
             LoadTournamentsAsync();
         }
 
-        public bool IsRunning 
+        public bool IsRunning
         {
             get => _isRunning;
             set => SetProperty(ref _isRunning, value);
         }
 
-        public List<TournamentItemViewModel> Tournaments 
+        public List<TournamentItemViewModel> Tournaments
         {
             get => _tournaments;
             set => SetProperty(ref _tournaments, value);
@@ -42,32 +38,42 @@ namespace Soccer.Prism.ViewModels
         {
             IsRunning = true;
             string url = App.Current.Resources["UrlAPI"].ToString();
-            Response response = await _apiService.GetListAsync<TournamentResponse>(
-                url,
-                "/api",
-                "/Tournaments");
-            IsRunning = false;
-
-            if (!response.IsSuccess)
+            bool connection = await _apiService.CheckConnectionAsync(url);
+            if (!connection)
             {
-                await App.Current.MainPage.DisplayAlert(
-                    "Error",
-                    response.Message,
-                    "Accept");
-                return;
+                IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Check the internet connection.", "Accept");
+            }
+            else
+            {
+                Response response = await _apiService.GetListAsync<TournamentResponse>(
+                    url,
+                    "/api",
+                    "/Tournaments");
+                IsRunning = false;
+
+                if (!response.IsSuccess)
+                {
+                    await App.Current.MainPage.DisplayAlert(
+                        "Error",
+                        response.Message,
+                        "Accept");
+                    return;
+                }
+
+                List<TournamentResponse> tournaments = (List<TournamentResponse>)response.Result;
+                Tournaments = tournaments.Select(t => new TournamentItemViewModel(_navigationService)
+                {
+                    EndDate = t.EndDate,
+                    Groups = t.Groups,
+                    Id = t.Id,
+                    IsActive = t.IsActive,
+                    LogoPath = t.LogoPath,
+                    Name = t.Name,
+                    StartDate = t.StartDate
+                }).ToList();
             }
 
-            var tournaments = (List<TournamentResponse>)response.Result;
-            Tournaments = tournaments.Select(t => new TournamentItemViewModel(_navigationService)
-            {
-                EndDate = t.EndDate,
-                Groups = t.Groups,
-                Id = t.Id,
-                IsActive = t.IsActive,
-                LogoPath = t.LogoPath,
-                Name = t.Name,
-                StartDate = t.StartDate
-            }).ToList();
         }
     }
 }

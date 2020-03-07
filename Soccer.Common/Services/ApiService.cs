@@ -1,27 +1,37 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using Soccer.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Soccer.Common.Services
 {
     public class ApiService : IApiService
     {
+        public async Task<bool> CheckConnectionAsync(string url)
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                return false;
+            }
+
+            return await CrossConnectivity.Current.IsRemoteReachable(url);
+        }
+
         public async Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller)
         {
             try
             {
-                var client = new HttpClient
+                HttpClient client = new HttpClient
                 {
                     BaseAddress = new Uri(urlBase),
                 };
 
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.GetAsync(url);
-                var result = await response.Content.ReadAsStringAsync();
+                string url = $"{servicePrefix}{controller}";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string result = await response.Content.ReadAsStringAsync();
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -32,7 +42,7 @@ namespace Soccer.Common.Services
                     };
                 }
 
-                var list = JsonConvert.DeserializeObject<List<T>>(result);
+                List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
                 return new Response
                 {
                     IsSuccess = true,
