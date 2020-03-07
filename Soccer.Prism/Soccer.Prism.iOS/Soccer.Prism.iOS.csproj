@@ -221,5 +221,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_action_vpn_key.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\soccer_splash.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
