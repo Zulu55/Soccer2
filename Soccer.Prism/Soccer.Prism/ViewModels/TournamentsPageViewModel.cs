@@ -15,6 +15,7 @@ namespace Soccer.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private List<TournamentItemViewModel> _tournaments;
+        private bool _isRunning;
 
         public TournamentsPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -25,6 +26,12 @@ namespace Soccer.Prism.ViewModels
             LoadTournamentsAsync();
         }
 
+        public bool IsRunning 
+        {
+            get => _isRunning;
+            set => SetProperty(ref _isRunning, value);
+        }
+
         public List<TournamentItemViewModel> Tournaments 
         {
             get => _tournaments;
@@ -33,11 +40,13 @@ namespace Soccer.Prism.ViewModels
 
         private async void LoadTournamentsAsync()
         {
+            IsRunning = true;
             string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetListAsync<TournamentResponse>(
                 url,
                 "/api",
                 "/Tournaments");
+            IsRunning = false;
 
             if (!response.IsSuccess)
             {
