@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+           	 xmlns:i18n="clr-namespace:Soccer.Prism.Helpers"
              x:Class="Soccer.Prism.Views.GroupsPage"
              IconImageSource="ic_action_vpn_key"
              BackgroundColor="{StaticResource ColorBackgroud}"
@@ -28,31 +29,31 @@
                    Text="Logo"/>
             <Label Grid.Column="1"
                    FontAttributes="Bold"
-                   Text="Name"/>
+                   Text="{i18n:Translate Name}"/>
             <Label Grid.Column="2"
                    HorizontalTextAlignment="End"
                    FontAttributes="Bold"
-                   Text="MP"/>
+                   Text="{i18n:Translate MP}"/>
             <Label Grid.Column="3"
                    HorizontalTextAlignment="End"
                    FontAttributes="Bold"
-                   Text="MW"/>
+                   Text="{i18n:Translate MW}"/>
             <Label Grid.Column="4"
                    HorizontalTextAlignment="End"
                    FontAttributes="Bold"
-                   Text="MT"/>
+                   Text="{i18n:Translate MT}"/>
             <Label Grid.Column="5"
                    HorizontalTextAlignment="End"
                    FontAttributes="Bold"
-                   Text="ML"/>
+                   Text="{i18n:Translate ML}"/>
             <Label Grid.Column="6"
                    HorizontalTextAlignment="End"
                    FontAttributes="Bold"
-                   Text="PO"/>
+                   Text="{i18n:Translate PO}"/>
             <Label Grid.Column="7"
                    HorizontalTextAlignment="End"
                    FontAttributes="Bold"
-                   Text="GD"/>
+                   Text="{i18n:Translate GD}"/>
         </Grid>
         <ListView ItemsSource="{Binding Groups}"
                   IsGroupingEnabled="true">

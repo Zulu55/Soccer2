@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
          	 xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
+           	 xmlns:i18n="clr-namespace:Soccer.Prism.Helpers"
              x:Class="Soccer.Prism.Views.TournamentsPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
              Title="{Binding Title}">
@@ -65,7 +66,7 @@
                 	                    HorizontalOptions="Center"
                 	                    TextColor="{StaticResource ColorFontInverse}"
                 	                    IsVisible="{Binding IsRunning}"
-                	                    Title="Loading..."
+                	                    Title="{i18n:Translate Loading}"
                 	                    VerticalOptions="Center"
                 	                    ViewBoxWidth="80"
                 	                    ViewBoxHeight="80" />
