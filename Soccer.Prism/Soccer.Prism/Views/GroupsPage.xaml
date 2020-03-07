@@ -4,6 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
              x:Class="Soccer.Prism.Views.GroupsPage"
              IconImageSource="ic_action_vpn_key"
              BackgroundColor="{StaticResource ColorBackgroud}"
@@ -54,14 +56,19 @@
                    FontAttributes="Bold"
                    Text="GD"/>
         </Grid>
-        <ListView ItemsSource="{Binding Groups}"
+        <ListView BackgroundColor="Transparent"
+                  ItemsSource="{Binding Groups}"
                   IsGroupingEnabled="true">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label FontAttributes="Bold" 
-                               FontSize="Large"
-                               Text="{Binding Name}"/>
+                        <StackLayout BackgroundColor="{StaticResource ColorDanger}"
+                                     VerticalOptions="Center">
+                            <Label FontAttributes="Bold" 
+                                   FontSize="Large"
+                                   Margin="10,0,0,0"
+                                   Text="{Binding Name}"/>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
