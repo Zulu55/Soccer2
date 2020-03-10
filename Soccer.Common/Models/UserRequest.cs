@@ -31,5 +31,8 @@ namespace Soccer.Common.Models
         public int TeamId { get; set; }
 
         public byte[] PictureArray { get; set; }
+
+        [Required]
+        public string CultureInfo { get; set; }
     }
 }

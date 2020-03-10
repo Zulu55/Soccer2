@@ -10,5 +10,8 @@ namespace Soccer.Common.Models
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public int TournamentId { get; set; }
+
+        [Required]
+        public string CultureInfo { get; set; }
     }
 }

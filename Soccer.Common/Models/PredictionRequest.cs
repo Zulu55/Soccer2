@@ -16,5 +16,8 @@ namespace Soccer.Common.Models
 
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public int GoalsVisitor { get; set; }
+
+        [Required]
+        public string CultureInfo { get; set; }
     }
 }

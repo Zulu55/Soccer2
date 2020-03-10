@@ -7,6 +7,8 @@ using Soccer.Common.Models;
 using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Helpers;
+using Soccer.Web.Resources;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,9 +45,13 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Bad request"
+                    Message = "Bad request",
+                    Result = ModelState
                 });
             }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
 
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user != null)
@@ -53,7 +59,7 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Error007"
+                    Message = Resource.UserAlreadyExists
                 });
             }
 
@@ -93,14 +99,13 @@ namespace Soccer.Web.Controllers.API
                 token = myToken
             }, protocol: HttpContext.Request.Scheme);
 
-            _mailHelper.SendMail(request.Email, "Email confirmation", $"<h1>Email Confirmation</h1>" +
-                $"To allow the user, " +
-                $"please click on this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+            _mailHelper.SendMail(request.Email, Resource.ConfirmEmail, $"<h1>{Resource.ConfirmEmail}</h1>" +
+                $"{Resource.ConfirmEmailSubject}</br></br><a href = \"{tokenLink}\">{Resource.ConfirmEmail}</a>");
 
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "Message001"
+                Message = Resource.ConfirmEmailMessage
             });
         }
 
@@ -113,9 +118,13 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Bad request"
+                    Message = "Bad request",
+                    Result = ModelState
                 });
             }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
 
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
@@ -123,20 +132,19 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "This email is not assigned to any user."
+                    Message = Resource.UserDoesntExists
                 });
             }
 
             string myToken = await _userHelper.GeneratePasswordResetTokenAsync(user);
             string link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
-            _mailHelper.SendMail(request.Email, "Password Reset", $"<h1>Recover Password</h1>" +
-                $"To reset the password click in this link:</br></br>" +
-                $"<a href = \"{link}\">Reset Password</a>");
+            _mailHelper.SendMail(request.Email, Resource.RecoverPassword, $"<h1>{Resource.RecoverPassword}</h1>" +
+                $"{Resource.RecoverPasswordSubject}</br></br><a href = \"{link}\">{Resource.RecoverPassword}</a>");
 
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "An email with instructions to change the password was sent."
+                Message = Resource.RecoverPasswordMessage
             });
         }
 
@@ -148,10 +156,13 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
             UserEntity userEntity = await _userHelper.GetUserAsync(request.Email);
             if (userEntity == null)
             {
-                return BadRequest("User not found.");
+                return BadRequest(Resource.UserDoesntExists);
             }
 
             string picturePath = userEntity.PicturePath;
@@ -187,9 +198,13 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "Bad request"
+                    Message = "Bad request",
+                    Result = ModelState
                 });
             }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
 
             UserEntity user = await _userHelper.GetUserAsync(request.Email);
             if (user == null)
@@ -197,7 +212,7 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = "This email is not assigned to any user."
+                    Message = Resource.UserDoesntExists
                 });
             }
 
@@ -208,31 +223,34 @@ namespace Soccer.Web.Controllers.API
                 return BadRequest(new Response
                 {
                     IsSuccess = false,
-                    Message = message.Contains("password") ? "Error001" : message
+                    Message = message.Contains("password") ? Resource.IncorrectCurrentPassword : message
                 });
             }
 
             return Ok(new Response
             {
                 IsSuccess = true,
-                Message = "Message002"
+                Message = Resource.PasswordChangedSuccess
             });
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("GetUserByEmail")]
-        public async Task<IActionResult> GetUserByEmail([FromBody] EmailRequest emailRequest)
+        public async Task<IActionResult> GetUserByEmail([FromBody] EmailRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            UserEntity userEntity = await _userHelper.GetUserAsync(emailRequest.Email);
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.Email);
             if (userEntity == null)
             {
-                return NotFound("Error002");
+                return NotFound(Resource.UserDoesntExists);
             }
 
             return Ok(_converterHelper.ToUserResponse(userEntity));
