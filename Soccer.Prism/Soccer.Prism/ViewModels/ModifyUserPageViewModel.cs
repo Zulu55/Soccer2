@@ -135,6 +135,7 @@ namespace Soccer.Prism.ViewModels
             }
 
             Settings.User = JsonConvert.SerializeObject(User);
+            SoccerMasterDetailPageViewModel.GetInstance().ReloadUser();
             await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.UserUpdated, Languages.Accept);
         }
 
