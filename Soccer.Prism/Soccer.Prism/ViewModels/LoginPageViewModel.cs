@@ -107,7 +107,13 @@ namespace Soccer.Prism.ViewModels
             }
 
             TokenResponse token = (TokenResponse)response.Result;
-            Response response2 = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, Email);
+            EmailRequest request2 = new EmailRequest
+            {
+                CultureInfo = Languages.Culture,
+                Email = Email
+            };
+
+            Response response2 = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, request2);
             UserResponse userResponse = (UserResponse)response2.Result;
 
             Settings.User = JsonConvert.SerializeObject(userResponse);

@@ -57,7 +57,8 @@ namespace Soccer.Prism.ViewModels
 
             EmailRequest request = new EmailRequest
             {
-                Email = Email
+                Email = Email,
+                CultureInfo = Languages.Culture
             };
 
             string url = App.Current.Resources["UrlAPI"].ToString();

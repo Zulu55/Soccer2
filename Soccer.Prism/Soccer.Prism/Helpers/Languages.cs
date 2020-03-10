@@ -10,8 +10,13 @@ namespace Soccer.Prism.Helpers
         {
             var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
             Resource.Culture = ci;
+            Culture = ci.Name;
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
+
+        public static string Culture { get; set; }
+
+        public static string MatchAlreadyStarts => Resource.MatchAlreadyStarts;
 
         public static string SearchUserPlaceHolder => Resource.SearchUserPlaceHolder;
 
@@ -29,10 +34,6 @@ namespace Soccer.Prism.Helpers
 
         public static string Open => Resource.Open;
 
-        public static string Error002 => Resource.Error002;
-
-        public static string Error003 => Resource.Error003;
-
         public static string LocalGoalsError => Resource.LocalGoalsError;
 
         public static string VisitorGoalsError => Resource.VisitorGoalsError;
@@ -44,10 +45,6 @@ namespace Soccer.Prism.Helpers
         public static string SelectTournament => Resource.SelectTournament;
 
         public static string PredictionsFor => Resource.PredictionsFor;
-
-        public static string Message002 => Resource.Message002;
-
-        public static string Error001 => Resource.Error001;
 
         public static string ConfirmNewPassword => Resource.ConfirmNewPassword;
 
@@ -176,10 +173,6 @@ namespace Soccer.Prism.Helpers
         public static string PasswordConfirmPlaceHolder => Resource.PasswordConfirmPlaceHolder;
 
         public static string Ok => Resource.Ok;
-
-        public static string Error007 => Resource.Error007;
-
-        public static string Message001 => Resource.Message001;
 
         public static string PictureSource => Resource.PictureSource;
 

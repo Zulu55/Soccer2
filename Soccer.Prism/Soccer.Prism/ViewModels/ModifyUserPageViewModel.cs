@@ -114,7 +114,8 @@ namespace Soccer.Prism.ViewModels
                 Password = "123456", // It doesn't matter what is sent here. It is only for the model to be valid
                 Phone = User.PhoneNumber,
                 PictureArray = imageArray,
-                TeamId = Team.Id
+                TeamId = Team.Id,
+                CultureInfo = Languages.Culture
             };
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);

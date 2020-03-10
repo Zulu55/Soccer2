@@ -250,12 +250,6 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
-  <data name="Error007" xml:space="preserve">
-    <value>This email is already registered.</value>
-  </data>
-  <data name="Message001" xml:space="preserve">
-    <value>A Confirmation email was sent. Please confirm your account and log into the App.</value>
-  </data>
   <data name="PictureSource" xml:space="preserve">
     <value>Where do you want to take the picture?</value>
   </data>
@@ -310,12 +304,6 @@
   <data name="NewPasswordError" xml:space="preserve">
     <value>You must enter a new password at least six characters.</value>
   </data>
-  <data name="Message002" xml:space="preserve">
-    <value>The password was changed successfully!</value>
-  </data>
-  <data name="Error001" xml:space="preserve">
-    <value>Incorrect current password.</value>
-  </data>
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Enter the new password...</value>
   </data>
@@ -336,12 +324,6 @@
   </data>
   <data name="VisitorGoalsError" xml:space="preserve">
     <value>You must enter the visitor goals.</value>
-  </data>
-  <data name="Error002" xml:space="preserve">
-    <value>Match is already closed.</value>
-  </data>
-  <data name="Error003" xml:space="preserve">
-    <value>You cannot record the prediction, because the match has already started.</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
@@ -366,5 +348,8 @@
   </data>
   <data name="SearchUserPlaceHolder" xml:space="preserve">
     <value>Search a user name...</value>
+  </data>
+  <data name="MatchAlreadyStarts" xml:space="preserve">
+    <value>You cannot record the prediction, because the match has already started.</value>
   </data>
 </root>

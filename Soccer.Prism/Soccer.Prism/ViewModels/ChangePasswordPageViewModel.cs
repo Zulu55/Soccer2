@@ -65,7 +65,8 @@ namespace Soccer.Prism.ViewModels
             {
                 Email = user.Email,
                 NewPassword = NewPassword,
-                OldPassword = CurrentPassword
+                OldPassword = CurrentPassword,
+                CultureInfo = Languages.Culture
             };
 
             string url = App.Current.Resources["UrlAPI"].ToString();
@@ -76,19 +77,11 @@ namespace Soccer.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error001")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error001, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
-
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message002, Languages.Accept);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 

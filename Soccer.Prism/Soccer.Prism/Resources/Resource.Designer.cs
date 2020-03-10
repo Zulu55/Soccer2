@@ -259,42 +259,6 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect current password..
-        /// </summary>
-        internal static string Error001 {
-            get {
-                return ResourceManager.GetString("Error001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Match is already closed..
-        /// </summary>
-        internal static string Error002 {
-            get {
-                return ResourceManager.GetString("Error002", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You cannot record the prediction, because the match has already started..
-        /// </summary>
-        internal static string Error003 {
-            get {
-                return ResourceManager.GetString("Error003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This email is already registered..
-        /// </summary>
-        internal static string Error007 {
-            get {
-                return ResourceManager.GetString("Error007", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Favorite team.
         /// </summary>
         internal static string FavoriteTeam {
@@ -475,20 +439,11 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A Confirmation email was sent. Please confirm your account and log into the App..
+        ///   Looks up a localized string similar to You cannot record the prediction, because the match has already started..
         /// </summary>
-        internal static string Message001 {
+        internal static string MatchAlreadyStarts {
             get {
-                return ResourceManager.GetString("Message001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The password was changed successfully!.
-        /// </summary>
-        internal static string Message002 {
-            get {
-                return ResourceManager.GetString("Message002", resourceCulture);
+                return ResourceManager.GetString("MatchAlreadyStarts", resourceCulture);
             }
         }
         

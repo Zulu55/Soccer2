@@ -270,12 +270,6 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
-  <data name="Error007" xml:space="preserve">
-    <value>¡El Email ya está registrado!</value>
-  </data>
-  <data name="Message001" xml:space="preserve">
-    <value>Se envió un correo electrónico de confirmación. ¡Confirme su cuenta e inicie sesión en la aplicación!</value>
-  </data>
   <data name="PictureSource" xml:space="preserve">
     <value>¿Dónde quieres tomar la foto?</value>
   </data>
@@ -330,12 +324,6 @@
   <data name="NewPasswordError" xml:space="preserve">
     <value>Debe ingresar una nueva clave de al menos seis caracteres.</value>
   </data>
-  <data name="Message002" xml:space="preserve">
-    <value>La clave se cambió correctamente.</value>
-  </data>
-  <data name="Error001" xml:space="preserve">
-    <value>Clave actual incorrecta</value>
-  </data>
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Escribe la nueva clave...</value>
   </data>
@@ -356,12 +344,6 @@
   </data>
   <data name="VisitorGoalsError" xml:space="preserve">
     <value>Debe ingresar los goles del visitante.</value>
-  </data>
-  <data name="Error002" xml:space="preserve">
-    <value>¡El partido ya está cerrado!</value>
-  </data>
-  <data name="Error003" xml:space="preserve">
-    <value>No puedes grabar la predicción porque el partido ya ha comenzado.</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Abiertos</value>
@@ -386,5 +368,8 @@
   </data>
   <data name="SearchUserPlaceHolder" xml:space="preserve">
     <value>Buscar un usuario ...</value>
+  </data>
+  <data name="MatchAlreadyStarts" xml:space="preserve">
+    <value>No puedes grabar la predicción porque la partida ya ha comenzado.</value>
   </data>
 </root>

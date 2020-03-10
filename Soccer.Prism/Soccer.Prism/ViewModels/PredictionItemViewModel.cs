@@ -45,25 +45,15 @@ namespace Soccer.Prism.ViewModels
                 GoalsLocal = GoalsLocal.Value,
                 GoalsVisitor = GoalsVisitor.Value,
                 MatchId = Match.Id,
-                UserId = new Guid(user.Id)
+                UserId = new Guid(user.Id),
+                CultureInfo = Languages.Culture
             };
 
             Response response = await _apiService.MakePredictionAsync(url, "/api", "/Predictions", request, "bearer", token.Token);
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error002")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error002, Languages.Accept);
-                }
-                else if (response.Message == "Error003")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error003, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
             }
         }
 
@@ -83,7 +73,7 @@ namespace Soccer.Prism.ViewModels
 
             if (Match.DateLocal <= DateTime.Now)
             {
-                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error003, Languages.Accept);
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.MatchAlreadyStarts, Languages.Accept);
                 return false;
             }
 

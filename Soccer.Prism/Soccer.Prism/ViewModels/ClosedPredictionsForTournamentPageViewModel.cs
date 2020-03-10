@@ -62,7 +62,8 @@ namespace Soccer.Prism.ViewModels
             var request = new PredictionsForUserRequest
             {
                 TournamentId = _tournament.Id,
-                UserId = new Guid(user.Id)
+                UserId = new Guid(user.Id),
+                CultureInfo = Languages.Culture
             };
 
             Response response = await _apiService.GetPredictionsForUserAsync(url, "/api", "/Predictions/GetPredictionsForUser", request, "bearer", token.Token);

@@ -115,6 +115,7 @@ namespace Soccer.Prism.ViewModels
 
             User.TeamId = Team.Id;
             User.PictureArray = imageArray;
+            User.CultureInfo = Languages.Culture;
 
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
@@ -122,18 +123,11 @@ namespace Soccer.Prism.ViewModels
 
             if (!response.IsSuccess)
             {
-                if (response.Message == "Error007")
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.Error007, Languages.Accept);
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                }
+                await App.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 
-            await App.Current.MainPage.DisplayAlert(Languages.Ok, Languages.Message001, Languages.Accept);
+            await App.Current.MainPage.DisplayAlert(Languages.Ok, response.Message, Languages.Accept);
             await _navigationService.GoBackAsync();
         }
 

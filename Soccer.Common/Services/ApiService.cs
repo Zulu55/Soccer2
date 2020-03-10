@@ -176,11 +176,10 @@ namespace Soccer.Common.Services
             string controller,
             string tokenType,
             string accessToken,
-            string email)
+            EmailRequest request)
         {
             try
             {
-                EmailRequest request = new EmailRequest { Email = email };
                 string requestString = JsonConvert.SerializeObject(request);
                 StringContent content = new StringContent(requestString, Encoding.UTF8, "application/json");
                 HttpClient client = new HttpClient
@@ -260,12 +259,12 @@ namespace Soccer.Common.Services
                 string url = $"{servicePrefix}{controller}";
                 HttpResponseMessage response = await client.PostAsync(url, content);
                 string answer = await response.Content.ReadAsStringAsync();
-                if (answer.StartsWith("<!DOCTYPE html>"))
+                if (!response.IsSuccessStatusCode)
                 {
                     return new Response
                     {
                         IsSuccess = false,
-                        Message = "Error008"
+                        Message = answer
                     };
                 }
 
