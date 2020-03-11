@@ -50,7 +50,6 @@ namespace Soccer.Prism.Droid
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations
         }
     }
 }

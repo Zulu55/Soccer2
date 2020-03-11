@@ -68,7 +68,6 @@ namespace Soccer.Prism.ViewModels
         {
             try
             {
-
                 if (_facebookService.IsLoggedIn)
                 {
                     _facebookService.Logout();
@@ -80,7 +79,6 @@ namespace Soccer.Prism.ViewModels
                     {
                         case FacebookActionStatus.Completed:
                             FacebookProfile facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
-                            var name = facebookProfile.FirstName;
                             break;
                         case FacebookActionStatus.Canceled:
                             await App.Current.MainPage.DisplayAlert("Facebook Auth", "Canceled", "Ok");
