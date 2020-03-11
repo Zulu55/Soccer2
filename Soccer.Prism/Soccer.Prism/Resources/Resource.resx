@@ -143,7 +143,7 @@
     <value>Modify User</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Log in</value>
+    <value>Login</value>
   </data>
   <data name="Groups" xml:space="preserve">
     <value>Groups</value>
@@ -351,5 +351,8 @@
   </data>
   <data name="MatchAlreadyStarts" xml:space="preserve">
     <value>You cannot record the prediction, because the match has already started.</value>
+  </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Login With Facebook</value>
   </data>
 </root>

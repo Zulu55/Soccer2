@@ -372,4 +372,7 @@
   <data name="MatchAlreadyStarts" xml:space="preserve">
     <value>No puedes grabar la predicción porque la partida ya ha comenzado.</value>
   </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Entrar con Facebook</value>
+  </data>
 </root>

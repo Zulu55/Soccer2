@@ -56,9 +56,18 @@
             </StackLayout>
             <StackLayout>
                 <Button Command="{Binding LoginCommand}" 
+                        HeightRequest="45"
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate Login}"/>
+                <Button BackgroundColor="#4768AD" 
+                        Command="{Binding LoginFacebookCommand}"
+                        HeightRequest="45"
+                        IsEnabled="{Binding IsEnabled}"
+                        ImageSource="ic_fb"
+                        Text="{i18n:Translate LoginFacebook}"
+                        TextColor="#FFFFFF"/>
                 <Button Command="{Binding RegisterCommand}" 
+                        HeightRequest="45"
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate Register}"
                         Style="{StaticResource DangerButton}"/>
