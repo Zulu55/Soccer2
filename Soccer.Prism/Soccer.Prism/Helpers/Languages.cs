@@ -16,6 +16,10 @@ namespace Soccer.Prism.Helpers
 
         public static string Culture { get; set; }
 
+        public static string ChangePhotoNoSoccerUser => Resource.ChangePhotoNoSoccerUser;
+        
+        public static string LoginFacebook => Resource.LoginFacebook; 
+        
         public static string MatchAlreadyStarts => Resource.MatchAlreadyStarts;
 
         public static string SearchUserPlaceHolder => Resource.SearchUserPlaceHolder;

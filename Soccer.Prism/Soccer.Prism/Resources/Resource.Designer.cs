@@ -115,6 +115,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users created by social networks, must change the photo or password on the social network..
+        /// </summary>
+        internal static string ChangePhotoNoSoccerUser {
+            get {
+                return ResourceManager.GetString("ChangePhotoNoSoccerUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closed.
         /// </summary>
         internal static string Closed {
@@ -426,6 +435,15 @@ namespace Soccer.Prism.Resources {
         internal static string LoginError {
             get {
                 return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login With Facebook.
+        /// </summary>
+        internal static string LoginFacebook {
+            get {
+                return ResourceManager.GetString("LoginFacebook", resourceCulture);
             }
         }
         

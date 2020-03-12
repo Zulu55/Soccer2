@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Soccer.Common.Enums;
+using Soccer.Common.Models;
 using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
@@ -26,6 +27,34 @@ namespace Soccer.Web.Helpers
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+        }
+
+        public async Task<UserEntity> AddUserAsync(FacebookProfile model)
+        {
+            UserEntity userEntity = new UserEntity
+            {
+                Address = "...",
+                Document = "...",
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PicturePath = model.Picture?.Data?.Url,
+                PhoneNumber = "...",
+                Team = await _context.Teams.FirstOrDefaultAsync(t => t.Name == "Colombia"),
+                UserName = model.Email,
+                UserType = UserType.User,
+                LoginType = LoginType.Facebook
+            };
+
+            IdentityResult result = await _userManager.CreateAsync(userEntity, model.Id);
+            if (result != IdentityResult.Success)
+            {
+                return null;
+            }
+
+            UserEntity newUser = await GetUserAsync(model.Email);
+            await AddUserToRoleAsync(newUser, userEntity.UserType.ToString());
+            return newUser;
         }
 
         public async Task<IdentityResult> AddUserAsync(UserEntity user, string password)

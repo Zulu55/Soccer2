@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Soccer.Common.Enums;
+using Soccer.Common.Models;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
 using System;
@@ -9,6 +10,8 @@ namespace Soccer.Web.Helpers
 {
     public interface IUserHelper
     {
+        Task<UserEntity> AddUserAsync(FacebookProfile model);
+        
         Task<UserEntity> GetUserAsync(string email);
 
         Task<UserEntity> GetUserAsync(Guid userId);

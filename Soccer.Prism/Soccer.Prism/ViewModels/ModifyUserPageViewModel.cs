@@ -3,6 +3,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Navigation;
+using Soccer.Common.Enums;
 using Soccer.Common.Helpers;
 using Soccer.Common.Models;
 using Soccer.Common.Services;
@@ -23,6 +24,7 @@ namespace Soccer.Prism.ViewModels
         private readonly IFilesHelper _filesHelper;
         private bool _isRunning;
         private bool _isEnabled;
+        private bool _isSoccerUser;
         private ImageSource _image;
         private UserResponse _user;
         private MediaFile _file;
@@ -39,6 +41,7 @@ namespace Soccer.Prism.ViewModels
             _apiService = apiService;
             _filesHelper = filesHelper;
             Title = Languages.ModifyUser;
+            IsSoccerUser = User.LoginType == LoginType.Soccer;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             Image = User.PictureFullPath;
@@ -50,6 +53,12 @@ namespace Soccer.Prism.ViewModels
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
+
+        public bool IsSoccerUser
+        {
+            get => _isSoccerUser;
+            set => SetProperty(ref _isSoccerUser, value);
+        }
 
         public ImageSource Image
         {
@@ -176,6 +185,12 @@ namespace Soccer.Prism.ViewModels
 
         private async void ChangeImageAsync()
         {
+            if (!IsSoccerUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoSoccerUser, Languages.Accept);
+                return;
+            }
+
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
@@ -248,6 +263,12 @@ namespace Soccer.Prism.ViewModels
 
         private async void ChangePasswordAsync()
         {
+            if (!IsSoccerUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoSoccerUser, Languages.Accept);
+                return;
+            }
+
             await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
     }
