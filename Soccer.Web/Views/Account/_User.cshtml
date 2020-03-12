@@ -1,0 +1,43 @@
+﻿@model Soccer.Web.Models.EditUserViewModel
+
+<div class="form-group">
+    <label asp-for="Document" class="control-label"></label>
+    <input asp-for="Document" class="form-control" />
+    <span asp-validation-for="Document" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="FirstName" class="control-label"></label>
+    <input asp-for="FirstName" class="form-control" />
+    <span asp-validation-for="FirstName" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="LastName" class="control-label"></label>
+    <input asp-for="LastName" class="form-control" />
+    <span asp-validation-for="LastName" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Address" class="control-label"></label>
+    <input asp-for="Address" class="form-control" />
+    <span asp-validation-for="Address" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="PhoneNumber" class="control-label"></label>
+    <input asp-for="PhoneNumber" class="form-control" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="PictureFile" class="control-label"></label>
+    <input asp-for="PictureFile" class="form-control" type="file" />
+    <span asp-validation-for="PictureFile" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="TeamId" class="control-label"></label>
+    <select asp-for="TeamId" asp-items="Model.Teams" class="form-control"></select>
+    <span asp-validation-for="TeamId" class="text-danger"></span>
+</div>

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Soccer.Common\Soccer.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\Users\" />
+  </ItemGroup>
+
 </Project>
