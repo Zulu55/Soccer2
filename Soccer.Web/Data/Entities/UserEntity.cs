@@ -32,6 +32,9 @@ namespace Soccer.Web.Data.Entities
         [Display(Name = "User Type")]
         public UserType UserType { get; set; }
 
+        [Display(Name = "Login Type")]
+        public LoginType LoginType { get; set; }
+
         [Display(Name = "Favorite Team")]
         public TeamEntity Team { get; set; }
 

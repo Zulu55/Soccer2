@@ -29,13 +29,14 @@
                            Source="soccer"/>
                     <ffimageloading:CachedImage x:Name="Picture" 
                                                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Logo,Property=Y,Factor=1,Constant=60}"
-                                                Aspect="AspectFit"
+                                                Aspect="AspectFill"
                                                 Source="{Binding User.PictureFullPath}" 
                                                 CacheDuration= "50"
                                                 HeightRequest="100"
                                                 Margin="5"
                                                 RetryCount= "3"
-                                                RetryDelay= "600">
+                                                RetryDelay= "600"
+                                                WidthRequest="100">
                         <ffimageloading:CachedImage.Transformations>
                             <fftransformations:CircleTransformation />
                         </ffimageloading:CachedImage.Transformations>
@@ -43,13 +44,18 @@
                     <ffimageloading:CachedImage x:Name="Team" 
                                                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=50}"
                                                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=X,Factor=1,Constant=60}"
-                                                Aspect="AspectFit"
+                                                Aspect="AspectFill"
                                                 Source="{Binding User.Team.LogoFullPath}" 
                                                 CacheDuration= "50"
                                                 HeightRequest="50"
                                                 Margin="5"
                                                 RetryCount= "3"
-                                                RetryDelay= "600"/>
+                                                RetryDelay= "600"
+                                                WidthRequest="50">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation />
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
                     <Label RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Picture,Property=Y,Factor=1,Constant=110}"
                            FontAttributes="Bold"
                            FontSize="Large"

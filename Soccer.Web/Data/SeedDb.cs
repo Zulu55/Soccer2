@@ -27,7 +27,7 @@ namespace Soccer.Web.Data
             await CheckRolesAsync();
             await CheckTeamsAsync();
             await CheckTournamentsAsync();
-            await CheckUserAsync("1010", "Juan", "Zuluaga", "jzuluaga55@gmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
+            await CheckUserAsync("1010", "Juan", "Zuluaga", "jzuluaga55@hotmail.com", "350 634 2747", "Calle Luna Calle Sol", UserType.Admin);
             await CheckUsersAsync();
             await CheckPreditionsAsync();
         }

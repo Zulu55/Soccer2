@@ -20,9 +20,11 @@ namespace Soccer.Common.Models
 
         public string PicturePath { get; set; }
 
+        public LoginType LoginType { get; set; }
+
         public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
             ? "https://SoccerWeb0.azurewebsites.net//images/noimage.png"
-            : $"https://SoccerWeb0.azurewebsites.net{PicturePath.Substring(1)}";
+            : LoginType == LoginType.Soccer ? $"https://SoccerWeb0.azurewebsites.net{PicturePath.Substring(1)}" : PicturePath;
 
         public UserType UserType { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Soccer.Common.Enums;
+using Soccer.Common.Models;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
 using System;
@@ -26,6 +27,8 @@ namespace Soccer.Web.Helpers
         Task LogoutAsync();
 
         Task<UserEntity> AddUserAsync(AddUserViewModel model, string path, UserType userType);
+
+        Task<UserEntity> AddUserAsync(FacebookProfile model);
 
         Task<IdentityResult> ChangePasswordAsync(UserEntity user, string oldPassword, string newPassword);
 
