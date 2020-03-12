@@ -41,9 +41,9 @@ namespace Soccer.Prism.ViewModels
             _apiService = apiService;
             _filesHelper = filesHelper;
             Title = Languages.ModifyUser;
-            IsSoccerUser = User.LoginType == LoginType.Soccer;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            IsSoccerUser = User.LoginType == LoginType.Soccer;
             Image = User.PictureFullPath;
             LoadTeamsAsync();
         }
