@@ -353,9 +353,12 @@
     <value>You cannot record the prediction, because the match has already started.</value>
   </data>
   <data name="LoginFacebook" xml:space="preserve">
-    <value>Login With Facebook</value>
+    <value>Facebook</value>
   </data>
   <data name="ChangePhotoNoSoccerUser" xml:space="preserve">
     <value>Users created by social networks, must change the photo or password on the social network.</value>
+  </data>
+  <data name="LoginGoogle" xml:space="preserve">
+    <value>Google</value>
   </data>
 </root>

@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Plugin.CurrentActivity;
 using Plugin.FacebookClient;
+using Plugin.GoogleClient;
 using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
@@ -27,6 +28,7 @@ namespace Soccer.Prism.Droid
 
             base.OnCreate(bundle);
             FacebookClientManager.Initialize(this);
+            GoogleClientManager.Initialize(this);
             CrossCurrentActivity.Current.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             new SfBusyIndicatorRenderer();

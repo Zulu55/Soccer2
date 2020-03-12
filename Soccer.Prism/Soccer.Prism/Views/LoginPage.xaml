@@ -59,18 +59,26 @@
                         HeightRequest="45"
                         IsEnabled="{Binding IsEnabled}"
                         Text="{i18n:Translate Login}"/>
-                <Button BackgroundColor="#4768AD" 
-                        Command="{Binding LoginFacebookCommand}"
-                        HeightRequest="45"
-                        IsEnabled="{Binding IsEnabled}"
-                        ImageSource="ic_fb"
-                        Text="{i18n:Translate LoginFacebook}"
-                        TextColor="#FFFFFF"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button BackgroundColor="#4768AD" 
+                            Command="{Binding LoginFacebookCommand}"
+                            HeightRequest="45"
+                            IsEnabled="{Binding IsEnabled}"
+                            ImageSource="ic_fb"
+                            Text="{i18n:Translate LoginFacebook}"
+                            TextColor="#FFFFFF"/>
+                    <Button BackgroundColor="#F8F8F8" 
+                            Command="{Binding LoginGoogleCommand}"
+                            HeightRequest="45"
+                            IsEnabled="{Binding IsEnabled}"
+                            ImageSource="ic_google"
+                            Text="{i18n:Translate LoginGoogle}"
+                            TextColor="#000000"/>
+                </StackLayout>
                 <Button Command="{Binding RegisterCommand}" 
                         HeightRequest="45"
                         IsEnabled="{Binding IsEnabled}"
-                        Text="{i18n:Translate Register}"
-                        Style="{StaticResource DangerButton}"/>
+                        Text="{i18n:Translate Register}"/>
             </StackLayout>
         </StackLayout>
         <busyindicator:SfBusyIndicator AnimationType="Gear" 

@@ -439,11 +439,20 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login With Facebook.
+        ///   Looks up a localized string similar to Facebook.
         /// </summary>
         internal static string LoginFacebook {
             get {
                 return ResourceManager.GetString("LoginFacebook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Google.
+        /// </summary>
+        internal static string LoginGoogle {
+            get {
+                return ResourceManager.GetString("LoginGoogle", resourceCulture);
             }
         }
         

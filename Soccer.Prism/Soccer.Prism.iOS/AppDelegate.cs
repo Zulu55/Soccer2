@@ -1,5 +1,6 @@
 ﻿using Foundation;
 using Plugin.FacebookClient;
+using Plugin.GoogleClient;
 using Prism;
 using Prism.Ioc;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
@@ -17,6 +18,7 @@ namespace Soccer.Prism.iOS
             new SfBusyIndicatorRenderer();
             LoadApplication(new App(new iOSInitializer()));
             FacebookClientManager.Initialize(app, options);
+            GoogleClientManager.Initialize();
             return base.FinishedLaunching(app, options);
         }
 

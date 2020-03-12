@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Plugin.FacebookClient;
+using Plugin.GoogleClient;
+using Plugin.GoogleClient.Shared;
 using Prism.Commands;
 using Prism.Navigation;
 using Soccer.Common.Helpers;
@@ -19,6 +21,7 @@ namespace Soccer.Prism.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private readonly IFacebookClient _facebookService = CrossFacebookClient.Current;
+        private readonly IGoogleClientManager _googleService = CrossGoogleClient.Current;
         private bool _isRunning;
         private bool _isEnabled;
         private string _password;
@@ -26,6 +29,7 @@ namespace Soccer.Prism.ViewModels
         private DelegateCommand _registerCommand;
         private DelegateCommand _forgotPasswordCommand;
         private DelegateCommand _loginFacebookCommand;
+        private DelegateCommand _loginGoogleCommand;
 
         public LoginPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
@@ -35,6 +39,8 @@ namespace Soccer.Prism.ViewModels
             Title = Languages.Login;
             IsEnabled = true;
         }
+
+        public DelegateCommand LoginGoogleCommand => _loginGoogleCommand ?? (_loginGoogleCommand = new DelegateCommand(LoginGoogleAsync));
 
         public DelegateCommand LoginFacebookCommand => _loginFacebookCommand ?? (_loginFacebookCommand = new DelegateCommand(LoginFacebookAsync));
 
@@ -62,6 +68,50 @@ namespace Soccer.Prism.ViewModels
         {
             get => _password;
             set => SetProperty(ref _password, value);
+        }
+
+        private async void LoginGoogleAsync()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(_googleService.ActiveToken))
+                {
+                    _googleService.Logout();
+                }
+
+                EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
+                userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
+                {
+                    switch (e.Status)
+                    {
+                        case GoogleActionStatus.Completed:
+#if DEBUG
+                            string googleUserString = JsonConvert.SerializeObject(e.Data);
+                            Debug.WriteLine($"Google Logged in succesfully: {googleUserString}");
+#endif
+                            break;
+                        case GoogleActionStatus.Canceled:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
+                            break;
+                        case GoogleActionStatus.Error:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Error", "Ok");
+                            break;
+                        case GoogleActionStatus.Unauthorized:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
+                            break;
+                    }
+
+                    _googleService.OnLogin -= userLoginDelegate;
+                };
+
+                _googleService.OnLogin += userLoginDelegate;
+
+                await _googleService.LoginAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
         }
 
         private async void LoginFacebookAsync()
