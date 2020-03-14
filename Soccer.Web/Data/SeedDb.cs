@@ -72,7 +72,7 @@ namespace Soccer.Web.Data
             string address,
             UserType userType)
         {
-            UserEntity user = await _userHelper.GetUserByEmailAsync(email);
+            UserEntity user = await _userHelper.GetUserAsync(email);
             if (user == null)
             {
                 user = new UserEntity
