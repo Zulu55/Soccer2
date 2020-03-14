@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Soccer.Common.Enums;
@@ -22,19 +23,22 @@ namespace Soccer.Web.Controllers
         private readonly ICombosHelper _combosHelper;
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IMailHelper _mailHelper;
 
         public AccountController(
             IUserHelper userHelper,
             IImageHelper imageHelper,
             ICombosHelper combosHelper,
             DataContext context,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IMailHelper mailHelper)
         {
             _userHelper = userHelper;
             _imageHelper = imageHelper;
             _combosHelper = combosHelper;
             _context = context;
             _configuration = configuration;
+            _mailHelper = mailHelper;
         }
 
         [HttpPost]
@@ -178,26 +182,51 @@ namespace Soccer.Web.Controllers
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "This email is already used.");
+                    model.Teams = _combosHelper.GetComboTeams();
                     return View(model);
                 }
 
-                LoginViewModel loginViewModel = new LoginViewModel
+                var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                var tokenLink = Url.Action("ConfirmEmail", "Account", new
                 {
-                    Password = model.Password,
-                    RememberMe = false,
-                    Username = model.Username
-                };
+                    userid = user.Id,
+                    token = myToken
+                }, protocol: HttpContext.Request.Scheme);
 
-                var result2 = await _userHelper.LoginAsync(loginViewModel);
-
-                if (result2.Succeeded)
+                var response = _mailHelper.SendMail(model.Username, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                    $"To allow the user, " +
+                    $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+                if (response.IsSuccess)
                 {
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Message = "The instructions to allow your user has been sent to email.";
+                    return View(model);
                 }
             }
 
             model.Teams = _combosHelper.GetComboTeams();
             return View(model);
+        }
+
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                return NotFound();
+            }
+
+            UserEntity user = await _userHelper.GetUserAsync(new Guid(userId));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            IdentityResult result = await _userHelper.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                return NotFound();
+            }
+
+            return View();
         }
 
         public IActionResult NotAuthorized()
