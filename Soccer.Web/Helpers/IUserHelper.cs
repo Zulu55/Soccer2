@@ -29,6 +29,8 @@ namespace Soccer.Web.Helpers
 
         Task<SignInResult> LoginAsync(LoginViewModel model);
 
+        Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password);
+
         Task LogoutAsync();
     }
 }

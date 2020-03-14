@@ -101,6 +101,11 @@ namespace Soccer.Web.Helpers
                 .FirstOrDefaultAsync(u => u.Id == userId.ToString());
         }
 
+        public async Task<SignInResult> ValidatePasswordAsync(UserEntity user, string password)
+        {
+            return await _signInManager.CheckPasswordSignInAsync(user, password, false);
+        }
+
         public async Task<bool> IsUserInRoleAsync(UserEntity user, string roleName)
         {
             return await _userManager.IsInRoleAsync(user, roleName);
