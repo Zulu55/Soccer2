@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1054100792921",
+    "firebase_url": "https://soccer-206dd.firebaseio.com",
+    "project_id": "soccer-206dd",
+    "storage_bucket": "soccer-206dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054100792921:android:7149daecfa317fc653f348",
+        "android_client_info": {
+          "package_name": "com.zulu.soccer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054100792921-5quefdl6qqi5d2vvpdodnm5715gqji5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCab7seeJITlt5-2iWxUG6RCyB3_1QQHrc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054100792921-5quefdl6qqi5d2vvpdodnm5715gqji5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

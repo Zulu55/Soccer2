@@ -4,6 +4,7 @@ using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -13,10 +14,12 @@ namespace Soccer.Prism.ViewModels
         private readonly IApiService _apiService;
         private List<TournamentItemViewModel> _tournaments;
         private bool _isRunning;
+        private static TournamentsPageViewModel _instance;
 
         public TournamentsPageViewModel(INavigationService navigationService, IApiService apiService) 
             : base(navigationService)
         {
+            _instance = this;
             _navigationService = navigationService;
             _apiService = apiService;
             Title = "Soccer";
@@ -33,6 +36,19 @@ namespace Soccer.Prism.ViewModels
         {
             get => _tournaments;
             set => SetProperty(ref _tournaments, value);
+        }
+
+        public static TournamentsPageViewModel GetInstance()
+        {
+            return _instance;
+        }
+
+        public void AddMessage(string message)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                App.Current.MainPage.DisplayAlert(Languages.Ok, message, Languages.Accept);
+            });
         }
 
         private async void LoadTournamentsAsync()
