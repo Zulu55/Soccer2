@@ -378,4 +378,10 @@
   <data name="ChangePhotoNoSoccerUser" xml:space="preserve">
     <value>Les utilisateurs créés par les réseaux sociaux, doivent changer la photo ou mot de passe sur le réseau social.</value>
   </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="CheckPointsEarned" xml:space="preserve">
+    <value>Vérifiez combien de points vous avez gagnés !!</value>
+  </data>
 </root>

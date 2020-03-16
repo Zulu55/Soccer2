@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.NotificationHubs;
 using Microsoft.EntityFrameworkCore;
+using Soccer.Common.Constants;
 using Soccer.Web.Data;
 using Soccer.Web.Helpers;
 using Soccer.Web.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -504,6 +507,9 @@ namespace Soccer.Web.Controllers
             if (ModelState.IsValid)
             {
                 await _matchHelper.CloseMatchAsync(model.MatchId, model.GoalsLocal.Value, model.GoalsVisitor.Value);
+                model.Local = await _context.Teams.FindAsync(model.LocalId);
+                model.Visitor = await _context.Teams.FindAsync(model.VisitorId);
+                await SendNotificationAsync(model);
                 return RedirectToAction($"{nameof(DetailsGroup)}/{model.GroupId}");
             }
 
@@ -511,6 +517,28 @@ namespace Soccer.Web.Controllers
             model.Local = await _context.Teams.FindAsync(model.LocalId);
             model.Visitor = await _context.Teams.FindAsync(model.VisitorId);
             return View(model);
+        }
+
+        private async Task SendNotificationAsync(CloseMatchViewModel model)
+        {
+            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(
+                AppConstants.ListenConnectionString,
+                AppConstants.NotificationHubName);
+
+            Dictionary<string, string> templateParameters = new Dictionary<string, string>();
+
+            foreach (string tag in AppConstants.SubscriptionTags)
+            {
+                templateParameters["messageParam"] = $"MATCH: {model.Local.Name} {model.GoalsLocal} - {model.GoalsVisitor} {model.Visitor.Name}";
+                try
+                {
+                    await hub.SendTemplateNotificationAsync(templateParameters, tag);
+                }
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
         }
     }
 }

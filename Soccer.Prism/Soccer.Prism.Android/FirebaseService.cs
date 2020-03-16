@@ -5,6 +5,7 @@ using Android.Support.V4.App;
 using Android.Util;
 using Firebase.Messaging;
 using Soccer.Common.Constants;
+using Soccer.Prism.Helpers;
 using Soccer.Prism.ViewModels;
 using System;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace Soccer.Prism.Droid
 
         private void SendLocalNotification(string body)
         {
+            if (body.StartsWith("MATCH: "))
+            {
+                body = $"{body.Substring(7)}, {Languages.CheckPointsEarned}";
+            }
+
             Intent intent = new Intent(this, typeof(MainActivity));
             intent.AddFlags(ActivityFlags.ClearTop);
             intent.PutExtra("message", body);

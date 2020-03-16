@@ -124,6 +124,15 @@ namespace Soccer.Prism.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check how many points you have earned!.
+        /// </summary>
+        internal static string CheckPointsEarned {
+            get {
+                return ResourceManager.GetString("CheckPointsEarned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Closed.
         /// </summary>
         internal static string Closed {
@@ -561,6 +570,15 @@ namespace Soccer.Prism.Resources {
         internal static string NewPasswordPlaceHolder {
             get {
                 return ResourceManager.GetString("NewPasswordPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification.
+        /// </summary>
+        internal static string Notification {
+            get {
+                return ResourceManager.GetString("Notification", resourceCulture);
             }
         }
         

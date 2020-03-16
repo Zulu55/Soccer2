@@ -47,7 +47,12 @@ namespace Soccer.Prism.ViewModels
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                App.Current.MainPage.DisplayAlert(Languages.Ok, message, Languages.Accept);
+                if (message.StartsWith("MATCH: "))
+                {
+                    message = $"{message.Substring(7)}, {Languages.CheckPointsEarned}";
+                }
+
+                App.Current.MainPage.DisplayAlert(Languages.Notification, message, Languages.Accept);
             });
         }
 
