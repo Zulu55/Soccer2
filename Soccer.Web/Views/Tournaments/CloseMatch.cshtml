@@ -1,0 +1,54 @@
+﻿@model Soccer.Web.Models.CloseMatchViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Close Match</h2>
+
+<h4>Match in group: @Model.Group.Name</h4>
+<hr />
+<form asp-action="CloseMatch" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="GroupId" />
+    <input type="hidden" asp-for="MatchId" />
+    <input type="hidden" asp-for="LocalId" />
+    <input type="hidden" asp-for="VisitorId" />
+
+    <div class="row">
+        <div class="col-md-2">
+            @if (!string.IsNullOrEmpty(Model.Local.LogoFullPath))
+            {
+                <img src="@Url.Content(Model.Local.LogoFullPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="GoalsLocal" class="control-label"></label>
+                <input asp-for="GoalsLocal" class="form-control" />
+                <span asp-validation-for="GoalsLocal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GoalsVisitor" class="control-label"></label>
+                <input asp-for="GoalsVisitor" class="form-control" />
+                <span asp-validation-for="GoalsVisitor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Close Match" class="btn btn-primary" />
+                <a asp-action="DetailsGroup" asp-route-id="@Model.GroupId" class="btn btn-success">Back to List</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            @if (!string.IsNullOrEmpty(Model.Visitor.LogoFullPath))
+            {
+                <img src="@Url.Content(Model.Visitor.LogoFullPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
+            }
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
