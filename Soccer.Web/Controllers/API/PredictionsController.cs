@@ -34,6 +34,61 @@ namespace Soccer.Web.Controllers.API
             _userHelper = userHelper;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPositionsByTournament([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            TournamentEntity tournament = await _context.Tournaments
+                .Include(t => t.Groups)
+                .ThenInclude(g => g.Matches)
+                .ThenInclude(m => m.Predictions)
+                .ThenInclude(p => p.User)
+                .ThenInclude(u => u.Team)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            if (tournament == null)
+            {
+                return BadRequest("Tournament doesn't exists.");
+            }
+
+            List<PositionResponse> positionResponses = new List<PositionResponse>();
+            foreach (GroupEntity groupEntity in tournament.Groups)
+            {
+                foreach (MatchEntity matchEntity in groupEntity.Matches)
+                {
+                    foreach (PredictionEntity predictionEntity in matchEntity.Predictions)
+                    {
+                        PositionResponse positionResponse = positionResponses.FirstOrDefault(pr => pr.UserResponse.Id == predictionEntity.User.Id);
+                        if (positionResponse == null)
+                        {
+                            positionResponses.Add(new PositionResponse
+                            {
+                                Points = predictionEntity.Points,
+                                UserResponse = _converterHelper.ToUserResponse(predictionEntity.User),
+                            });
+                        }
+                        else
+                        {
+                            positionResponse.Points += predictionEntity.Points;
+                        }
+                    }
+                }
+            }
+
+            List<PositionResponse> list = positionResponses.OrderByDescending(pr => pr.Points).ToList();
+            int i = 1;
+            foreach (PositionResponse item in list)
+            {
+                item.Ranking = i;
+                i++;
+            }
+
+            return Ok(list);
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostPrediction([FromBody] PredictionRequest request)
         {
