@@ -35,5 +35,7 @@ namespace Soccer.Web.Helpers
         TournamentResponse ToTournamentResponse(TournamentEntity tournamentEntity);
 
         List<TournamentResponse> ToTournamentResponse(List<TournamentEntity> tournamentEntities);
+
+        UserResponse ToUserResponse(UserEntity user);
     }
 }

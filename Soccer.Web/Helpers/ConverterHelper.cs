@@ -245,7 +245,7 @@ namespace Soccer.Web.Helpers
             return list;
         }
 
-        private UserResponse ToUserResponse(UserEntity user)
+        public UserResponse ToUserResponse(UserEntity user)
         {
             if (user == null)
             {
