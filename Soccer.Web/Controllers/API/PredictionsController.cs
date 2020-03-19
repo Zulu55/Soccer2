@@ -7,6 +7,7 @@ using Soccer.Web.Data;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Helpers;
 using Soccer.Web.Resources;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -21,11 +22,75 @@ namespace Soccer.Web.Controllers.API
     {
         private readonly DataContext _context;
         private readonly IConverterHelper _converterHelper;
+        private readonly IUserHelper _userHelper;
 
-        public PredictionsController(DataContext context, IConverterHelper converterHelper)
+        public PredictionsController(
+            DataContext context, 
+            IConverterHelper converterHelper,
+            IUserHelper userHelper)
         {
             _context = context;
             _converterHelper = converterHelper;
+            _userHelper = userHelper;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostPrediction([FromBody] PredictionRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            CultureInfo cultureInfo = new CultureInfo(request.CultureInfo);
+            Resource.Culture = cultureInfo;
+
+            MatchEntity matchEntity = await _context.Matches.FindAsync(request.MatchId);
+            if (matchEntity == null)
+            {
+                return BadRequest(Resource.MatchDoesntExists);
+            }
+
+            if (matchEntity.IsClosed)
+            {
+                return BadRequest(Resource.MatchAlreadyClosed);
+            }
+
+            UserEntity userEntity = await _userHelper.GetUserAsync(request.UserId);
+            if (userEntity == null)
+            {
+                return BadRequest(Resource.UserDoesntExists);
+            }
+
+            if (matchEntity.Date <= DateTime.UtcNow)
+            {
+                return BadRequest(Resource.MatchAlreadyStarts);
+            }
+
+            PredictionEntity predictionEntity = await _context.Predictions
+                .FirstOrDefaultAsync(p => p.User.Id == request.UserId.ToString() && p.Match.Id == request.MatchId);
+
+            if (predictionEntity == null)
+            {
+                predictionEntity = new PredictionEntity
+                {
+                    GoalsLocal = request.GoalsLocal,
+                    GoalsVisitor = request.GoalsVisitor,
+                    Match = matchEntity,
+                    User = userEntity
+                };
+
+                _context.Predictions.Add(predictionEntity);
+            }
+            else
+            {
+                predictionEntity.GoalsLocal = request.GoalsLocal;
+                predictionEntity.GoalsVisitor = request.GoalsVisitor;
+                _context.Predictions.Update(predictionEntity);
+            }
+
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpPost]
