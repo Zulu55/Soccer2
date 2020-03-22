@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Soccer.Common.Enums;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Soccer.Web.Data.Entities
 {
@@ -41,5 +42,7 @@ namespace Soccer.Web.Data.Entities
 
         [Display(Name = "User")]
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
+
+        public int Points => Predictions == null ? 0 : Predictions.Sum(p => p.Points);
     }
 }
