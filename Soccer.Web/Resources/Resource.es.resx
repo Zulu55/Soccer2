@@ -133,19 +133,19 @@
     <value>El usuario no existe</value>
   </data>
   <data name="RecoverPassword" xml:space="preserve">
-    <value>Recuperar contraseña</value>
+    <value>Recuperar Clave</value>
   </data>
   <data name="RecoverPasswordSubject" xml:space="preserve">
-    <value>Para restablecer la contraseña, haga clic en este enlace:</value>
+    <value>Para restablecer la Clave, haga clic en este enlace:</value>
   </data>
   <data name="RecoverPasswordMessage" xml:space="preserve">
-    <value>Se envió un email con instrucciones sobre cómo cambiar la contraseña.</value>
+    <value>Se envió un email con instrucciones sobre cómo cambiar la Clave.</value>
   </data>
   <data name="IncorrectCurrentPassword" xml:space="preserve">
-    <value>Contraseña actual incorrecta.</value>
+    <value>Clave actual incorrecta.</value>
   </data>
   <data name="PasswordChangedSuccess" xml:space="preserve">
-    <value>Su contraseña ha sido modificada con éxito.</value>
+    <value>Su clave ha sido modificada con éxito.</value>
   </data>
   <data name="MatchDoesntExists" xml:space="preserve">
     <value>El partido no existe.</value>
@@ -158,5 +158,26 @@
   </data>
   <data name="TournamentDoesntExists" xml:space="preserve">
     <value>El torneo no existe.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailPlaceHolder" xml:space="preserve">
+    <value>Entra tu email...</value>
+  </data>
+  <data name="EmailError" xml:space="preserve">
+    <value>Debes ingresar un correo electrónico...</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Clave</value>
+  </data>
+  <data name="PasswordPlaceHolder" xml:space="preserve">
+    <value>Entra tu clave...</value>
+  </data>
+  <data name="PasswordError" xml:space="preserve">
+    <value>Debe escribir una clave.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrar</value>
   </data>
 </root>

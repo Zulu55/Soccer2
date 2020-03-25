@@ -9,7 +9,7 @@
         <ResourceDictionary>
 
             <!-- Parameters -->
-            <x:String x:Key="UrlAPI">https://SoccerWeb0.azurewebsites.net/</x:String>
+            <x:String x:Key="UrlAPI">https://SoccerWeb4.azurewebsites.net/</x:String>
 
             <!-- Colors -->
             <Color x:Key="ColorBackgroud">#54E85D</Color>
@@ -37,6 +37,7 @@
 
             <Style x:Key="DangerButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ColorDanger}" />
+                <Setter Property="TextColor" Value="{StaticResource ColorFont}" />
             </Style>
 
             <!-- Data Templates -->
