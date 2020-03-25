@@ -5,6 +5,7 @@ using Soccer.Common.Helpers;
 using Soccer.Common.Models;
 using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
+using Soccer.Prism.Views;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -116,8 +117,9 @@ namespace Soccer.Prism.ViewModels
             Password = string.Empty;
         }
 
-        private void RegisterAsync()
+        private async void RegisterAsync()
         {
+            await _navigationService.NavigateAsync(nameof(RegisterPage));
         }
     }
 }
