@@ -59,7 +59,7 @@
     <a asp-action="AddGroup" asp-route-id="@Model.Id" class="btn btn-primary">Add Group</a>
     <a asp-action="Index" class="btn btn-success">Back to List</a>
 </div>
-<br/>
+<br />
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -85,22 +85,22 @@
                     <tbody>
                         @foreach (var item in Model.Groups.OrderBy(g => g.Name))
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.GroupDetails.Count)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Matches.Count)
-                            </td>
-                            <td>
-                                <a asp-action="EditGroup" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
-                                <a asp-action="DetailsGroup" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon glyphicon-align-justify"></i></a>
-                                <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GroupDetails.Count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Matches.Count)
+                                </td>
+                                <td>
+                                    <a asp-action="EditGroup" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    <a asp-action="DetailsGroup" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon glyphicon-align-justify"></i></a>
+                                    <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog"><i class="glyphicon glyphicon-trash"></i></button>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -114,21 +114,14 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="/js/deleteDialog.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('#MyTable').DataTable();
 
             // Delete item
-            var item_to_delete;
-
-            $('.deleteItem').click((e) => {
-                item_to_delete = e.currentTarget.dataset.id;
-            });
-
-            $("#btnYesDelete").click(function () {
-                window.location.href = '/Tournaments/DeleteGroup/' + item_to_delete;
-            });
+            sc_deleteDialog.openModal('deleteItem', true, 'btnYesDelete', '/Tournaments/DeleteGroup/', false);
         });
     </script>
 }
