@@ -282,4 +282,10 @@
   <data name="FromGallery" xml:space="preserve">
     <value>À partir de la galerie</value>
   </data>
+  <data name="PasswordRecover" xml:space="preserve">
+    <value>Retrouver son mot de passe</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Vous avez oublié votre mot de passe ?</value>
+  </data>
 </root>
