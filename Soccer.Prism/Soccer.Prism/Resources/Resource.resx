@@ -327,4 +327,37 @@
   <data name="NewPasswordPlaceHolder" xml:space="preserve">
     <value>Enter the new password.</value>
   </data>
+  <data name="SelectTournament" xml:space="preserve">
+    <value>Select a tournament</value>
+  </data>
+  <data name="PredictionsFor" xml:space="preserve">
+    <value>Predictions for</value>
+  </data>
+  <data name="IsUpdated" xml:space="preserve">
+    <value>Is Updated?</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="LocalGoalsError" xml:space="preserve">
+    <value>You must enter the local goals.</value>
+  </data>
+  <data name="VisitorGoalsError" xml:space="preserve">
+    <value>You must enter the visitor goals.</value>
+  </data>
+  <data name="MatchAlreadyStarts" xml:space="preserve">
+    <value>You cannot record the prediction, because the match has already started.</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Real" xml:space="preserve">
+    <value>Real</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="Prediction" xml:space="preserve">
+    <value>Prediction</value>
+  </data>
 </root>
