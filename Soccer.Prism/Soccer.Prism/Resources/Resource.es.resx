@@ -288,4 +288,43 @@
   <data name="ForgotPassword" xml:space="preserve">
     <value>¿Ha olvidado la clave?</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar clave</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>El usuario se actualizó correctamente.</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmar nueva clave</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>Debe ingresar una confirmación para la nueva clave.</value>
+  </data>
+  <data name="ConfirmNewPasswordError2" xml:space="preserve">
+    <value>La clave y la  confirmación no coinciden.</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba la confirmación de su nueva clave.</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Calve actual</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>Debe introducir su clave actual.</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Escriba la clave actual.</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nueva clave.</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>Debe especificar una nueva clave</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Escribe la nueva clave</value>
+  </data>
 </root>

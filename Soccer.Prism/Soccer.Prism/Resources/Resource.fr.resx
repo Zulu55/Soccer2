@@ -288,4 +288,43 @@
   <data name="ForgotPassword" xml:space="preserve">
     <value>Vous avez oublié votre mot de passe ?</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Modifier le mot de passe</value>
+  </data>
+  <data name="UserUpdated" xml:space="preserve">
+    <value>L utilisateur a été mis à jour avec succès!</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmer le nouveau mot de passe</value>
+  </data>
+  <data name="ConfirmNewPasswordError" xml:space="preserve">
+    <value>Vous devez saisir une confirmation pour le nouveau mot de passe.!</value>
+  </data>
+  <data name="ConfirmNewPasswordError2" xml:space="preserve">
+    <value>La confirmation et le nouveau mot de passe ne correspondent pas.!</value>
+  </data>
+  <data name="ConfirmNewPasswordPlaceHolder" xml:space="preserve">
+    <value>Veuillez saisir la confirmation de votre mot de passe.</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Mot de passe actuel</value>
+  </data>
+  <data name="CurrentPasswordError" xml:space="preserve">
+    <value>Veuillez saisir votre mot de passe actuel.</value>
+  </data>
+  <data name="CurrentPasswordPlaceHolder" xml:space="preserve">
+    <value>Saisissez votre mot de passe actuel.</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="NewPasswordError" xml:space="preserve">
+    <value>'Vous devez entrer un nouveau mot de passe';</value>
+  </data>
+  <data name="NewPasswordPlaceHolder" xml:space="preserve">
+    <value>Entrer le nouveau mot de passe</value>
+  </data>
 </root>
