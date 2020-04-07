@@ -26,7 +26,6 @@ namespace Soccer.Prism.ViewModels
         {
             _apiService = apiService;
             Title = Languages.Positions;
-            LoadPositionsAsync();
         }
 
         public DelegateCommand SearchCommand => _searchCommand ?? (_searchCommand = new DelegateCommand(ShowPositions));
@@ -53,10 +52,16 @@ namespace Soccer.Prism.ViewModels
             set => SetProperty(ref _positions, value);
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            _tournament = parameters.GetValue<TournamentResponse>("tournament");
+            LoadPositionsAsync();
+        }
+
         private async void LoadPositionsAsync()
         {
             IsRunning = true;
-            _tournament = JsonConvert.DeserializeObject<TournamentResponse>(Settings.Tournament);
             string url = App.Current.Resources["UrlAPI"].ToString();
             bool connection = await _apiService.CheckConnectionAsync(url);
             if (!connection)
