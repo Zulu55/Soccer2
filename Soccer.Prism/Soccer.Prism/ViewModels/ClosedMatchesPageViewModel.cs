@@ -16,7 +16,6 @@ namespace Soccer.Prism.ViewModels
         public ClosedMatchesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             Title = Languages.Closed;
-            LoadMatches();
         }
 
         public List<MatchResponse> Matches
@@ -27,7 +26,6 @@ namespace Soccer.Prism.ViewModels
 
         private void LoadMatches()
         {
-            _tournament = JsonConvert.DeserializeObject<TournamentResponse>(Settings.Tournament);
             List<MatchResponse> matches = new List<MatchResponse>();
             foreach (GroupResponse group in _tournament.Groups)
             {
@@ -35,6 +33,17 @@ namespace Soccer.Prism.ViewModels
             }
 
             Matches = matches.Where(m => m.IsClosed).OrderBy(m => m.Date).ToList();
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            if (parameters.ContainsKey("tournament"))
+            {
+                _tournament = parameters.GetValue<TournamentResponse>("tournament");
+                LoadMatches();
+            }
         }
     }
 }

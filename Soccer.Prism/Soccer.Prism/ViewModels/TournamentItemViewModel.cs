@@ -29,7 +29,6 @@ namespace Soccer.Prism.ViewModels
                 { "tournament", this }
             };
 
-            Settings.Tournament = JsonConvert.SerializeObject(this);
             await _navigationService.NavigateAsync(nameof(TournamentTabbedPage), parameters);
         }
 
