@@ -20,10 +20,7 @@
             @Html.DisplayNameFor(model => model.LogoPath)
         </dt>
         <dd>
-            @if (!string.IsNullOrEmpty(Model.LogoPath))
-            {
-                <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:200px;height:200px;max-width: 100%; height: auto;" />
-            }
+            <img src="@Model.LogoFullPath" style="width:100px;height:200px;max-width:200%; height: auto;" />
         </dd>
     </dl>
 </div>
