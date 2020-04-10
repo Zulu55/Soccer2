@@ -50,6 +50,7 @@ namespace Soccer.Web.Controllers
             return View(await _context.Users
                 .Include(u => u.Team)
                 .Include(u => u.Predictions)
+                .Where(u => u.UserType == UserType.User)
                 .OrderBy(u => u.FirstName)
                 .ThenBy(u => u.LastName)
                 .ToListAsync());
