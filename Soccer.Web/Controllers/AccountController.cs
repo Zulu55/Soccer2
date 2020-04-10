@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Soccer.Common.Enums;
@@ -40,6 +42,17 @@ namespace Soccer.Web.Controllers
             _configuration = configuration;
             _mailHelper = mailHelper;
             _blobHelper = blobHelper;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Users
+                .Include(u => u.Team)
+                .Include(u => u.Predictions)
+                .OrderBy(u => u.FirstName)
+                .ThenBy(u => u.LastName)
+                .ToListAsync());
         }
 
         public IActionResult Login()

@@ -14,6 +14,7 @@ namespace Soccer.Web.Data
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
         private readonly IBlobHelper _blobHelper;
+        private readonly Random _random;
 
         public SeedDb(
             DataContext context,
@@ -23,6 +24,7 @@ namespace Soccer.Web.Data
             _context = context;
             _userHelper = userHelper;
             _blobHelper = blobHelper;
+            _random = new Random();
         }
 
         public async Task SeedAsync()
@@ -96,13 +98,12 @@ namespace Soccer.Web.Data
 
         private void AddPrediction(UserEntity user)
         {
-            Random random = new Random();
             foreach (MatchEntity match in _context.Matches)
             {
                 _context.Predictions.Add(new PredictionEntity
                 {
-                    GoalsLocal = random.Next(0, 5),
-                    GoalsVisitor = random.Next(0, 5),
+                    GoalsLocal = _random.Next(0, 5),
+                    GoalsVisitor = _random.Next(0, 5),
                     Match = match,
                     User = user
                 });
@@ -125,6 +126,10 @@ namespace Soccer.Web.Data
                 string path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\images\\Users", image);
                 string imageId = await _blobHelper.UploadBlobAsync(path, "users");
 
+                int totalTeams = _context.Teams.Count();
+                int random = _random.Next(1, _context.Teams.Count());
+                TeamEntity team = _context.Teams.FirstOrDefault(t => t.Id == random);
+
                 user = new UserEntity
                 {
                     FirstName = firstName,
@@ -134,7 +139,7 @@ namespace Soccer.Web.Data
                     PhoneNumber = phone,
                     Address = address,
                     Document = document,
-                    Team = _context.Teams.FirstOrDefault(),
+                    Team = team,
                     UserType = userType,
                     PicturePath = imageId
                 };
