@@ -1,0 +1,36 @@
+ Volume in drive C has no label.
+ Volume Serial Number is A6DD-BD99
+
+ Directory of C:\Projects\Soccer\Soccer.Web\wwwroot\images\Users
+
+04/10/2020  10:39 AM    <DIR>          .
+04/10/2020  10:39 AM    <DIR>          ..
+03/06/2020  12:15 AM            18,826 Adala.jpg
+02/19/2020  04:01 PM            20,283 Amalia.jpg
+02/19/2020  04:02 PM            33,103 Camila.jpg
+03/06/2020  12:16 AM            47,707 Camilo.jpg
+02/19/2020  04:02 PM            37,380 Carolina.jpg
+02/19/2020  04:01 PM             6,506 Claudia.jpg
+03/06/2020  12:16 AM            95,622 Gilberto.jpg
+03/06/2020  12:17 AM            36,755 Jhon.jpg
+03/06/2020  12:18 AM             6,636 Ken.jpg
+02/19/2020  04:03 PM            60,901 Laura.jpg
+02/19/2020  04:03 PM           320,919 Luisa.jpg
+03/06/2020  12:14 AM            75,840 Manuel.jpg
+02/19/2020  04:01 PM             7,669 Manuela.jpg
+03/06/2020  12:16 AM           202,362 Mario.jpg
+02/19/2020  04:00 PM            24,711 Monica.jpg
+03/06/2020  12:15 AM            58,445 Pedro.jpg
+02/19/2020  04:02 PM            41,207 Penelope.jpg
+03/06/2020  12:17 AM            24,624 Pepe.jpg
+03/06/2020  12:15 AM            38,736 Raul.jpg
+02/18/2020  05:01 PM            44,473 Roberto.jpg
+02/19/2020  04:01 PM             6,074 Rosa.jpg
+02/19/2020  04:01 PM            85,895 Rosario.jpg
+02/19/2020  04:00 PM           210,861 Sandra.jpg
+03/06/2020  12:16 AM            17,881 Sandro.jpg
+02/18/2020  02:35 PM           158,851 Teresa.jpg
+04/10/2020  10:39 AM                 0 users.txt
+02/18/2020  05:02 PM            70,278 Zulu.jpg
+              27 File(s)      1,752,545 bytes
+               2 Dir(s)  167,815,716,864 bytes free

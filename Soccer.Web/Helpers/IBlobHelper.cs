@@ -9,6 +9,8 @@ namespace Soccer.Web.Helpers
 
         Task<string> UploadBlobAsync(byte[] file, string containerName);
 
+        Task<string> UploadBlobAsync(string image, string containerName);
+
         string GetBlobPath(string containerName, string name);
     }
 }
