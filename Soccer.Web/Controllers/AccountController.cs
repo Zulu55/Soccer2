@@ -21,25 +21,25 @@ namespace Soccer.Web.Controllers
     {
         private readonly DataContext _context;
         private readonly IUserHelper _userHelper;
-        private readonly IImageHelper _imageHelper;
         private readonly ICombosHelper _combosHelper;
         private readonly IConfiguration _configuration;
         private readonly IMailHelper _mailHelper;
+        private readonly IBlobHelper _blobHelper;
 
         public AccountController(
             DataContext context,
             IUserHelper userHelper,
-            IImageHelper imageHelper,
             ICombosHelper combosHelper,
             IConfiguration configuration,
-            IMailHelper mailHelper)
+            IMailHelper mailHelper,
+            IBlobHelper blobHelper)
         {
             _context = context;
             _userHelper = userHelper;
-            _imageHelper = imageHelper;
             _combosHelper = combosHelper;
             _configuration = configuration;
             _mailHelper = mailHelper;
+            _blobHelper = blobHelper;
         }
 
         public IActionResult Login()
@@ -104,7 +104,7 @@ namespace Soccer.Web.Controllers
 
                 if (model.PictureFile != null)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "users");
                 }
 
                 UserEntity user = await _userHelper.AddUserAsync(model, path, UserType.User);
@@ -171,7 +171,7 @@ namespace Soccer.Web.Controllers
 
                 if (model.PictureFile != null)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "users");
                 }
 
                 UserEntity user = await _userHelper.GetUserAsync(User.Identity.Name);

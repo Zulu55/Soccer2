@@ -44,6 +44,11 @@ namespace Soccer.Web.Data.Entities
 
         public string FullNameWithDocument => $"{FirstName} {LastName} - {Document}";
 
+        [Display(Name = "Picture")]
+        public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
+            ? "https://SoccerWeb0.azurewebsites.net//images/noimage.png"
+            : LoginType == LoginType.Soccer ? $"https://zulusoccer.blob.core.windows.net/users/{PicturePath}" : PicturePath;
+
         public ICollection<PredictionEntity> Predictions { get; set; }
     }
 }
