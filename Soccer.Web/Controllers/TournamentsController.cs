@@ -14,23 +14,23 @@ namespace Soccer.Web.Controllers
     public class TournamentsController : Controller
     {
         private readonly DataContext _context;
-        private readonly IImageHelper _imageHelper;
         private readonly IConverterHelper _converterHelper;
         private readonly ICombosHelper _combosHelper;
         private readonly IMatchHelper _matchHelper;
+        private readonly IBlobHelper _blobHelper;
 
         public TournamentsController(
             DataContext context,
-            IImageHelper imageHelper,
             IConverterHelper converterHelper,
             ICombosHelper combosHelper,
-            IMatchHelper matchHelper)
+            IMatchHelper matchHelper,
+            IBlobHelper blobHelper)
         {
             _context = context;
-            _imageHelper = imageHelper;
             _converterHelper = converterHelper;
             _combosHelper = combosHelper;
             _matchHelper = matchHelper;
+            _blobHelper = blobHelper;
         }
 
         public async Task<IActionResult> Index()
@@ -57,7 +57,7 @@ namespace Soccer.Web.Controllers
 
                 if (model.LogoFile != null)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.LogoFile, "Tournaments");
+                    path = await _blobHelper.UploadBlobAsync(model.LogoFile, "tournaments");
                 }
 
                 var tournament = _converterHelper.ToTournamentEntity(model, path, true);
@@ -98,7 +98,7 @@ namespace Soccer.Web.Controllers
 
                     if (model.LogoFile != null)
                     {
-                        path = await _imageHelper.UploadImageAsync(model.LogoFile, "Tournaments");
+                        path = await _blobHelper.UploadBlobAsync(model.LogoFile, "tournaments");
                     }
 
                     var tournamentEntity = _converterHelper.ToTournamentEntity(model, path, false);

@@ -47,10 +47,7 @@
             </dl>
         </div>
         <div class="col-md-4">
-            @if (!string.IsNullOrEmpty(Model.LogoPath))
-            {
-                <img src="@Url.Content(Model.LogoPath)" alt="Image" style="width:150px;height:150px;max-width: 100%; height: auto;" />
-            }
+            <img src="@Model.LogoFullPath" style="width:150px;height:150px;max-width:200%; height: auto;" />
         </div>
     </div>
 </div>

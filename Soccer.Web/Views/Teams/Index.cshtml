@@ -36,9 +36,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
-                                    <td>
-                                        <img src="@item.LogoFullPath" style="width:100px;height:100px;max-width: 100%; height: auto;" />
-                                    </td>
+                                <td>
+                                    <img src="@item.LogoFullPath" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                                </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>
                                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info"><i class="glyphicon glyphicon glyphicon-align-justify"></i></a>
