@@ -9,6 +9,7 @@ using Soccer.Prism.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -47,9 +48,7 @@ namespace Soccer.Prism.ViewModels
 
         public async void ReloadUser()
         {
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 return;
             }
@@ -62,6 +61,7 @@ namespace Soccer.Prism.ViewModels
                 Email = user.Email
             };
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetUserByEmail(url, "api", "/Account/GetUserByEmail", "bearer", token.Token, emailRequest);
             UserResponse userResponse = (UserResponse)response.Result;
             Settings.User = JsonConvert.SerializeObject(userResponse);

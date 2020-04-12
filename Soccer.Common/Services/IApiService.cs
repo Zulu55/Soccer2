@@ -10,8 +10,6 @@ namespace Soccer.Common.Services
 
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller, string tokenType, string accessToken);
 
-        Task<bool> CheckConnectionAsync(string url);
-
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, FacebookProfile request);

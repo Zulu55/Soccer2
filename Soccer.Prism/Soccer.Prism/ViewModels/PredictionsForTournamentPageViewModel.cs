@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -47,9 +48,8 @@ namespace Soccer.Prism.ViewModels
         private async void LoadPredictionsAsync()
         {
             IsRunning = true;
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
@@ -66,6 +66,7 @@ namespace Soccer.Prism.ViewModels
                 CultureInfo = Languages.Culture
             };
 
+            var url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetPredictionsForUserAsync(url, "/api", "/Predictions/GetPredictionsForUser", request, "bearer", token.Token);
             IsRunning = false;
 

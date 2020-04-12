@@ -4,6 +4,8 @@ using Soccer.Common.Services;
 using Soccer.Prism.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -20,7 +22,11 @@ namespace Soccer.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
             Title = "Soccer";
-            LoadTournamentsAsync();
+        }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            await LoadTournamentsAsync();
         }
 
         public bool IsRunning
@@ -35,18 +41,18 @@ namespace Soccer.Prism.ViewModels
             set => SetProperty(ref _tournaments, value);
         }
 
-        private async void LoadTournamentsAsync()
+        private async Task LoadTournamentsAsync()
         {
             IsRunning = true;
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
 
+            var url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetListAsync<TournamentResponse>(url, "/api", "/Tournaments");
             IsRunning = false;
 

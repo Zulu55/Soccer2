@@ -11,6 +11,7 @@ using Soccer.Prism.Views;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -170,12 +171,10 @@ namespace Soccer.Prism.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
-                IsRunning = true;
-                IsEnabled = false;
+                IsRunning = false;
+                IsEnabled = true;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
                 return;
             }
@@ -186,6 +185,7 @@ namespace Soccer.Prism.ViewModels
                 Username = Email
             };
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
 
             if (!response.IsSuccess)

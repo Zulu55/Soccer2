@@ -8,6 +8,7 @@ using Soccer.Prism.Helpers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -62,9 +63,8 @@ namespace Soccer.Prism.ViewModels
         private async void LoadPositionsAsync()
         {
             IsRunning = true;
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
@@ -72,6 +72,7 @@ namespace Soccer.Prism.ViewModels
             }
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetListAsync<PositionResponse>(url, "/api", $"/Predictions/{_tournament.Id}", "bearer", token.Token);
             IsRunning = false;
 

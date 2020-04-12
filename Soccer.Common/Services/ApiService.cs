@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Plugin.Connectivity;
 using Soccer.Common.Models;
 using Soccer.Common.Models.Soccer.Common.Models;
 using System;
@@ -13,16 +12,6 @@ namespace Soccer.Common.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<bool> CheckConnectionAsync(string url)
-        {
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                return false;
-            }
-
-            return await CrossConnectivity.Current.IsRemoteReachable(url);
-        }
-
         public async Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, FacebookProfile request)
         {
             try

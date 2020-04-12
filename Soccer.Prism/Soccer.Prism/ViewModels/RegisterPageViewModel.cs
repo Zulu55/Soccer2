@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Soccer.Prism.ViewModels
@@ -97,9 +98,8 @@ namespace Soccer.Prism.ViewModels
 
             IsRunning = true;
             IsEnabled = false;
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -117,6 +117,7 @@ namespace Soccer.Prism.ViewModels
             User.PictureArray = imageArray;
             User.CultureInfo = Languages.Culture;
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.RegisterUserAsync(url, "/api", "/Account", User);
             IsRunning = false;
             IsEnabled = true;
@@ -200,9 +201,8 @@ namespace Soccer.Prism.ViewModels
         {
             IsRunning = true;
             IsEnabled = false;
-            string url = App.Current.Resources["UrlAPI"].ToString();
-            bool connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+
+            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -210,6 +210,7 @@ namespace Soccer.Prism.ViewModels
                 return;
             }
 
+            string url = App.Current.Resources["UrlAPI"].ToString();
             Response response = await _apiService.GetListAsync<TeamResponse>(url, "/api", "/Teams");
             IsRunning = false;
             IsEnabled = true;
