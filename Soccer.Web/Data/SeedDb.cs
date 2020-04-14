@@ -16,10 +16,7 @@ namespace Soccer.Web.Data
         private readonly IBlobHelper _blobHelper;
         private readonly Random _random;
 
-        public SeedDb(
-            DataContext context,
-            IUserHelper userHelper,
-            IBlobHelper blobHelper)
+        public SeedDb(DataContext context, IUserHelper userHelper, IBlobHelper blobHelper)
         {
             _context = context;
             _userHelper = userHelper;

@@ -19,13 +19,6 @@ namespace Soccer.Web.Helpers
             _blobClient = storageAccount.CreateCloudBlobClient();
         }
 
-        public string GetBlobPath(string containerName, string name)
-        {
-            CloudBlobContainer container = _blobClient.GetContainerReference(containerName);
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference(name);
-            return blockBlob.Uri.AbsoluteUri;
-        }
-
         public async Task<string> UploadBlobAsync(byte[] file, string containerName)
         {
             MemoryStream stream = new MemoryStream(file);
