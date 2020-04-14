@@ -348,14 +348,14 @@
   <data name="MatchAlreadyStarts" xml:space="preserve">
     <value>No puedes grabar la predicción porque la partida ya ha comenzado.</value>
   </data>
-  <data name="Open" xml:space="preserve">
+  <data name="Open_Duplicate[1]" xml:space="preserve">
     <value>Abiertos</value>
   </data>
   <data name="Real" xml:space="preserve">
     <value>Real</value>
   </data>
   <data name="Points" xml:space="preserve">
-    <value>Puntos</value>
+    <value>Ptos</value>
   </data>
   <data name="Prediction" xml:space="preserve">
     <value>Predicción</value>
