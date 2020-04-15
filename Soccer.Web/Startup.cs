@@ -75,6 +75,7 @@ namespace Soccer.Web
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<IMailHelper, MailHelper>();
             services.AddScoped<IMatchHelper, MatchHelper>();
+            services.AddScoped<IBlobHelper, BlobHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

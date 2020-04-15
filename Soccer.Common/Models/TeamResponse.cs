@@ -10,6 +10,6 @@
 
         public string LogoFullPath => string.IsNullOrEmpty(LogoPath)
             ? "https://SoccerWeb0.azurewebsites.net//images/noimage.png"
-            : $"https://SoccerWeb0.azurewebsites.net{LogoPath.Substring(1)}";
+            : $"https://zulusoccer.blob.core.windows.net/teams/{LogoPath}";
     }
 }

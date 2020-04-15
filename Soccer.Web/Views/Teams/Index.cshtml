@@ -38,10 +38,7 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @if (!string.IsNullOrEmpty(item.LogoPath))
-                                    {
-                                        <img src="@Url.Content(item.LogoPath)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
-                                    }
+                                    <img src="@item.LogoFullPath" style="width:100px;height:100px;max-width: 100%; height: auto;" />
                                 </td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning"><i class="glyphicon glyphicon-pencil"></i></a>

@@ -17,8 +17,8 @@ namespace Soccer.Web.Data.Entities
         [Display(Name = "Logo")]
         public string LogoFullPath => string.IsNullOrEmpty(LogoPath)
             ? "https://SoccerWeb4.azurewebsites.net//images/noimage.png"
-            : $"https://SoccerWeb4.azurewebsites.net{LogoPath.Substring(1)}";
-        
+            : $"https://zulusoccer.blob.core.windows.net/teams/{LogoPath}";
+
         public ICollection<UserEntity> Users { get; set; }
     }
 }

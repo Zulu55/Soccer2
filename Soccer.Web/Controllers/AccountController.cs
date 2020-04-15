@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Soccer.Common.Enums;
@@ -19,26 +21,38 @@ namespace Soccer.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IUserHelper _userHelper;
-        private readonly IImageHelper _imageHelper;
         private readonly ICombosHelper _combosHelper;
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
         private readonly IMailHelper _mailHelper;
+        private readonly IBlobHelper _blobHelper;
 
         public AccountController(
             IUserHelper userHelper,
-            IImageHelper imageHelper,
             ICombosHelper combosHelper,
             DataContext context,
             IConfiguration configuration,
-            IMailHelper mailHelper)
+            IMailHelper mailHelper,
+            IBlobHelper blobHelper)
         {
             _userHelper = userHelper;
-            _imageHelper = imageHelper;
             _combosHelper = combosHelper;
             _context = context;
             _configuration = configuration;
             _mailHelper = mailHelper;
+            _blobHelper = blobHelper;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Users
+                .Include(u => u.Team)
+                .Include(u => u.Predictions)
+                .Where(u => u.UserType == UserType.User)
+                .OrderBy(u => u.FirstName)
+                .ThenBy(u => u.LastName)
+                .ToListAsync());
         }
 
         public IActionResult RecoverPasswordMVC()
@@ -192,7 +206,7 @@ namespace Soccer.Web.Controllers
 
                 if (model.PictureFile != null)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "users");
                 }
 
                 UserEntity user = await _userHelper.GetUserAsync(User.Identity.Name);
@@ -233,7 +247,7 @@ namespace Soccer.Web.Controllers
 
                 if (model.PictureFile != null)
                 {
-                    path = await _imageHelper.UploadImageAsync(model.PictureFile, "Users");
+                    path = await _blobHelper.UploadBlobAsync(model.PictureFile, "users");
                 }
 
                 UserEntity user = await _userHelper.AddUserAsync(model, path, UserType.User);
