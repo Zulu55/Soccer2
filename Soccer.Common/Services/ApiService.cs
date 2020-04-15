@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Plugin.Connectivity;
 using Soccer.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace Soccer.Common.Services
 {
@@ -313,14 +313,9 @@ namespace Soccer.Common.Services
             }
         }
 
-        public async Task<bool> CheckConnectionAsync(string url)
+        public bool CheckConnection()
         {
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                return false;
-            }
-
-            return await CrossConnectivity.Current.IsRemoteReachable(url);
+            return Connectivity.NetworkAccess == NetworkAccess.Internet;
         }
 
         public async Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller)

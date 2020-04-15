@@ -38,9 +38,8 @@ namespace Soccer.Prism.ViewModels
         private async void LoadTournamentsAsync()
         {
             IsRunning = true;
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            if (!_apiService.CheckConnection())
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);

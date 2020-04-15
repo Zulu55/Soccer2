@@ -19,7 +19,7 @@ namespace Soccer.Common.Services
 
         Task<Response> GetListAsync<T>(string urlBase, string servicePrefix, string controller);
 
-        Task<bool> CheckConnectionAsync(string url);
+        bool CheckConnection();
 
         Task<Response> GetTokenAsync(string urlBase, string servicePrefix, string controller, TokenRequest request);
 

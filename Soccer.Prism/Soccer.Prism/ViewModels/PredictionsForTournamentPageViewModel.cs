@@ -46,9 +46,8 @@ namespace Soccer.Prism.ViewModels
         private async void LoadPredictionsAsync()
         {
             IsRunning = true;
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var connection = await _apiService.CheckConnectionAsync(url);
-            if (!connection)
+            string url = App.Current.Resources["UrlAPI"].ToString();
+            if (!_apiService.CheckConnection())
             {
                 IsRunning = false;
                 await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ConnectionError, Languages.Accept);
@@ -58,7 +57,7 @@ namespace Soccer.Prism.ViewModels
             UserResponse user = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
 
-            var request = new PredictionsForUserRequest
+            PredictionsForUserRequest request = new PredictionsForUserRequest
             {
                 TournamentId = _tournament.Id,
                 UserId = new Guid(user.Id),
