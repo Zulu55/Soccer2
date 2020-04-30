@@ -360,4 +360,13 @@
   <data name="Prediction" xml:space="preserve">
     <value>Predicción</value>
   </data>
+  <data name="SearchUserPlaceHolder" xml:space="preserve">
+    <value>Buscar usuario</value>
+  </data>
+  <data name="Ranking" xml:space="preserve">
+    <value>Puesto</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Puestos</value>
+  </data>
 </root>

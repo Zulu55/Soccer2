@@ -16,6 +16,14 @@ namespace Soccer.Prism.Helpers
 
         public static string Culture { get; set; }
 
+        public static string SearchUserPlaceHolder => Resource.SearchUserPlaceHolder;
+
+        public static string Ranking => Resource.Ranking;
+
+        public static string Positions => Resource.Positions;
+
+        public static string Picture => Resource.Picture;
+
         public static string Real => Resource.Real;
 
         public static string Prediction => Resource.Prediction;

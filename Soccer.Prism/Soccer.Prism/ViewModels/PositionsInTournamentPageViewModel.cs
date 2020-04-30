@@ -11,21 +11,21 @@ using System.Linq;
 
 namespace Soccer.Prism.ViewModels
 {
-    public class MyPositionsPageViewModel : ViewModelBase
+    public class PositionsInTournamentPageViewModel : ViewModelBase
     {
         private readonly IApiService _apiService;
+        private TournamentResponse _tournament;
         private bool _isRunning;
         private ObservableCollection<PositionResponse> _positions;
         private List<PositionResponse> _myPositions;
         private string _search;
         private DelegateCommand _searchCommand;
 
-        public MyPositionsPageViewModel(INavigationService navigationService, IApiService apiService)
+        public PositionsInTournamentPageViewModel(INavigationService navigationService, IApiService apiService)
             : base(navigationService)
         {
             _apiService = apiService;
             Title = Languages.Positions;
-            LoadPositionsAsync();
         }
 
         public DelegateCommand SearchCommand => _searchCommand ?? (_searchCommand = new DelegateCommand(ShowPositions));
@@ -52,6 +52,13 @@ namespace Soccer.Prism.ViewModels
             set => SetProperty(ref _positions, value);
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            _tournament = parameters.GetValue<TournamentResponse>("tournament");
+            LoadPositionsAsync();
+        }
+
         private async void LoadPositionsAsync()
         {
             IsRunning = true;
@@ -64,7 +71,7 @@ namespace Soccer.Prism.ViewModels
             }
 
             TokenResponse token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
-            Response response = await _apiService.GetListAsync<PositionResponse>(url, "/api", $"/Predictions", "bearer", token.Token);
+            Response response = await _apiService.GetListAsync<PositionResponse>(url, "/api", $"/Predictions/{_tournament.Id}", "bearer", token.Token);
             IsRunning = false;
 
             if (!response.IsSuccess)

@@ -7,9 +7,11 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
            	 xmlns:i18n="clr-namespace:Soccer.Prism.Helpers"
              ios:Page.UseSafeArea="true"
-             x:Class="Soccer.Prism.Views.MyPositionsPage"
+             x:Class="Soccer.Prism.Views.PositionsInTournamentPage"
              BackgroundColor="{StaticResource ColorBackgroud}"
+             IconImageSource="ic_action_equalizer"
              Title="{Binding Title}">
+
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
                      AbsoluteLayout.LayoutFlags="All" 

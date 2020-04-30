@@ -348,7 +348,7 @@
   <data name="MatchAlreadyStarts" xml:space="preserve">
     <value>Vous ne pouvez pas enregistrer la prédiction, car le match a déjà commencé.</value>
   </data>
-  <data name="Open" xml:space="preserve">
+  <data name="Open_Duplicate[1]" xml:space="preserve">
     <value>Ouvrir</value>
   </data>
   <data name="Real" xml:space="preserve">
@@ -359,5 +359,14 @@
   </data>
   <data name="Prediction" xml:space="preserve">
     <value>prédiction</value>
+  </data>
+  <data name="SearchUserPlaceHolder" xml:space="preserve">
+    <value>Chercher un utilisateur</value>
+  </data>
+  <data name="Ranking" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="Positions" xml:space="preserve">
+    <value>Postes</value>
   </data>
 </root>
