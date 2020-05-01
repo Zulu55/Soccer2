@@ -369,4 +369,10 @@
   <data name="Positions" xml:space="preserve">
     <value>Puestos</value>
   </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Imagen</value>
+  </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Iniciar sesión con Facebook</value>
+  </data>
 </root>

@@ -370,6 +370,9 @@
     <value>Positions </value>
   </data>
   <data name="Picture" xml:space="preserve">
-    <value></value>
+    <value>Picture</value>
+  </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Login with Facebook</value>
   </data>
 </root>

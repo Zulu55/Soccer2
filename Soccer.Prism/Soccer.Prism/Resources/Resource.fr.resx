@@ -369,4 +369,10 @@
   <data name="Positions" xml:space="preserve">
     <value>Postes</value>
   </data>
+  <data name="Picture" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="LoginFacebook" xml:space="preserve">
+    <value>Se connecter avec Facbook</value>
+  </data>
 </root>
