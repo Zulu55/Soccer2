@@ -22,6 +22,8 @@ namespace Soccer.Common.Models
 
         public UserType UserType { get; set; }
 
+        public LoginType LoginType { get; set; }
+
         public TeamResponse Team { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
@@ -30,6 +32,6 @@ namespace Soccer.Common.Models
 
         public string PictureFullPath => string.IsNullOrEmpty(PicturePath)
             ? "https://SoccerWeb4.azurewebsites.net//images/noimage.png"
-            : $"https://zulusoccer.blob.core.windows.net/users/{PicturePath}";
+            : LoginType == LoginType.Soccer ? $"https://SoccerWeb4.azurewebsites.net{PicturePath.Substring(1)}" : PicturePath;
     }
 }

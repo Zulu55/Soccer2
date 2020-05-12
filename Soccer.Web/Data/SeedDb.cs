@@ -141,7 +141,8 @@ namespace Soccer.Web.Data
                     Document = document,
                     Team = team,
                     UserType = userType,
-                    PicturePath = imageId
+                    PicturePath = imageId,
+                    LoginType = LoginType.Soccer
                 };
 
                 await _userHelper.AddUserAsync(user, "123456");

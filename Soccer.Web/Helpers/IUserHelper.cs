@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Soccer.Common.Enums;
+using Soccer.Common.Models;
 using Soccer.Web.Data.Entities;
 using Soccer.Web.Models;
 using System;
@@ -29,6 +30,8 @@ namespace Soccer.Web.Helpers
 
         Task<IdentityResult> AddUserAsync(UserEntity user, string password);
 
+        Task<UserEntity> AddUserAsync(FacebookProfile model);
+        
         Task CheckRoleAsync(string roleName);
 
         Task AddUserToRoleAsync(UserEntity user, string roleName);

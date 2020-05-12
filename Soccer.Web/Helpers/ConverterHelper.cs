@@ -263,7 +263,8 @@ namespace Soccer.Web.Helpers
                 PhoneNumber = user.PhoneNumber,
                 PicturePath = user.PicturePath,
                 Team = ToTeamResponse(user?.Team),
-                UserType = user.UserType
+                UserType = user.UserType,
+                LoginType = user.LoginType
             };
         }
 

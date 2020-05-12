@@ -13,6 +13,7 @@ using Soccer.Common.Services;
 using System.Collections.Generic;
 using System.Linq;
 using Soccer.Prism.Views;
+using Soccer.Common.Enums;
 
 namespace Soccer.Prism.ViewModels
 {
@@ -27,6 +28,7 @@ namespace Soccer.Prism.ViewModels
         private UserResponse _user;
         private MediaFile _file;
         private TeamResponse _team;
+        private bool _isSoccerUser;
         private ObservableCollection<TeamResponse> _teams;
         private DelegateCommand _changeImageCommand;
         private DelegateCommand _saveCommand;
@@ -41,6 +43,7 @@ namespace Soccer.Prism.ViewModels
             Title = Languages.ModifyUser;
             IsEnabled = true;
             User = JsonConvert.DeserializeObject<UserResponse>(Settings.User);
+            IsSoccerUser = User.LoginType == LoginType.Soccer;
             Image = User.PictureFullPath;
             LoadTeamsAsync();
         }
@@ -50,6 +53,12 @@ namespace Soccer.Prism.ViewModels
         public DelegateCommand ChangeImageCommand => _changeImageCommand ?? (_changeImageCommand = new DelegateCommand(ChangeImageAsync));
 
         public DelegateCommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAsync));
+
+        public bool IsSoccerUser
+        {
+            get => _isSoccerUser;
+            set => SetProperty(ref _isSoccerUser, value);
+        }
 
         public ImageSource Image
         {
@@ -89,6 +98,12 @@ namespace Soccer.Prism.ViewModels
 
         private async void ChangePasswordAsync()
         {
+            if (!IsSoccerUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoSoccerUser, Languages.Accept);
+                return;
+            }
+
             await _navigationService.NavigateAsync(nameof(ChangePasswordPage));
         }
 
@@ -181,6 +196,12 @@ namespace Soccer.Prism.ViewModels
 
         private async void ChangeImageAsync()
         {
+            if (!IsSoccerUser)
+            {
+                await App.Current.MainPage.DisplayAlert(Languages.Error, Languages.ChangePhotoNoSoccerUser, Languages.Accept);
+                return;
+            }
+
             await CrossMedia.Current.Initialize();
 
             string source = await Application.Current.MainPage.DisplayActionSheet(
